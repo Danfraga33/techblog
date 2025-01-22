@@ -1,19 +1,4 @@
 import LatestPodcastCard from "~/components/LatestPodcastCard";
-import { AppSidebar } from "~/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
-import { Separator } from "~/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "~/components/ui/sidebar";
 import {
   Table,
   TableHeader,
@@ -24,7 +9,6 @@ import {
 } from "@heroui/react";
 import { Fragment } from "react";
 import Header from "~/components/Dashboard/Header";
-import Search from "~/components/Dashboard/Search";
 import SearchBar from "~/components/Dashboard/Search";
 
 type podcastListType = {
