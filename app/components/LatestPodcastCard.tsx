@@ -24,7 +24,7 @@ export default function LatestPodcastCard({
   href: string;
 }) {
   return (
-    <Card className="group relative w-[400px] space-y-4 overflow-hidden px-4 py-0">
+    <Card className="group relative w-[400px] space-y-4 overflow-hidden px-4 py-0 shadow-lg">
       <figure className="group-hover:opacity-90">
         <Image
           className="aspect-square w-full"
