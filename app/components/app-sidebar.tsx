@@ -29,33 +29,23 @@ const data = {
   navMain: [
     {
       title: "Newsletters",
-      url: "#",
-      icon: BookOpen, // Placeholder icon
-      items: [],
-    },
-    {
-      title: "Annual Reports",
-      url: "#",
-      icon: Command, // Placeholder icon
-      items: [],
+      url: "/Newsletter",
+      icon: BookOpen,
     },
     {
       title: "Blogs",
       url: "/Blog",
-      icon: Settings2, // Placeholder icon
-      items: [],
+      icon: Settings2,
     },
     {
       title: "Podcasts",
       url: "/Podcasts",
-      icon: AudioWaveform, // Placeholder icon
-      items: [],
+      icon: AudioWaveform,
     },
     {
       title: "Whiteboard Animation",
       url: "#",
-      icon: BookOpen, // Placeholder icon
-      items: [],
+      icon: BookOpen,
     },
   ],
 };
