@@ -9,8 +9,11 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { AppSidebar } from "./components/app-sidebar";
+import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: "/app/tailwind.css" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -33,9 +36,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />	
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset className="bg-[#F5f5f5 ]">{children}</SidebarInset>
+        </SidebarProvider>
+        <SidebarInset>
+          <ScrollRestoration />
+        </SidebarInset>
+        <Scripts />
         <LiveReload />
       </body>
     </html>
