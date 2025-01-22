@@ -9,7 +9,7 @@ import {
 } from "@heroui/react";
 import { Fragment } from "react";
 import Header from "~/components/Dashboard/Header";
-import SearchBar from "~/components/Dashboard/Search";
+import SearchBar from "~/components/Dashboard/SearchBar";
 
 type podcastListType = {
   id: number;
