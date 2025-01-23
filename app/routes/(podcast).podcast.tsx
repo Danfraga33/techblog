@@ -10,6 +10,7 @@ import {
 import { Fragment } from "react";
 import SearchBar from "~/components/Dashboard/SearchBar";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
+import { useParams } from "@remix-run/react";
 
 type podcastListType = {
   id: number;
@@ -18,6 +19,8 @@ type podcastListType = {
   pubDate: string;
   category: string;
   href: string;
+  slug: string;
+  slogan: string;
 };
 
 export const podcastList: podcastListType[] = [
@@ -25,32 +28,39 @@ export const podcastList: podcastListType[] = [
     id: 1,
     title: "Future of Quantum Chips",
     description:
-      "A brief look at how quantum chips are shaping the future of technology.",
+      "Dive into the groundbreaking world of quantum chips, where cutting-edge technology meets limitless potential. Explore how these revolutionary innovations are reshaping computing, solving complex problems, and driving advancements across industries like AI, cryptography, and more. With expert insights, learn about the challenges and opportunities ahead as quantum chips redefine the boundaries of what's possible in technology. Get ready to unlock the future of innovation and computation.",
     pubDate: "2025-02-15",
     category: "Semiconductor",
-    href: "/podcasts/future-of-quantum-chips",
+    href: "/podcast/future-of-quantum-chips",
+    slug: "future-of-quantum-chips",
+    slogan: "Quantum Chips: Unlocking Tomorrow's Technology Today.",
   },
   {
     id: 2,
     title: "Investing in Semiconductors",
     description:
-      "Key trends and opportunities in the evolving semiconductor market.",
+      "Dive into the groundbreaking world of quantum chips, where cutting-edge technology meets limitless potential. Explore how these revolutionary innovations are reshaping computing, solving complex problems, and driving advancements across industries like AI, cryptography, and more. With expert insights, learn about the challenges and opportunities ahead as quantum chips redefine the boundaries of what's possible in technology. Get ready to unlock the future of innovation and computation.",
     pubDate: "2025-01-30",
     category: "Semiconductor",
-    href: "/podcasts/investing-in-semiconductors",
+    href: "/podcast/investing-in-semiconductors",
+    slug: "investing-in-semiconductors",
+    slogan: "Your Guide to the Future of Smart Investments in Semiconductors.",
   },
   {
     id: 3,
     title: "Chip Design Innovations",
     description:
-      "How cutting-edge technologies are driving the next wave of chip design.",
+      "Dive into the groundbreaking world of quantum chips, where cutting-edge technology meets limitless potential. Explore how these revolutionary innovations are reshaping computing, solving complex problems, and driving advancements across industries like AI, cryptography, and more. With expert insights, learn about the challenges and opportunities ahead as quantum chips redefine the boundaries of what's possible in technology. Get ready to unlock the future of innovation and computation.",
     pubDate: "2025-03-10",
     category: "Semiconductor",
-    href: "/podcasts/chip-design-innovations",
+    href: "/podcast/chip-design-innovations",
+    slug: "chip-design-innovations",
+    slogan: "Pioneering the Blueprint for Smarter, Faster Chips.",
   },
 ];
 
 export default function Podcasts() {
+  const { id } = useParams();
   return (
     <>
       <ContentLayout
@@ -58,27 +68,19 @@ export default function Podcasts() {
         description="New product features, the latest in technology, solutions, and
        updates."
       >
-        {/* Latest News & Podcasts Section */}
         <section className="container flex min-h-[400px] w-3/4 flex-col">
           <section className="flex items-center gap-8 py-8">
-            <LatestPodcastCard
-              title="The Semiconductor Supply Chain Crisis"
-              description="An in-depth analysis of the global semiconductor supply chain issues and how companies are responding to the ongoing shortages."
-              category="Semiconductor"
-              href="/podcasts/future-of-quantum-chips"
-            />
-            <LatestPodcastCard
-              title="AI in Semiconductor Manufacturing"
-              description="Exploring how AI is enhancing efficiency and cutting costs in chip production."
-              category="Semiconductor"
-              href="/podcasts/future-of-quantum-chips"
-            />
-            <LatestPodcastCard
-              title="AI's Role in Revolutionizing Chip Design"
-              description="Explore how artificial intelligence is transforming the design and manufacturing of semiconductor chips for modern applications."
-              category="Semiconductor"
-              href="/podcasts/future-of-quantum-chips"
-            />
+            {podcastList.map((podcast) => (
+              <Fragment key={podcast.id}>
+                <LatestPodcastCard
+                  title={podcast.title}
+                  description={podcast.description}
+                  category={podcast.category}
+                  href={podcast.href}
+                  slogan={podcast.slogan}
+                />
+              </Fragment>
+            ))}
           </section>
         </section>
 
