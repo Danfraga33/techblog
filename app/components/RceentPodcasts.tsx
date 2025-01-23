@@ -1,19 +1,27 @@
-"use client";
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Play } from "lucide-react";
 
 const podcasts = [
-  { title: "The Future of AI in Semiconductor Industry", duration: "45:30" },
-  { title: "Navigating the Chip Shortage: Expert Insights", duration: "38:15" },
+  {
+    title: "The Future of AI in Semiconductor Industry",
+    duration: "45:30",
+    id: 1,
+  },
+  {
+    title: "Navigating the Chip Shortage: Expert Insights",
+    duration: "38:15",
+    id: 2,
+  },
   {
     title: "Quantum Computing: A New Era for Semiconductors",
     duration: "52:00",
+    id: 3,
   },
   {
     title: "Green Tech: Sustainable Practices in Chip Manufacturing",
     duration: "41:45",
+    id: 4,
   },
 ];
 
