@@ -1,9 +1,8 @@
-import { Badge, Image } from "@heroui/react";
 import { Button } from "./ui/button";
-import { AudioWaveform, HeartIcon, PlusIcon } from "lucide-react";
+import { AudioWaveform } from "lucide-react";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
 import { Link } from "@remix-run/react";
-import { Separator } from "./ui/separator";
+import { Badge } from "./ui/badge";
 
 const truncateDescription = (description: string, wordLimit: number = 4) => {
   const words = description.split(" ");
@@ -17,26 +16,27 @@ export default function LatestPodcastCard({
   description,
   category,
   href,
+  slogan,
 }: {
   title: string;
   description: string;
   category: string;
   href: string;
+  slogan: string;
 }) {
   return (
-    <Card className="group relative w-[400px] space-y-4 overflow-hidden px-4 py-0 shadow-lg">
+    <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg">
       <figure className="group-hover:opacity-90">
-        <Image
+        <img
           className="aspect-square w-full"
-          src={""}
+          src={"/chip.jpg"}
           width={300}
           height={500}
           alt={title}
         />
       </figure>
-      <Separator />
       <CardContent className="px-4 py-0">
-        <div className="flex justify-between">
+        <div className="flex flex-col gap-1">
           <div>
             <h3 className="text-lg">
               <Link to={href}>
@@ -44,12 +44,12 @@ export default function LatestPodcastCard({
                 {title}
               </Link>
             </h3>
-            <Badge className="text-sm text-muted-foreground">{category}</Badge>
+            <Badge className="text-xs text-foreground-50">{category}</Badge>
           </div>
+          <p className="text-sm text-muted-foreground">
+            {truncateDescription(description)}
+          </p>
         </div>
-        <p className="text-sm text-muted-foreground">
-          {truncateDescription(description)}
-        </p>
       </CardContent>
       <CardFooter className="border-t p-0">
         <Button variant="ghost" className="w-full">
