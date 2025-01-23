@@ -9,6 +9,7 @@ import { PageTitle } from "~/lib/utils";
 import { Badge } from "~/components/ui/badge";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
+import { SidebarTrigger } from "~/components/ui/sidebar";
 
 const DynamicBlog = () => {
   const { name } = useParams();
@@ -25,7 +26,7 @@ const DynamicBlog = () => {
     //   title={selectedBlog?.title as string}
     //   description={selectedBlog?.description as string}
     // >
-    <section className="relative flex flex-col rounded-xl p-8">
+    <section className="relative flex flex-col rounded-xl p-4">
       <div className="relative flex justify-center">
         <img
           src="/chip.jpg"
@@ -33,7 +34,10 @@ const DynamicBlog = () => {
           alt="Image of a chip"
         />
         <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50">
-          <Header />
+          <div className="flex items-center gap-2 px-2">
+            <SidebarTrigger className="-ml-1" />
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+          </div>
         </div>
         <div className="absolute bottom-8 left-4 w-1/2 rounded-lg bg-stone-400/50 px-4 py-2 text-white">
           <div className="flex flex-col gap-2">
@@ -51,7 +55,7 @@ const DynamicBlog = () => {
           </div>
         </div>
       </div>
-      <div className="mx-auto px-6 py-12">
+      <div className="mx-auto px-2 py-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           <div className="md:col-span-2">
             <div className="prose prose-lg max-w-none">
