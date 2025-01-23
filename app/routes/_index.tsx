@@ -1,6 +1,5 @@
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
-import { Image } from "@heroui/react";
 import { cn } from "~/lib/utils";
 import { useState } from "react";
 import { Separator } from "~/components/ui/separator";

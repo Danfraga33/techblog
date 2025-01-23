@@ -1,9 +1,6 @@
-import { Image } from "@heroui/react";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
-import Header from "~/components/Dashboard/Header";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
-import { Separator } from "~/components/ui/separator";
 
 const blogPosts = [
   {

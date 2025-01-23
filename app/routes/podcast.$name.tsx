@@ -1,9 +1,7 @@
-import { useParams, useRouteLoaderData } from "@remix-run/react";
-import React from "react";
-import ContentLayout from "~/components/Dashboard/ContentLayout";
+import { useParams } from "@remix-run/react";
 import PodcastPlayer from "~/components/PodcastPlayer";
+import { podcastList } from "~/data/podcasts";
 import { PageTitle } from "~/lib/utils";
-import { podcastList } from "./(podcast).podcast";
 
 const PodcastDynamic = () => {
   const { name } = useParams();
