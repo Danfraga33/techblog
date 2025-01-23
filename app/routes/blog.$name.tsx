@@ -2,7 +2,7 @@ import { useParams } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { PageTitle } from "~/lib/utils";
-import { Chip } from "@heroui/react";
+import { Chip, select } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
 import { BlogPostTypes, blogPost } from "~/data/blogPosts";
@@ -13,10 +13,10 @@ const DynamicBlog = () => {
   const pageTitle = PageTitle(name as string);
   console.log("pageTitle: ", pageTitle);
 
-  const selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
-    return blog.title === "UX review presentations";
+  let selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
+    return blog.title === pageTitle;
   });
-  console.log("selectedBlog: ", selectedBlog);
+
   return (
     // <ContentLayout
     //   title={selectedBlog?.title as string}
@@ -25,22 +25,21 @@ const DynamicBlog = () => {
     <section className="relative flex flex-col rounded-xl p-4">
       <div className="relative flex justify-center">
         <img
-          src="/chip.jpg"
+          src={selectedBlog?.image.url}
           className="h-full w-full rounded-2xl object-cover"
           alt="Image of a chip"
         />
-        <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50">
-          <div className="flex items-center gap-2 px-2">
-            <SidebarTrigger className="-ml-1" />
-            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
-          </div>
+        <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50 p-1">
+          <SidebarTrigger />
         </div>
-        <div className="absolute bottom-8 left-4 w-1/2 rounded-lg bg-stone-400/50 px-4 py-2 text-white">
+        <div className="absolute bottom-8 left-4 w-4/5 rounded-lg bg-stone-400/50 px-4 py-2 text-white lg:w-1/2">
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl">
               {selectedBlog?.title ?? "Leading the way"}
             </h1>
-            <p className="text-sm">{selectedBlog?.description}</p>
+            <p className="hidden md:block md:text-xs lg:text-sm">
+              {selectedBlog?.description}
+            </p>
             <ul className="flex gap-1.5">
               {selectedBlog?.tags.map((tag: string, index: number) => (
                 <li key={index}>
