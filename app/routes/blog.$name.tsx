@@ -1,15 +1,11 @@
 import { useParams } from "@remix-run/react";
-import React from "react";
-import ContentLayout from "~/components/Dashboard/ContentLayout";
-import { blogPost } from "./(blog).blog";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import Header from "~/components/Dashboard/Header";
 import { PageTitle } from "~/lib/utils";
-import { Badge } from "~/components/ui/badge";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
+import { BlogPostTypes, blogPost } from "~/data/blogPosts";
 
 const DynamicBlog = () => {
   const { name } = useParams();
@@ -17,7 +13,7 @@ const DynamicBlog = () => {
   const pageTitle = PageTitle(name as string);
   console.log("pageTitle: ", pageTitle);
 
-  const selectedBlog = blogPost.find((blog) => {
+  const selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
     return blog.title === "UX review presentations";
   });
   console.log("selectedBlog: ", selectedBlog);
@@ -46,7 +42,7 @@ const DynamicBlog = () => {
             </h1>
             <p className="text-sm">{selectedBlog?.description}</p>
             <ul className="flex gap-1.5">
-              {selectedBlog?.tags.map((tag, index) => (
+              {selectedBlog?.tags.map((tag: string, index: number) => (
                 <li key={index}>
                   <Chip size="sm">{tag}</Chip>
                 </li>

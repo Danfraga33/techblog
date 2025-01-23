@@ -3,27 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import Header from "~/components/Dashboard/Header";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
-import Title from "~/components/Dashboard/Title";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { blogPost } from "~/data/blogPosts";
 import { cn } from "~/lib/utils";
-
-export const blogPost = [
-  {
-    id: 1,
-    title: "UX review presentations",
-    description:
-      "How do you create compelling presentations that wow your colleagues and impress your managers? Look no further.",
-    image: {
-      url: "/chip.jpg",
-      alt: "Person holding a camera",
-    },
-    author: "Daniel Fraga",
-    date: "20 Jan 2022",
-    link: "/blog/one",
-    tags: ["UX Design", "Presentation Tips", "Creative Storytelling"],
-  },
-];
 
 const Blog = () => {
   const [filter, setFilter] = useState("View all");
