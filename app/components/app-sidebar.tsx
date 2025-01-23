@@ -34,17 +34,17 @@ const data = {
     },
     {
       title: "Newsletters",
-      url: "/Newsletter",
+      url: "/newsletter",
       icon: BookOpen,
     },
     {
-      title: "Blogs",
-      url: "/Blog",
+      title: "Blog",
+      url: "/blog",
       icon: Settings2,
     },
     {
       title: "Podcasts",
-      url: "/Podcasts",
+      url: "/podcast",
       icon: AudioWaveform,
     },
     {
