@@ -12,13 +12,12 @@ const Blog = () => {
   return (
     <>
       <Header />
-
       <div className="min-w-screen px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-8">
           <Title
             title="Blog"
             description="New product features, the latest in technology, solutions, and
-              updates."
+            updates."
           />
           <div className="flex max-w-md gap-2">
             <Input
@@ -52,7 +51,6 @@ const Blog = () => {
           </nav>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {" "}
           {/* Changed to 3 columns */}
           <article className="group">
             <Link to="#" className="block space-y-4">
@@ -190,10 +188,10 @@ const Blog = () => {
       </div>
       {/* <section className="flex items-center justify-center pt-8">
         <Button>
-          <span>
-            <ArrowDown />
-          </span>
-          Lead more
+        <span>
+        <ArrowDown />
+        </span>
+        Lead more
         </Button>
       </section> */}
     </>
