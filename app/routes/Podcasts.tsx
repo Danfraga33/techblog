@@ -8,9 +8,8 @@ import {
   TableCell,
 } from "@heroui/react";
 import { Fragment } from "react";
-import Header from "~/components/Dashboard/Header";
 import SearchBar from "~/components/Dashboard/SearchBar";
-import Title from "~/components/Dashboard/Title";
+import ContentLayout from "~/components/Dashboard/ContentLayout";
 
 type podcastListType = {
   id: number;
@@ -54,16 +53,13 @@ export const podcastList: podcastListType[] = [
 export default function Podcasts() {
   return (
     <>
-      <Header />
-
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <ContentLayout
+        title="Podcasts"
+        description="New product features, the latest in technology, solutions, and
+       updates."
+      >
         {/* Latest News & Podcasts Section */}
         <section className="container flex min-h-[400px] w-3/4 flex-col">
-          <Title
-            title="Podcasts"
-            description="New product features, the latest in technology, solutions, and
-              updates."
-          />
           <section className="flex items-center gap-8 py-8">
             <LatestPodcastCard
               title="The Semiconductor Supply Chain Crisis"
@@ -119,7 +115,7 @@ export default function Podcasts() {
             </TableBody>
           </Table>
         </section>
-      </div>
+      </ContentLayout>
     </>
   );
 }
