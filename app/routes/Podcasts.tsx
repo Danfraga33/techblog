@@ -10,6 +10,7 @@ import {
 import { Fragment } from "react";
 import Header from "~/components/Dashboard/Header";
 import SearchBar from "~/components/Dashboard/SearchBar";
+import Title from "~/components/Dashboard/Title";
 
 type podcastListType = {
   id: number;
@@ -58,13 +59,11 @@ export default function Podcasts() {
       <div className="px-4 py-8 sm:px-6 lg:px-8">
         {/* Latest News & Podcasts Section */}
         <section className="container flex min-h-[400px] w-3/4 flex-col">
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight">Latest News</h1>
-            <p className="text-lg text-muted-foreground">
-              New product features, the latest in technology, solutions, and
-              updates.
-            </p>
-          </div>
+          <Title
+            title="Podcasts"
+            description="New product features, the latest in technology, solutions, and
+              updates."
+          />
           <section className="flex items-center gap-8 py-8">
             <LatestPodcastCard
               title="The Semiconductor Supply Chain Crisis"

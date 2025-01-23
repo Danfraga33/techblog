@@ -1,28 +1,25 @@
 import { Image } from "@heroui/react";
 import { Link } from "@remix-run/react";
-import { ArrowDown } from "lucide-react";
+import { Fragment, useState } from "react";
 import Header from "~/components/Dashboard/Header";
-import SearchBar from "~/components/Dashboard/Search";
-import { AppSidebar } from "~/components/app-sidebar";
+import Title from "~/components/Dashboard/Title";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
+import { cn } from "~/lib/utils";
 
 const Blog = () => {
+  const [filter, setFilter] = useState("View all");
   return (
     <>
       <Header />
 
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header Section */}
+      <div className="min-w-screen px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-8">
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight">Blog</h1>
-            <p className="text-lg text-muted-foreground">
-              New product features, the latest in technology, solutions, and
-              updates.
-            </p>
-          </div>
+          <Title
+            title="Blog"
+            description="New product features, the latest in technology, solutions, and
+              updates."
+          />
           <div className="flex max-w-md gap-2">
             <Input
               type="email"
@@ -33,36 +30,30 @@ const Blog = () => {
           </div>
           <nav className="border-b">
             <ul className="-mb-px flex gap-8">
-              <li>
-                <Link
-                  to="#"
-                  className="inline-block border-b-2 border-primary py-3 font-medium"
-                >
-                  View all
-                </Link>
-              </li>
-              {[
-                "Design",
-                "Product",
-                "Development",
-                "Customer Support",
-                "Leadership",
-                "Management",
-                "Interviews",
-              ].map((item) => (
-                <li key={item}>
-                  <Link
-                    to="#"
-                    className="inline-block py-3 text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              {["View all", "Artificial Intelligence", "Semiconductor"].map(
+                (item) => (
+                  <Fragment key={item}>
+                    <li>
+                      <Link
+                        to="#"
+                        onClick={() => setFilter(item)}
+                        className={cn(
+                          "inline-block py-3 font-medium",
+                          filter === item && "border-b-3 border-b-stone-300",
+                        )}
+                      >
+                        {item}
+                      </Link>
+                    </li>
+                  </Fragment>
+                ),
+              )}
             </ul>
           </nav>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-3">
+          {" "}
+          {/* Changed to 3 columns */}
           <article className="group">
             <Link to="#" className="block space-y-4">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
@@ -113,7 +104,6 @@ const Blog = () => {
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-OwajP7iYDPAyYHRWLTMAFlLg1pFmKf.png"
                   alt="Bookshelf with various books"
-                  fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -152,16 +142,60 @@ const Blog = () => {
               </div>
             </Link>
           </article>
+          <article className="group">
+            <Link to="#" className="block space-y-4">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-OwajP7iYDPAyYHRWLTMAFlLg1pFmKf.png"
+                  alt="Desk workspace"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <div className="mb-2 text-sm">Jaxon Cole</div>
+                  <div className="text-sm opacity-70">18 Jan 2022</div>
+                  <div className="mt-1 text-sm">Development</div>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
+                  New techniques for app development
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  Learn about the latest techniques in app development to
+                  optimize your workflow and improve your product's performance.
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+                  Read post
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-arrow-right"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+          </article>
         </div>
       </div>
-      <section className="items flex">
+      {/* <section className="flex items-center justify-center pt-8">
         <Button>
           <span>
             <ArrowDown />
           </span>
           Lead more
         </Button>
-      </section>
+      </section> */}
     </>
   );
 };
