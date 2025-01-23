@@ -40,11 +40,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <AppSidebar />
           <SidebarInset className="bg-[#F5f5f5 ]">{children}</SidebarInset>
         </SidebarProvider>
-        <SidebarInset>
-          <ScrollRestoration />
-        </SidebarInset>
+        <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
