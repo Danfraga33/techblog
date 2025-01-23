@@ -66,7 +66,7 @@ export default function Home() {
                   <Badge className="bg-white/90 text-foreground">Blog</Badge>
                 </div>
                 <div className="overflow-hidden rounded-xl">
-                  <Image
+                  <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                     alt="Fashion"
                     width={600}
@@ -76,7 +76,7 @@ export default function Home() {
                 </div>
                 <div className="mt-4">
                   <div className="mb-2 flex items-center gap-2">
-                    <Image
+                    <img
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                       alt="Author"
                       width={24}
@@ -103,7 +103,7 @@ export default function Home() {
                   <Badge className="bg-white/90 text-foreground">Podcast</Badge>
                 </div>
                 <div className="overflow-hidden rounded-xl">
-                  <Image
+                  <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                     alt="Environment"
                     width={600}
@@ -113,7 +113,7 @@ export default function Home() {
                 </div>
                 <div className="mt-4">
                   <div className="mb-2 flex items-center gap-2">
-                    <Image
+                    <img
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                       alt="Author"
                       width={24}
@@ -171,7 +171,9 @@ export default function Home() {
           {/* Sidebar */}
           <div className="space-y-8">
             <section>
-              <h2 className="mb-4 text-xl font-semibold">Curated Picks</h2>
+              <h2 className="mb-4 text-xl font-semibold">
+                Artificial Intelligence
+              </h2>
               <div className="space-y-4">
                 {[
                   {
@@ -193,7 +195,7 @@ export default function Home() {
                   <article key={i} className="flex gap-4">
                     <div className="flex-1">
                       <div className="mb-1 flex items-center gap-2">
-                        <Image
+                        <img
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                           alt="Author"
                           width={20}
@@ -218,7 +220,67 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="h-20 w-20">
-                      <Image
+                      <img
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                        alt="Article"
+                        width={80}
+                        height={80}
+                        className="h-full w-full rounded-lg object-cover"
+                      />
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">Semiconductor</h2>
+              <div className="space-y-4">
+                {[
+                  {
+                    author: "Alfredo Lubin",
+                    category: "Technology",
+                    title:
+                      "New Solar Panel Technology Increases Efficiency by 30%",
+                    date: "11 July 2024",
+                    readTime: "2 min read",
+                  },
+                  {
+                    author: "Justin Levin",
+                    category: "Environment",
+                    title: "World's Oldest Known Tree Discovered in Australia",
+                    date: "12 July 2024",
+                    readTime: "4 min read",
+                  },
+                ].map((article, i) => (
+                  <article key={i} className="flex gap-4">
+                    <div className="flex-1">
+                      <div className="mb-1 flex items-center gap-2">
+                        <img
+                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                          alt="Author"
+                          width={20}
+                          height={20}
+                          className="rounded-full"
+                        />
+                        <span className="text-sm font-medium">
+                          {article.author}
+                        </span>
+                        <span className="text-sm text-muted-foreground">•</span>
+                        <span className="text-sm text-muted-foreground">
+                          {article.category}
+                        </span>
+                      </div>
+                      <h3 className="mb-1 line-clamp-2 font-medium">
+                        {article.title}
+                      </h3>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>{article.date}</span>
+                        <span>•</span>
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+                    <div className="h-20 w-20">
+                      <img
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                         alt="Article"
                         width={80}
@@ -232,43 +294,15 @@ export default function Home() {
             </section>
 
             <section>
-              <h2 className="mb-4 text-xl font-semibold">Categories</h2>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Fashion",
-                  "Politics",
-                  "Entertainment",
-                  "Sports",
-                  "Technology",
-                  "Finance",
-                  "Health & Wellness",
-                  "Science",
-                  "Lifestyle",
-                ].map((category) => (
-                  <Badge
-                    key={category}
-                    variant="secondary"
-                    className="px-4 py-2"
-                  >
-                    {category}
-                  </Badge>
-                ))}
-              </div>
-              <Button variant="link" className="mt-4 p-0">
-                View More Categories
-              </Button>
-            </section>
-
-            <section>
               <h2 className="mb-4 text-xl font-semibold">
-                Recommended Follows
+                Recommended Resources
               </h2>
               <div className="space-y-4">
                 {[{ name: "Haylie Botosh" }, { name: "Emerson Dias" }].map(
                   (user, i) => (
                     <div key={i} className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Image
+                        <img
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
                           alt={user.name}
                           width={32}
