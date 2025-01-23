@@ -34,7 +34,7 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Digital Shift</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Fragment key={item.url}>
