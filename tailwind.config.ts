@@ -1,14 +1,19 @@
-import {heroui} from '@heroui/theme';
+import { heroui } from "@heroui/theme";
 import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
   content: [
     "./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@heroui/theme/dist/components/(button|card|table|ripple|spinner|checkbox|form|spacer).js"
+    "./node_modules/@heroui/theme/dist/components/(button|card|table|ripple|spinner|checkbox|form|spacer).js",
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
       fontFamily: {
         sans: [
           '"Inter"',
@@ -102,5 +107,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),heroui()],
+  plugins: [require("tailwindcss-animate"), heroui()],
 } satisfies Config;
