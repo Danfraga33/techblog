@@ -1,141 +1,293 @@
-import LatestPodcastCard from "~/components/LatestPodcastCard";
-import { AppSidebar } from "~/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
+import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
+import { Image } from "@heroui/react";
+import { cn } from "~/lib/utils";
+import { useState } from "react";
 import { Separator } from "~/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "~/components/ui/sidebar";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@heroui/react";
-import { Fragment } from "react";
 import Header from "~/components/Dashboard/Header";
-import SearchBar from "~/components/Dashboard/Search";
 
-type podcastListType = {
-  id: number;
-  title: string;
-  description: string;
-  pubDate: string;
-  category: string;
-  href: string;
-};
+export default function Home() {
+  const [category, setCategory] = useState("Most Recent");
+  console.log("category: ", category);
 
-export const podcastList: podcastListType[] = [
-  {
-    id: 1,
-    title: "Future of Quantum Chips",
-    description:
-      "A brief look at how quantum chips are shaping the future of technology.",
-    pubDate: "2025-02-15",
-    category: "Semiconductor",
-    href: "/podcasts/future-of-quantum-chips",
-  },
-  {
-    id: 2,
-    title: "Investing in Semiconductors",
-    description:
-      "Key trends and opportunities in the evolving semiconductor market.",
-    pubDate: "2025-01-30",
-    category: "Semiconductor",
-    href: "/podcasts/investing-in-semiconductors",
-  },
-  {
-    id: 3,
-    title: "Chip Design Innovations",
-    description:
-      "How cutting-edge technologies are driving the next wave of chip design.",
-    pubDate: "2025-03-10",
-    category: "Semiconductor",
-    href: "/podcasts/chip-design-innovations",
-  },
-];
-
-export default function Index() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset className="bg-[#161616]">
-        <Header />
+    <div className="min-h-screen bg-white">
+      <Header />
+      {/* Navigation */}
+      <div className="border-b">
+        <div className="px-4">
+          <div className="no-scrollbar flex gap-4 overflow-x-auto py-4">
+            <Badge variant="secondary"> Data Centre's</Badge>
+            <Badge variant="secondary"> Algorithims</Badge>
+            <Badge variant="secondary"> Photolithography</Badge>
+            <Badge variant="secondary"> TSMC</Badge>
+          </div>
+          <div className="flex gap-8 py-4">
+            <button
+              className={cn(
+                "text-muted-foreground",
+                category === "Most Recent" && "border-b-2 border-primary",
+              )}
+              onClick={() => setCategory("Most Recent")}
+            >
+              Most Recent
+            </button>
+            <button
+              className={cn(
+                "text-muted-foreground",
+                category === "AI" && "border-b-2 border-primary",
+              )}
+              onClick={() => setCategory("AI")}
+            >
+              AI
+            </button>
+            <button
+              className={cn(
+                "text-muted-foreground",
+                category === "Semiconductors" && "border-b-2 border-primary",
+              )}
+              onClick={() => setCategory("Semiconductors")}
+            >
+              Semiconductors
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <section className="p-8">
-          {/* Search Bar Section */}
-          <SearchBar />
+      {/* Main Content */}
+      <main className="px-4 py-6">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Main Feed */}
+          <div className="space-y-6 lg:col-span-2">
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Trending #1 */}
+              <div className="group relative">
+                <div className="absolute left-4 top-4 z-10">
+                  <Badge className="bg-white/90 text-foreground">Blog</Badge>
+                </div>
+                <div className="overflow-hidden rounded-xl">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                    alt="Fashion"
+                    width={600}
+                    height={400}
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="mb-2 flex items-center gap-2">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                      alt="Author"
+                      width={24}
+                      height={24}
+                      className="rounded-full"
+                    />
+                    <span className="font-medium">Esther Howard</span>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">Fashion</span>
+                  </div>
+                  <h2 className="mb-2 text-xl font-semibold">
+                    Fashion Icon's New Collection Embraces Nature Elegance
+                  </h2>
+                  <p className="line-clamp-2 text-muted-foreground">
+                    Renowned for pushing the boundaries of fashion, the latest
+                    collection captures the serene beauty of nature.
+                  </p>
+                </div>
+              </div>
 
-          {/* Latest News & Podcasts Section */}
-          <section className="container flex min-h-[400px] w-3/4 flex-col">
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
-              Latest News
-            </h1>
-            <section className="flex items-center gap-8 py-8">
-              <LatestPodcastCard
-                title="The Semiconductor Supply Chain Crisis"
-                description="An in-depth analysis of the global semiconductor supply chain issues and how companies are responding to the ongoing shortages."
-                category="Semiconductor"
-              />
-              <LatestPodcastCard
-                title="AI in Semiconductor Manufacturing"
-                description="Exploring how AI is enhancing efficiency and cutting costs in chip production."
-                category="Semiconductor"
-              />
-              <LatestPodcastCard
-                title="AI's Role in Revolutionizing Chip Design"
-                description="Explore how artificial intelligence is transforming the design and manufacturing of semiconductor chips for modern applications."
-                category="Semiconductor"
-              />
-            </section>
-          </section>
+              {/* Trending #2 */}
+              <div className="group relative">
+                <div className="absolute left-4 top-4 z-10">
+                  <Badge className="bg-white/90 text-foreground">Podcast</Badge>
+                </div>
+                <div className="overflow-hidden rounded-xl">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                    alt="Environment"
+                    width={600}
+                    height={400}
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="mb-2 flex items-center gap-2">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                      alt="Author"
+                      width={24}
+                      height={24}
+                      className="rounded-full"
+                    />
+                    <span className="font-medium">Corey Rhiel Madsen</span>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">Environment</span>
+                  </div>
+                  <h2 className="mb-2 text-xl font-semibold">
+                    Endangered Orangutan Population Shows Signs of Recovery in
+                    Borneo
+                  </h2>
+                  <p className="line-clamp-2 text-muted-foreground">
+                    In a heartening development, conservation efforts in Borneo
+                    have begun to show positive results.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          {/* Recently Added Section */}
+            <Separator />
+            {/* Regular Articles */}
+            <div className="space-y-6">
+              <article className="flex gap-4">
+                <div className="flex-1">
+                  <div className="mb-2 flex items-center gap-2">
+                    <img
+                      src="/water.jpg"
+                      alt="Tech"
+                      className="h-60 w-64 rounded-lg object-cover" // Set both width and height to the same value (e.g., 16rem)
+                    />
+                    <div>
+                      <span className="text-muted-foreground">Fabless</span>
+                      <h3 className="mb-2 text-xl font-semibold">
+                        Tech Giant Unveils Revolutionary AI Chip
+                      </h3>
+                      <p className="line-clamp-2 text-muted-foreground">
+                        Renowned for pushing the boundaries of technology, the
+                        latest innovation promises unprecedented performance.
+                      </p>
+                      <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>10 July 2024</span>
+                        <span>•</span>
+                        <span>2 min read</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
 
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
-            Recently Added
-          </h1>
-          <section className="flex items-center gap-8 py-8">
-            <Table aria-label="Example static collection table">
-              <TableHeader>
-                <TableColumn>Date Published</TableColumn>
-                <TableColumn>Title</TableColumn>
-                <TableColumn>Description</TableColumn>
-                <TableColumn>Listen</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {podcastList.map((podcast) => (
-                  <Fragment key={podcast.id}>
-                    <TableRow>
-                      <TableCell>January 1, 2025</TableCell>
-                      <TableCell>
-                        The Semiconductor Supply Chain Crisis
-                      </TableCell>
-                      <TableCell>
-                        An in-depth analysis of the global semiconductor supply
-                        chain issues.
-                      </TableCell>
-                      <TableCell>
-                        <button>Listen</button>
-                      </TableCell>
-                    </TableRow>
-                  </Fragment>
+          {/* Sidebar */}
+          <div className="space-y-8">
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">Curated Picks</h2>
+              <div className="space-y-4">
+                {[
+                  {
+                    author: "Alfredo Lubin",
+                    category: "Technology",
+                    title:
+                      "New Solar Panel Technology Increases Efficiency by 30%",
+                    date: "11 July 2024",
+                    readTime: "2 min read",
+                  },
+                  {
+                    author: "Justin Levin",
+                    category: "Environment",
+                    title: "World's Oldest Known Tree Discovered in Australia",
+                    date: "12 July 2024",
+                    readTime: "4 min read",
+                  },
+                ].map((article, i) => (
+                  <article key={i} className="flex gap-4">
+                    <div className="flex-1">
+                      <div className="mb-1 flex items-center gap-2">
+                        <Image
+                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                          alt="Author"
+                          width={20}
+                          height={20}
+                          className="rounded-full"
+                        />
+                        <span className="text-sm font-medium">
+                          {article.author}
+                        </span>
+                        <span className="text-sm text-muted-foreground">•</span>
+                        <span className="text-sm text-muted-foreground">
+                          {article.category}
+                        </span>
+                      </div>
+                      <h3 className="mb-1 line-clamp-2 font-medium">
+                        {article.title}
+                      </h3>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>{article.date}</span>
+                        <span>•</span>
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+                    <div className="h-20 w-20">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                        alt="Article"
+                        width={80}
+                        height={80}
+                        className="h-full w-full rounded-lg object-cover"
+                      />
+                    </div>
+                  </article>
                 ))}
-              </TableBody>
-            </Table>
-          </section>
-        </section>
-      </SidebarInset>
-    </SidebarProvider>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">Categories</h2>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Fashion",
+                  "Politics",
+                  "Entertainment",
+                  "Sports",
+                  "Technology",
+                  "Finance",
+                  "Health & Wellness",
+                  "Science",
+                  "Lifestyle",
+                ].map((category) => (
+                  <Badge
+                    key={category}
+                    variant="secondary"
+                    className="px-4 py-2"
+                  >
+                    {category}
+                  </Badge>
+                ))}
+              </div>
+              <Button variant="link" className="mt-4 p-0">
+                View More Categories
+              </Button>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-xl font-semibold">
+                Recommended Follows
+              </h2>
+              <div className="space-y-4">
+                {[{ name: "Haylie Botosh" }, { name: "Emerson Dias" }].map(
+                  (user, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Image
+                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                          alt={user.name}
+                          width={32}
+                          height={32}
+                          className="rounded-full"
+                        />
+                        <span className="font-medium">{user.name}</span>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        Follow
+                      </Button>
+                    </div>
+                  ),
+                )}
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }

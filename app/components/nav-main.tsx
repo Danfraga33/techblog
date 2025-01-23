@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { Fragment } from "react";
 
 import {
   Collapsible,
@@ -36,27 +37,29 @@ export function NavMain({
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <Link to={item.url}>
-            <SidebarMenuItem>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-                {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
-              </SidebarMenuButton>
+          <Fragment key={item.url}>
+            <Link to={item.url}>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip={item.title}>
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                  {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
+                </SidebarMenuButton>
 
-              <SidebarMenuSub>
-                {item.items?.map((subItem) => (
-                  <SidebarMenuSubItem key={subItem.title}>
-                    <SidebarMenuSubButton asChild>
-                      <a href={subItem.url}>
-                        <span>{subItem.title}</span>
-                      </a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </SidebarMenuSub>
-            </SidebarMenuItem>
-          </Link>
+                <SidebarMenuSub>
+                  {item.items?.map((subItem) => (
+                    <SidebarMenuSubItem key={subItem.title}>
+                      <SidebarMenuSubButton asChild>
+                        <a href={subItem.url}>
+                          <span>{subItem.title}</span>
+                        </a>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </SidebarMenuItem>
+            </Link>
+          </Fragment>
         ))}
       </SidebarMenu>
     </SidebarGroup>

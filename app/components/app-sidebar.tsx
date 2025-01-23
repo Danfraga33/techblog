@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AudioWaveform, BookOpen, Command, Settings2 } from "lucide-react"; // Icons used for demonstration, update as needed.
+import { AudioWaveform, BookOpen, FolderKanban, Settings2 } from "lucide-react"; // Icons used for demonstration, update as needed.
 
 import { NavMain } from "~/components/nav-main";
 import { TeamSwitcher } from "~/components/team-switcher";
@@ -17,7 +17,7 @@ const data = {
   user: {
     name: "Daniel",
     email: "daniel@example.com",
-    avatar: "/avatars/daniel.jpg",
+    avatar: "",
   },
   teams: [
     {
@@ -27,6 +27,11 @@ const data = {
     },
   ],
   navMain: [
+    {
+      title: "Hub",
+      url: "/",
+      icon: FolderKanban,
+    },
     {
       title: "Newsletters",
       url: "/Newsletter",
