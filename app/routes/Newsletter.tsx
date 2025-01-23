@@ -3,14 +3,14 @@ import ContentLayout from "~/components/Dashboard/ContentLayout";
 import Header from "~/components/Dashboard/Header";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
+import { Separator } from "~/components/ui/separator";
 
 const blogPosts = [
   {
     title: "Street art festival",
     excerpt:
       "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-23%20at%2010.52.03_2000c969.jpg-0aiFiA8wNs31qWLWZlPWCbiGIAbjlU.jpeg",
+    imageUrl: "/water.jpg",
     readTime: "3 min",
     category: "Street Art",
   },
@@ -18,8 +18,7 @@ const blogPosts = [
     title: "Street art festival",
     excerpt:
       "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-23%20at%2010.52.03_2000c969.jpg-0aiFiA8wNs31qWLWZlPWCbiGIAbjlU.jpeg",
+    imageUrl: "/chip.jpg",
     readTime: "3 min",
     category: "Street Art",
   },
@@ -46,14 +45,13 @@ const Newsletter = () => {
           {blogPosts.map((post, index) => (
             <Card
               key={index}
-              className="overflow-hidden transition-shadow hover:shadow-lg"
+              className="cursor-pointer overflow-hidden transition-shadow hover:shadow-lg"
             >
               <div className="relative aspect-square">
-                <Image
-                  src={post.imageUrl || "/placeholder.svg"}
+                <img
+                  src={post.imageUrl || ""}
                   alt={post.title}
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <CardContent className="p-4">
