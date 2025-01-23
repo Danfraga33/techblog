@@ -36,9 +36,12 @@ export default function PodcastPlayer({
       <div className="min-h-screen bg-gradient-to-b from-[#3d2329] to-[#1a1314] text-white">
         <div className="px-4 py-6">
           <div className="mb-8 flex items-center justify-between">
-            <button className="rounded-full bg-slate-200/10 p-2 transition hover:bg-white/10">
+            <Link
+              to="/podcast"
+              className="rounded-full bg-slate-200/10 p-2 transition hover:bg-white/10"
+            >
               <ChevronLeft className="h-6 w-6 opacity-100" />
-            </button>
+            </Link>
 
             <div>
               <h1 className="text-lg font-medium">{selectedPodcast.title}</h1>
