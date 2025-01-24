@@ -4,6 +4,8 @@ import { cn } from "~/lib/utils";
 import { useState } from "react";
 import { Separator } from "~/components/ui/separator";
 import Header from "~/components/Dashboard/Header";
+import RecentBlogs from "~/components/Dashboard/RecentBlogs";
+import { resources } from "~/data/resources";
 
 export default function Home() {
   const [category, setCategory] = useState("Most Recent");
@@ -137,34 +139,7 @@ export default function Home() {
 
             <Separator />
             {/* Regular Articles */}
-            <div className="space-y-6">
-              <article className="flex gap-4">
-                <div className="flex-1">
-                  <div className="mb-2 flex items-center gap-2">
-                    <img
-                      src="/water.jpg"
-                      alt="Tech"
-                      className="h-60 w-64 rounded-lg object-cover" // Set both width and height to the same value (e.g., 16rem)
-                    />
-                    <div>
-                      <span className="text-muted-foreground">Fabless</span>
-                      <h3 className="mb-2 text-xl font-semibold">
-                        Tech Giant Unveils Revolutionary AI Chip
-                      </h3>
-                      <p className="line-clamp-2 text-muted-foreground">
-                        Renowned for pushing the boundaries of technology, the
-                        latest innovation promises unprecedented performance.
-                      </p>
-                      <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-                        <span>10 July 2024</span>
-                        <span>•</span>
-                        <span>2 min read</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
+            <RecentBlogs />
           </div>
 
           {/* Sidebar */}
