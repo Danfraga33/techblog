@@ -8,6 +8,7 @@ export type BlogPostTypes = {
     url: string;
     alt: string;
   };
+  topic: string;
   author: string;
   date: string;
   link: string;
@@ -22,6 +23,7 @@ export const blogPost: BlogPostTypes[] = [
       "How do you create compelling presentations that wow your colleagues and impress your managers? Look no further.",
     body: "exercitation aliqua sint fugiat in dolore consectetur amet ut enim esse irure et non quis ut adipisicing tempor qui aliqua consectetur excepteur et amet ad aute ex consequat nostrud eiusmod exercitation officia adipisicing officia veniam aute consectetur ex cillum consectetur culpa aliqua velit velit ad irure consectetur voluptate culpa voluptate",
     tableOfContents: ["Introduction", "semiconductor"],
+    topic: "Semiconductor",
     image: {
       url: "/chip.jpg",
       alt: "Person holding a camera",
@@ -38,6 +40,7 @@ export const blogPost: BlogPostTypes[] = [
       "Augmented Reality is transforming how we interact with the world. Learn how AR is enhancing industries from gaming to education and beyond.",
     body: "exercitation aliqua sint fugiat in dolore consectetur amet ut enim esse irure et non quis ut adipisicing tempor qui aliqua consectetur excepteur et amet ad aute ex consequat nostrud eiusmod exercitation officia adipisicing officia veniam aute consectetur ex cillum consectetur culpa aliqua velit velit ad irure consectetur voluptate culpa voluptate",
     tableOfContents: ["Introduction", "AR"],
+    topic: "Artificial Intelligence",
     image: {
       url: "/ar.jpg",
       alt: "Person using augmented reality glasses",
