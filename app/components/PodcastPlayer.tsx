@@ -3,7 +3,6 @@
 import {
   ChevronLeft,
   MoreVertical,
-  Star,
   Shuffle,
   SkipBack,
   Pause,
@@ -13,7 +12,7 @@ import {
 import { Separator } from "./ui/separator";
 import FadedDivider from "./Dashboard/StyleComponents.tsx/FadedDivider";
 import { Link } from "@remix-run/react";
-import Header from "./Dashboard/Header";
+import { SidebarTrigger } from "./ui/sidebar";
 
 type podcastType = {
   id: number;
@@ -32,16 +31,17 @@ export default function PodcastPlayer({
 }) {
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gradient-to-b from-[#3d2329] to-[#1a1314] text-white">
         <div className="px-4 py-6">
           <div className="mb-8 flex items-center justify-between">
-            <Link
-              to="/podcast"
-              className="rounded-full bg-slate-200/10 p-2 transition hover:bg-white/10"
-            >
-              <ChevronLeft className="h-6 w-6 opacity-100" />
-            </Link>
+            <div className="flex items-center gap-2 rounded-full bg-slate-200/10 p-2 px-3 transition hover:bg-white/10">
+              <Link to="/podcast" className="">
+                <ChevronLeft className="h-6 w-6 opacity-100" />
+              </Link>
+              <Separator orientation="vertical" className="mr-2 h-4" />
+
+              <SidebarTrigger className="-ml-1" />
+            </div>
 
             <div>
               <h1 className="text-lg font-medium">{selectedPodcast.title}</h1>
