@@ -11,6 +11,9 @@ import { Fragment } from "react";
 import SearchBar from "~/components/Dashboard/SearchBar";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
 import { podcastList } from "~/data/podcasts";
+import { Button } from "~/components/ui/button";
+import { Play } from "lucide-react";
+import { Link } from "@remix-run/react";
 
 export default function Podcasts() {
   return (
@@ -54,14 +57,18 @@ export default function Podcasts() {
               {podcastList.map((podcast) => (
                 <Fragment key={podcast.id}>
                   <TableRow>
-                    <TableCell>January 1, 2025</TableCell>
-                    <TableCell>The Semiconductor Supply Chain Crisis</TableCell>
                     <TableCell>
-                      An in-depth analysis of the global semiconductor supply
-                      chain issues.
+                      {new Date(podcast.pubDate).toDateString()}
                     </TableCell>
+                    <TableCell>{podcast.title}</TableCell>
+                    <TableCell>{podcast.description}</TableCell>
                     <TableCell>
-                      <button>Listen</button>
+                      <Button className="flex items-center" asChild>
+                        <Link to={podcast.href}>
+                          <Play />
+                          Listen
+                        </Link>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 </Fragment>
