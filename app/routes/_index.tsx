@@ -7,9 +7,62 @@ import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
 import { resources } from "~/data/resources";
 
+export type NewsArticleType = {
+  uuid: string;
+  title: string;
+  description: string;
+  keywords: string;
+  snippet: string;
+  url: string;
+  image_url: string;
+  language: string;
+  published_at: string;
+  source: string;
+  categories: string[];
+  relevance_score: number;
+  locale: string;
+};
+
+const cacheTTL = 24 * 60 * 60 * 1000; // 24 hours
+let cache = new Map();
+// export async function loader() {
+//   const cacheKey = "semiconductorNews";
+//   const currentTime = Date.now();
+
+// Try to get the cached data from Redis
+
+// try {
+//   const limit = 3;
+//   const search = "Semiconductor";
+//   const pub_after = "2025-01-20";
+//   const response = await fetch(
+//     `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.THENEWSAPI_API_KEY}&locale=us&limit=${limit}&exclude_domains=seekingalpha.com&search=${search}&published_after=${pub_after}`,
+//   );
+
+//   // Check if the API response is successful
+//   if (!response.ok) {
+//     throw new Error(
+//       `Failed to fetch news: ${response.status} ${response.statusText}`,
+//     );
+//   }
+
+//   // Parse the response as JSON
+//   const news = await response.json();
+
+//   // Store the fetched news and the timestamp in Redis
+
+//   cache.set(cacheKey, { news });
+//   console.log("Fetching new data from API and updating cache");
+//   return json(news);
+// } catch (error) {
+//   console.error("Error fetching semiconductor news:", error);
+//   throw new Error("Could not load semiconductor news.");
+// }
+// }
+
 export default function Home() {
   const [category, setCategory] = useState("Most Recent");
-  console.log("category: ", category);
+  // const news = useLoaderData<typeof loader>();
 
   return (
     <div className="min-h-screen bg-white">
@@ -68,7 +121,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                    src="water.jpg"
                     alt="Fashion"
                     width={600}
                     height={400}
@@ -78,7 +131,7 @@ export default function Home() {
                 <div className="mt-4">
                   <div className="mb-2 flex items-center gap-2">
                     <img
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                      src="water.jpg"
                       alt="Author"
                       width={24}
                       height={24}
@@ -105,7 +158,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                    src="chip.jpg"
                     alt="Environment"
                     width={600}
                     height={400}
@@ -115,7 +168,7 @@ export default function Home() {
                 <div className="mt-4">
                   <div className="mb-2 flex items-center gap-2">
                     <img
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
+                      src="chip.jpg"
                       alt="Author"
                       width={24}
                       height={24}
@@ -145,66 +198,53 @@ export default function Home() {
           {/* Sidebar */}
           <div className="space-y-8">
             <section>
-              <h2 className="mb-4 text-xl font-semibold">
-                Artificial Intelligence
-              </h2>
-              <div className="space-y-4">
-                {[
-                  {
-                    author: "Alfredo Lubin",
-                    category: "Technology",
-                    title:
-                      "New Solar Panel Technology Increases Efficiency by 30%",
-                    date: "11 July 2024",
-                    readTime: "2 min read",
-                  },
-                  {
-                    author: "Justin Levin",
-                    category: "Environment",
-                    title: "World's Oldest Known Tree Discovered in Australia",
-                    date: "12 July 2024",
-                    readTime: "4 min read",
-                  },
-                ].map((article, i) => (
+              <h2 className="mb-4 text-xl font-semibold">Recent News</h2>
+              Coming soon...
+              {/* <div className="space-y-4">
+                {news.data.map((article: NewsArticleType, i: number) => (
                   <article key={i} className="flex gap-4">
-                    <div className="flex-1">
-                      <div className="mb-1 flex items-center gap-2">
+                    <a
+                      href={article.url}
+                      className="flex flex-1 items-center gap-4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="flex-1">
+                        <div className="mb-1 flex items-center gap-2">
+                          <img
+                            src={article.image_url}
+                            alt="Author"
+                            width={20}
+                            height={20}
+                            className="rounded-full"
+                          />
+                          <span className="text-sm font-medium">
+                            {article.source}
+                          </span>
+                          <span className="text-sm text-green-600">•</span>
+                          <span className="text-sm text-muted-foreground">
+                            {new Date(article.published_at).toDateString()}
+                          </span>
+                        </div>
+                        <h3 className="mb-1 line-clamp-2 font-medium">
+                          {article.title}
+                        </h3>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span>5 min read</span>
+                        </div>
+                      </div>
+
+                      <div className="h-20 w-20">
                         <img
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
-                          alt="Author"
-                          width={20}
-                          height={20}
-                          className="rounded-full"
+                          src={article.image_url}
+                          alt="Article"
+                          className="h-full w-full rounded-lg object-cover"
                         />
-                        <span className="text-sm font-medium">
-                          {article.author}
-                        </span>
-                        <span className="text-sm text-muted-foreground">•</span>
-                        <span className="text-sm text-muted-foreground">
-                          {article.category}
-                        </span>
                       </div>
-                      <h3 className="mb-1 line-clamp-2 font-medium">
-                        {article.title}
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span>{article.date}</span>
-                        <span>•</span>
-                        <span>{article.readTime}</span>
-                      </div>
-                    </div>
-                    <div className="h-20 w-20">
-                      <img
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
-                        alt="Article"
-                        width={80}
-                        height={80}
-                        className="h-full w-full rounded-lg object-cover"
-                      />
-                    </div>
+                    </a>
                   </article>
                 ))}
-              </div>
+              </div> */}
             </section>
             <section>
               <h2 className="mb-4 text-xl font-semibold">Semiconductor</h2>
