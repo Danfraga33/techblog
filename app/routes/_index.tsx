@@ -297,25 +297,28 @@ export default function Home() {
                 Recommended Resources
               </h2>
               <div className="space-y-4">
-                {[{ name: "Haylie Botosh" }, { name: "Emerson Dias" }].map(
-                  (user, i) => (
-                    <div key={i} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <img
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
-                          alt={user.name}
-                          width={32}
-                          height={32}
-                          className="rounded-full"
-                        />
-                        <span className="font-medium">{user.name}</span>
+                {resources.map((resource, i) => (
+                  <div key={i} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/water.jpg"
+                        alt={resource.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                      />
+                      <div className="flex flex-col">
+                        <span className="font-medium">{resource.name}</span>
+                        <span className="text-xs font-light">
+                          {resource.category}
+                        </span>
                       </div>
-                      <Button variant="outline" size="sm">
-                        Follow
-                      </Button>
                     </div>
-                  ),
-                )}
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={resource.link}>View</a>
+                    </Button>
+                  </div>
+                ))}
               </div>
             </section>
           </div>
