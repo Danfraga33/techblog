@@ -1,22 +1,19 @@
-import { useParams } from "@remix-run/react";
+import { json, useLoaderData, useParams } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { PageTitle } from "~/lib/utils";
-import { Chip, select } from "@heroui/react";
+import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
 import { BlogPostTypes, blogPost } from "~/data/blogPosts";
 
 const DynamicBlog = () => {
   const { name } = useParams();
-  console.log("name: ", name);
   const pageTitle = PageTitle(name as string);
-  console.log("pageTitle: ", pageTitle);
 
   let selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
     return blog.title === pageTitle;
   });
-
   return (
     // <ContentLayout
     //   title={selectedBlog?.title as string}

@@ -63,7 +63,11 @@ export default function Podcasts() {
                     <TableCell>{podcast.title}</TableCell>
                     <TableCell>{podcast.description}</TableCell>
                     <TableCell>
-                      <Button className="flex items-center" asChild>
+                      <Button
+                        variant="outline"
+                        className="flex items-center"
+                        asChild
+                      >
                         <Link to={podcast.href}>
                           <Play />
                           Listen
