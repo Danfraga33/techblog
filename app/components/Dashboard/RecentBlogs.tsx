@@ -18,7 +18,7 @@ const RecentBlogs = () => {
           {blogPost.map((blog) => (
             <Fragment key={blog.id}>
               <Link
-                to={blog.link}
+                to={`/blog/${blog.title}`}
                 className="mb-2 flex gap-4 py-4 transition-all hover:bg-stone-100/50"
               >
                 <img
