@@ -11,9 +11,7 @@ const RecentBlogs = () => {
     <div className="space-y-6">
       <article className="flex gap-4">
         <div className="flex-1">
-          <h1 className="pb-1 text-3xl font-bold tracking-tight">
-            Recent Blogs
-          </h1>
+          <h1 className="prose">Recent Blogs</h1>
           <Separator />
           {blogPost.map((blog) => (
             <Fragment key={blog.id}>

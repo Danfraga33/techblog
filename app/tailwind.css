@@ -10,6 +10,9 @@ body {
     color-scheme: dark;
   }
 }
+h1 {
+  @apply my-4 text-4xl font-bold;
+}
 
 @layer base {
   :root {

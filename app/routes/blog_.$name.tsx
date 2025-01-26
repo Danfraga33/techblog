@@ -8,13 +8,25 @@ import { SidebarTrigger } from "~/components/ui/sidebar";
 import { BlogPostTypes, blogPost } from "~/data/blogPosts";
 import Example from "./content/example.mdx";
 
+import { read } from "to-vfile";
+import { matter } from "vfile-matter";
+
+export async function loader() {
+  const frontmatter = await read("./app/routes/content/example.mdx");
+  matter(frontmatter);
+
+  return json({ frontmatter });
+}
+
 const DynamicBlog = () => {
+  const { frontmatter } = useLoaderData<typeof loader>();
   const { name } = useParams();
   const pageTitle = PageTitle(name as string);
 
   let selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
     return blog.title === pageTitle;
   });
+
   return (
     // <ContentLayout
     //   title={selectedBlog?.title as string}
@@ -49,8 +61,8 @@ const DynamicBlog = () => {
         </div>
       </div>
       <div className="mx-auto px-2 py-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          <div className="max-w-full md:col-span-1">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+          <div className="prose max-w-full md:col-span-1">
             <Example />
 
             <div className="mt-4">
@@ -96,7 +108,7 @@ const DynamicBlog = () => {
               </nav>
             </div>
 
-            {/* <div className="space-y-4">
+            <div className="space-y-4">
               <h3 className="font-medium">Written by</h3>
               <div className="flex items-center space-x-3">
                 <img
@@ -125,7 +137,7 @@ const DynamicBlog = () => {
                 />
                 <Button className="w-full">Subscribe</Button>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
