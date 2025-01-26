@@ -5,7 +5,8 @@ import { useState } from "react";
 import { Separator } from "~/components/ui/separator";
 import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
-import { resources } from "~/data/resources";
+import { author } from "~/data/constant/author";
+import { resources } from "~/data/constant/recommendedResources";
 
 export type NewsArticleType = {
   uuid: string;
@@ -23,41 +24,41 @@ export type NewsArticleType = {
   locale: string;
 };
 
-const cacheTTL = 24 * 60 * 60 * 1000; // 24 hours
-let cache = new Map();
+// const cacheTTL = 24 * 60 * 60 * 1000; // 24 hours
+// let cache = new Map();
 // export async function loader() {
 //   const cacheKey = "semiconductorNews";
 //   const currentTime = Date.now();
 
-// Try to get the cached data from Redis
+//   // Try to get the cached data from Redis
 
-// try {
-//   const limit = 3;
-//   const search = "Semiconductor";
-//   const pub_after = "2025-01-20";
-//   const response = await fetch(
-//     `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.THENEWSAPI_API_KEY}&locale=us&limit=${limit}&exclude_domains=seekingalpha.com&search=${search}&published_after=${pub_after}`,
-//   );
-
-//   // Check if the API response is successful
-//   if (!response.ok) {
-//     throw new Error(
-//       `Failed to fetch news: ${response.status} ${response.statusText}`,
+//   try {
+//     const limit = 3;
+//     const search = "Semiconductor";
+//     const pub_after = "2025-01-20";
+//     const response = await fetch(
+//       `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.THENEWSAPI_API_KEY}&locale=us&limit=${limit}&exclude_domains=seekingalpha.com&search=${search}&published_after=${pub_after}`,
 //     );
+
+//     // Check if the API response is successful
+//     if (!response.ok) {
+//       throw new Error(
+//         `Failed to fetch news: ${response.status} ${response.statusText}`,
+//       );
+//     }
+
+//     // Parse the response as JSON
+//     const news = await response.json();
+
+//     // Store the fetched news and the timestamp in Redis
+
+//     cache.set(cacheKey, { news });
+//     console.log("Fetching new data from API and updating cache");
+//     return json(news);
+//   } catch (error) {
+//     console.error("Error fetching semiconductor news:", error);
+//     throw new Error("Could not load semiconductor news.");
 //   }
-
-//   // Parse the response as JSON
-//   const news = await response.json();
-
-//   // Store the fetched news and the timestamp in Redis
-
-//   cache.set(cacheKey, { news });
-//   console.log("Fetching new data from API and updating cache");
-//   return json(news);
-// } catch (error) {
-//   console.error("Error fetching semiconductor news:", error);
-//   throw new Error("Could not load semiconductor news.");
-// }
 // }
 
 export default function Home() {
@@ -251,16 +252,19 @@ export default function Home() {
               <div className="space-y-4">
                 {[
                   {
-                    author: "Alfredo Lubin",
-                    category: "Technology",
+                    author: author.name,
+                    avatarImg: author.avatarImage,
+
+                    category: "Semiconductor",
                     title:
                       "New Solar Panel Technology Increases Efficiency by 30%",
                     date: "11 July 2024",
                     readTime: "2 min read",
                   },
                   {
-                    author: "Justin Levin",
-                    category: "Environment",
+                    author: author.name,
+                    avatarImg: author.avatarImage,
+                    category: "Aritificial Intelligence",
                     title: "World's Oldest Known Tree Discovered in Australia",
                     date: "12 July 2024",
                     readTime: "4 min read",
@@ -270,8 +274,8 @@ export default function Home() {
                     <div className="flex-1">
                       <div className="mb-1 flex items-center gap-2">
                         <img
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1JzbrAiPjEYkAmhWeldOz8tVOO2pdU.png"
-                          alt="Author"
+                          src={article.avatarImg}
+                          alt={article.author}
                           width={20}
                           height={20}
                           className="rounded-full"
@@ -306,7 +310,6 @@ export default function Home() {
                 ))}
               </div>
             </section>
-
             <section>
               <h2 className="mb-4 text-xl font-semibold">
                 Recommended Resources
@@ -316,11 +319,12 @@ export default function Home() {
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <img
-                        src="/water.jpg"
+                        src={resource.avatarImg}
                         alt={resource.name}
-                        width={32}
-                        height={32}
+                        height={6}
+                        width={6}
                         className="rounded-full"
+                        style={{ width: "40px", height: "40px" }}
                       />
                       <div className="flex flex-col">
                         <span className="font-medium">{resource.name}</span>
