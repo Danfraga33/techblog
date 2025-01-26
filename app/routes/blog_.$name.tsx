@@ -1,7 +1,7 @@
 import { json, useLoaderData, useParams } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { PageTitle } from "~/lib/utils";
+import { PageTitle, cn } from "~/lib/utils";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
@@ -43,7 +43,9 @@ const DynamicBlog = () => {
       <div className="relative flex justify-center">
         <img
           src={frontmatter.data.matter.coverImage}
-          className="min-h-screen rounded-2xl object-cover"
+          className={cn(
+            "min-h-screen rounded-2xl object-cover 2xl:h-full 2xl:w-full",
+          )}
           alt="Image of a chip"
         />
         <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50 p-1">
