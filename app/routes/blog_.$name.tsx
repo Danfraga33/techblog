@@ -97,7 +97,7 @@ const DynamicBlog = () => {
               <h3 className="font-medium">Written by</h3>
               <div className="flex items-center space-x-3">
                 <img
-                  src=""
+                  src={"/AvatarImg.jpg"}
                   alt={frontmatter.data.matter.author}
                   width={40}
                   height={40}
