@@ -1,8 +1,11 @@
+import { Button } from "@heroui/button";
+import { Card } from "@heroui/card";
 import { Link } from "@remix-run/react";
 import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import Header from "~/components/Dashboard/Header";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
+import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
 import { blogPost } from "~/data/blogPosts";
 import { cn } from "~/lib/utils";
 
@@ -21,8 +24,7 @@ const Blog = () => {
                 (item) => (
                   <Fragment key={item}>
                     <li>
-                      <Link
-                        to="#"
+                      <button
                         onClick={() => setFilter(item)}
                         className={cn(
                           "inline-block py-3 font-medium",
@@ -30,7 +32,7 @@ const Blog = () => {
                         )}
                       >
                         {item}
-                      </Link>
+                      </button>
                     </li>
                   </Fragment>
                 ),
@@ -38,48 +40,45 @@ const Blog = () => {
             </ul>
           </nav>
         </div>
+
         <div className="grid gap-6 md:grid-cols-3">
-          {/* Changed to 3 columns */}
           {blogPost.map((post) => (
-            <article className="group" key={post.id}>
+            <Card className="group" key={post.id}>
               <Link to={`/blog/${post.title}`} className="block space-y-4">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <div className="relative overflow-hidden">
                   <img
                     src={post.image.url}
                     alt={post.image.alt}
-                    className="object-cover"
+                    className="relative rounded-xl object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <div className="mb-2 text-sm">{post.author}</div>
+                  <div className="p-3">
+                    <div className="mb-2 text-sm font-semibold">
+                      {post.author}
+                    </div>
                     <div className="text-sm opacity-70">{post.date}</div>
                   </div>
-                </div>
-                <div>
-                  <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 text-muted-foreground">
-                    {post.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm font-medium">
-                    Read post
-                    <ArrowRight />
+                  <FadedDivider />
+                  <div className="p-2">
+                    <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-muted-foreground">
+                      {post.description}
+                    </p>
+                    <Button
+                      variant="flat"
+                      className="mt-4 flex items-center gap-2 text-sm font-medium"
+                    >
+                      Read post
+                      <ArrowRight />
+                    </Button>
                   </div>
                 </div>
               </Link>
-            </article>
+            </Card>
           ))}
         </div>
       </div>
-      {/* <section className="flex items-center justify-center pt-8">
-        <Button>
-        <span>
-        <ArrowDown />
-        </span>
-        Lead more
-        </Button>
-      </section> */}
     </>
   );
 };

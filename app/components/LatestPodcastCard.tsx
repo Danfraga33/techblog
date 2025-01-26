@@ -26,7 +26,7 @@ export default function LatestPodcastCard({
 }) {
   return (
     <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg">
-      <figure className="group-hover:opacity-90">
+      <figure className="transition-all group-hover:opacity-90">
         <img
           className="aspect-square w-full"
           src={"/chip.jpg"}
