@@ -6,6 +6,7 @@ import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
 import { BlogPostTypes, blogPost } from "~/data/blogPosts";
+import Example from "./content/example.mdx";
 
 const DynamicBlog = () => {
   const { name } = useParams();
@@ -49,37 +50,9 @@ const DynamicBlog = () => {
       </div>
       <div className="mx-auto px-2 py-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          <div className="md:col-span-2">
-            <div className="prose prose-lg max-w-none">
-              <p className="lead">
-                Incidunt elit, id quisque ligula ac diam, amet. Vel etiam
-                suspendisse morbi eleifend faucibus eget vestibulum felis.
-                Dictum quis montes, sit sit. Tellus aliquam enim urna, etiam.
-                Mauris posuere vulputate arcu amet, vitae nisi, tellus
-                tincidunt. At feugiat.
-              </p>
-              <p>
-                Eget quis mi enim, leo lacinia pharetra, semper. Eget in
-                volutpat mollis at volutpat lectus velit, sed auctor. Porttitor
-                fames arcu quis fusce augue enim. Quis at habitant diam at.
-                Suscipit tristique risus, at donec. In turpis vel et quam
-                imperdiet. Ipsum molestie aliquet sodales.
-              </p>
+          <div className="max-w-full md:col-span-1">
+            <Example />
 
-              <img
-                src="/water.jpg"
-                alt="Person working on laptop with floating avatars"
-                width={800}
-                height={600}
-                className="my-8 rounded-2xl"
-              />
-
-              <blockquote>
-                "In a world older and more complete than ours they move finished
-                and complete, gifted with extensions of the senses we have lost
-                or never attained, living by voices we shall never hear."
-              </blockquote>
-            </div>
             <div className="mt-4">
               <Separator />
             </div>
@@ -123,7 +96,7 @@ const DynamicBlog = () => {
               </nav>
             </div>
 
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <h3 className="font-medium">Written by</h3>
               <div className="flex items-center space-x-3">
                 <img
@@ -152,7 +125,7 @@ const DynamicBlog = () => {
                 />
                 <Button className="w-full">Subscribe</Button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
