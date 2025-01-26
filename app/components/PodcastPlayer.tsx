@@ -63,7 +63,7 @@ export default function PodcastPlayer({
                 alt="Podcast host"
                 width={600}
                 height={600}
-                className="toopacity-30 mx-auto w-4/5 rounded-lg opacity-65"
+                className="toopacity-30 mx-auto w-4/5 rounded-3xl opacity-65"
               />
             </div>
 
