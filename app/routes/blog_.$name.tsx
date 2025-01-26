@@ -36,27 +36,28 @@ const DynamicBlog = () => {
   let selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
     return blog.title === pageTitle;
   });
+  console.log("selectedBlog: ", selectedBlog);
 
   return (
     <section className="relative flex flex-col justify-center rounded-xl p-4">
       <div className="relative flex justify-center">
         <img
-          src={selectedBlog?.image.url}
-          className="h-full w-full rounded-2xl object-cover"
+          src={frontmatter.data.matter.coverImage}
+          className="min-h-screen rounded-2xl object-cover"
           alt="Image of a chip"
         />
         <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50 p-1">
           <SidebarTrigger />
         </div>
-        <div className="absolute bottom-8 left-4 w-4/5 rounded-lg bg-stone-400/50 px-4 py-2 text-white lg:w-1/2">
+        <div className="absolute bottom-8 left-4 w-4/5 rounded-lg bg-stone-400/70 px-4 py-2 text-white lg:w-1/2">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl">
+            <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl">
               {frontmatter.data.matter.title}
             </h1>
-            <p className="hidden md:block md:text-xs lg:text-sm">
+            <p className="text-sm lg:text-sm">
               {frontmatter.data.matter.description}
             </p>
-            <ul className="flex gap-1.5">
+            <ul className="flex flex-wrap gap-1.5">
               {frontmatter.data.matter.tags.map((tag) => (
                 <li key={tag}>
                   <Chip size="sm">{tag}</Chip>
