@@ -1,6 +1,5 @@
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -11,6 +10,7 @@ import type { LinksFunction } from "@remix-run/node";
 import "./tailwind.css";
 import { AppSidebar } from "./components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
+import { ReactNode } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "/app/tailwind.css" },
@@ -26,7 +26,7 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
