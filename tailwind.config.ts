@@ -14,6 +14,11 @@ export default {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      typography: {
+        default: {
+          css: {},
+        },
+      },
       fontFamily: {
         sans: [
           '"Inter"',
@@ -107,5 +112,9 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), heroui()],
+  plugins: [
+    require("tailwindcss-animate"),
+    heroui(),
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;
