@@ -56,7 +56,7 @@ export default function Podcasts() {
             <TableBody>
               {podcastList.map((podcast) => (
                 <Fragment key={podcast.id}>
-                  <TableRow>
+                  <TableRow className="transition-all hover:bg-stone-50">
                     <TableCell>
                       {new Date(podcast.pubDate).toDateString()}
                     </TableCell>
