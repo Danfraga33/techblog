@@ -53,7 +53,7 @@ export default function Podcasts() {
               <TableColumn>Description</TableColumn>
               <TableColumn>Listen</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody className="overflow-scroll">
               {podcastList.map((podcast) => (
                 <Fragment key={podcast.id}>
                   <TableRow className="transition-all hover:bg-stone-50">
