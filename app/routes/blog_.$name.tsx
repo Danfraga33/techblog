@@ -9,6 +9,7 @@ import Example from "./content/example.mdx";
 
 import { read } from "to-vfile";
 import { matter } from "vfile-matter";
+
 export interface FrontmatterTypes {
   title: string;
   description: string;
@@ -33,19 +34,27 @@ const DynamicBlog = () => {
     .matter as FrontmatterTypes;
 
   return (
-    <section className="relative flex flex-col justify-center rounded-xl p-4">
-      <div className="relative flex justify-center">
+    <section className="relative flex flex-col justify-center rounded-2xl p-4">
+      {/* Image Container */}
+      <div className="relative flex h-[75vh] justify-center overflow-hidden">
+        {/* Set height to 50% of viewport height */}
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-10 rounded-b-xl bg-gradient-to-t from-black to-transparent"></div>
+        {/* Image */}
         <img
           src={coverImage}
           className={cn(
-            "min-h-screen rounded-2xl object-cover 2xl:h-full 2xl:w-full",
+            "h-full w-full rounded-2xl object-cover", // Ensure the image covers the container
+            "mask-image: linear-gradient(to top, transparent, black 50%)", // Fade-out effect
           )}
           alt="Image of a chip"
         />
-        <div className="absolute left-4 top-5 rounded-xl bg-stone-400/50 p-1">
+        {/* Sidebar Trigger */}
+        <div className="absolute left-4 top-5 z-20 rounded-xl bg-stone-400/50 p-1">
           <SidebarTrigger />
         </div>
-        <div className="absolute bottom-8 left-4 w-4/5 rounded-lg bg-stone-400/70 px-4 py-2 text-white lg:w-1/2">
+        {/* Text Overlay */}
+        <div className="absolute bottom-8 left-4 z-20 w-4/5 rounded-lg bg-stone-400/70 px-4 py-2 text-white lg:w-1/2">
           <div className="flex flex-col gap-2">
             <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl">{title}</h1>
             <p className="text-sm lg:text-sm">{description}</p>
@@ -59,9 +68,12 @@ const DynamicBlog = () => {
           </div>
         </div>
       </div>
-      <div className="px-2 py-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-          <div className="prose flex max-w-full flex-col items-end md:col-span-1">
+
+      {/* Content Below the Image */}
+      <div className="px-2 py-12">
+        <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-10">
+          {/* Blog Content - Takes up 3 columns */}
+          <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
             <Example />
 
             <div className="mt-4">
@@ -69,8 +81,8 @@ const DynamicBlog = () => {
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-8">
+          {/* Sidebar - Takes up 1 column */}
+          <div className="space-y-8 md:col-start-8 md:col-end-10">
             <div className="space-y-4">
               <h3 className="font-medium">Table of Contents</h3>
               <ul className="space-y-2">
