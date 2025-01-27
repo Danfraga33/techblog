@@ -7,6 +7,9 @@ import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
 import { author } from "~/data/constant/author";
 import { resources } from "~/data/constant/recommendedResources";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { Smile } from "lucide-react";
 
 export type NewsArticleType = {
   uuid: string;
@@ -199,8 +202,10 @@ export default function Home() {
           {/* Sidebar */}
           <div className="space-y-8">
             <section>
-              <h2 className="mb-4 text-xl font-semibold">Recent News</h2>
-              Coming soon...
+              <div className="flex gap-2">
+                <h2 className="mb-4 text-xl font-semibold">Recent News</h2>
+                Coming soon... <Smile color="red" />
+              </div>
               {/* <div className="space-y-4">
                 {news.data.map((article: NewsArticleType, i: number) => (
                   <article key={i} className="flex gap-4">
