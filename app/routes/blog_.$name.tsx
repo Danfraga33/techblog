@@ -10,12 +10,13 @@ import Example from "./content/example.mdx";
 
 import { read } from "to-vfile";
 import { matter } from "vfile-matter";
-export interface Frontmatter {
+export interface FrontmatterTypes {
   title: string;
   description: string;
   tags: string[];
   author: string;
   authorImg: string;
+  coverImage: string;
   date: string;
   toc?: { title: string; id: string }[];
 }
@@ -29,6 +30,8 @@ export async function loader() {
 
 const DynamicBlog = () => {
   const { frontmatter } = useLoaderData<typeof loader>();
+  const { title, description, tags, author, coverImage, toc } = frontmatter.data
+    .matter as FrontmatterTypes;
   console.log("frontmatter: ", frontmatter.data.matter);
   const { name } = useParams();
   const pageTitle = PageTitle(name as string);
@@ -42,7 +45,7 @@ const DynamicBlog = () => {
     <section className="relative flex flex-col justify-center rounded-xl p-4">
       <div className="relative flex justify-center">
         <img
-          src={frontmatter.data.matter.coverImage}
+          src={coverImage}
           className={cn(
             "min-h-screen rounded-2xl object-cover 2xl:h-full 2xl:w-full",
           )}
@@ -53,14 +56,10 @@ const DynamicBlog = () => {
         </div>
         <div className="absolute bottom-8 left-4 w-4/5 rounded-lg bg-stone-400/70 px-4 py-2 text-white lg:w-1/2">
           <div className="flex flex-col gap-2">
-            <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl">
-              {frontmatter.data.matter.title}
-            </h1>
-            <p className="text-sm lg:text-sm">
-              {frontmatter.data.matter.description}
-            </p>
+            <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl">{title}</h1>
+            <p className="text-sm lg:text-sm">{description}</p>
             <ul className="flex flex-wrap gap-1.5">
-              {frontmatter.data.matter.tags.map((tag) => (
+              {tags.map((tag: string) => (
                 <li key={tag}>
                   <Chip size="sm">{tag}</Chip>
                 </li>
@@ -84,7 +83,7 @@ const DynamicBlog = () => {
             <div className="space-y-4">
               <h3 className="font-medium">Table of Contents</h3>
               <ul className="space-y-2">
-                {frontmatter.data.matter.toc.map((item) => (
+                {toc.map((item: { id: string; title: string }) => (
                   <li
                     className="block text-sm text-gray-600 hover:text-gray-900"
                     key={item.id}
@@ -100,15 +99,13 @@ const DynamicBlog = () => {
               <div className="flex items-center space-x-3">
                 <img
                   src={"/AvatarImg.jpg"}
-                  alt={frontmatter.data.matter.author}
+                  alt={author}
                   width={40}
                   height={40}
                   className="rounded-full"
                 />
                 <div>
-                  <p className="font-medium">
-                    {frontmatter.data.matter.author as string}
-                  </p>
+                  <p className="font-medium">{author}</p>
                   <p className="text-sm text-gray-600">AI Engineer</p>
                 </div>
               </div>
