@@ -1,11 +1,10 @@
-import { json, useLoaderData, useParams } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { PageTitle, cn } from "~/lib/utils";
+import { cn } from "~/lib/utils";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
-import { BlogPostTypes, blogPost } from "~/data/blogPosts";
 import Example from "./content/example.mdx";
 
 import { read } from "to-vfile";
@@ -32,14 +31,6 @@ const DynamicBlog = () => {
   const { frontmatter } = useLoaderData<typeof loader>();
   const { title, description, tags, author, coverImage, toc } = frontmatter.data
     .matter as FrontmatterTypes;
-  console.log("frontmatter: ", frontmatter.data.matter);
-  const { name } = useParams();
-  const pageTitle = PageTitle(name as string);
-
-  let selectedBlog: BlogPostTypes | undefined = blogPost.find((blog) => {
-    return blog.title === pageTitle;
-  });
-  console.log("selectedBlog: ", selectedBlog);
 
   return (
     <section className="relative flex flex-col justify-center rounded-xl p-4">
