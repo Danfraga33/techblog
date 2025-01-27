@@ -86,14 +86,23 @@ const DynamicBlog = () => {
             <div className="space-y-4">
               <h3 className="font-medium">Table of Contents</h3>
               <ul className="space-y-2">
-                {toc.map((item: { id: string; title: string }) => (
-                  <li
-                    className="block text-sm text-gray-600 hover:text-gray-900"
-                    key={item.id}
-                  >
-                    <a href={`#${item.id}`}>{item.title}</a>
-                  </li>
-                ))}
+                {toc
+                  ? toc.map((item: { id: string; title: string }) => (
+                      <li
+                        className="block text-sm text-gray-600 hover:text-gray-900"
+                        key={item.id}
+                      >
+                        <a href={`#${item.id}`}>{item.title}</a>
+                      </li>
+                    ))
+                  : [{ title: "Technology", id: 1 }].map((item) => (
+                      <li
+                        className="block text-sm text-gray-600 hover:text-gray-900"
+                        key={item.id}
+                      >
+                        {item.title}
+                      </li>
+                    ))}
               </ul>
             </div>
 
