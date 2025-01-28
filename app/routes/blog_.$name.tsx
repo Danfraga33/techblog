@@ -13,7 +13,7 @@ import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 
-export async function loader({ params }: { params: { slug: string } }) {
+export async function loader({ params }: { params: { name: string } }) {
   console.log("params: ", params);
   const postsDirectory = path.join(process.cwd(), "app/content/posts");
   const filePath = path.join(postsDirectory, `${params.name}.mdx`); // This is the problem, its not dynamic
@@ -24,7 +24,6 @@ export async function loader({ params }: { params: { slug: string } }) {
 
   const fileContent = fs.readFileSync(filePath, "utf8");
   const { content } = matter(fileContent);
-  console.log("content: ", content);
 
   // Compile MDX to React components
   const { code, frontmatter } = await bundleMDX({
@@ -50,8 +49,7 @@ export interface FrontmatterTypes {
 
 const DynamicBlog = () => {
   const { code, frontmatter } = useLoaderData<typeof loader>();
-  console.log("code: ", code);
-  console.log("frontmatter: ", frontmatter);
+
   const { title, description, tags, author, coverImage, toc } = frontmatter;
   //   .matter as FrontmatterTypes;
   const Component = useMemo(() => getMDXComponent(code), [code]);
