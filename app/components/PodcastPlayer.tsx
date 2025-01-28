@@ -23,19 +23,25 @@ export default function PodcastPlayer({
   code: string;
   frontmatter: PodcastFrontmatter;
 }) {
+  const [currentTime, setCurrentTime] = useState(0);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const Component = useMemo(() => getMDXComponent(code), [code]);
-  const audioRef = useRef<HTMLAudioElement>(null); // Ref for the audio element
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+  };
 
   const toggleAudio = async () => {
     if (audioRef.current) {
       try {
         if (audioPlaying) {
-          audioRef.current.pause(); // Pause only if playing
+          audioRef.current.pause();
         } else {
           await audioRef.current.play().catch((error) => {
             console.error("Error playing audio:", error);
-          }); // Play only if paused
+          });
         }
         setAudioPlaying(!audioPlaying);
       } catch (error) {
@@ -70,7 +76,6 @@ export default function PodcastPlayer({
               {frontmatter.slogan}
             </h2>
 
-            {/* Add image fade here */}
             <div className="relative mb-12 inline-block">
               <img
                 src={frontmatter.coverImage}
@@ -81,15 +86,15 @@ export default function PodcastPlayer({
               />
             </div>
 
-            {/* Waveform */}
             <div className="mb-4 h-12">
               <FadedDivider />
             </div>
 
-            {/* Time */}
-            <div className="mb-4 text-sm text-gray-400">00:23/02:34</div>
+            <div className="mb-4 text-sm text-gray-400">
+              {formatTime(currentTime)}/
+              {formatTime(audioRef.current?.duration || 0)}
+            </div>
 
-            {/* Controls */}
             <div className="mb-8 flex items-center justify-evenly gap-8">
               <button className="rounded-full p-2 transition hover:bg-white/10">
                 <Shuffle className="h-10 w-10 text-gray-400" />
@@ -104,7 +109,6 @@ export default function PodcastPlayer({
                 className="rounded-full bg-white p-3 transition hover:bg-white/90"
                 onClick={toggleAudio}
               >
-                {/* <Play /> */}
                 {audioPlaying ? (
                   <Pause className="h-6 w-6 text-black" />
                 ) : (
@@ -124,7 +128,20 @@ export default function PodcastPlayer({
             </div>
           </div>
         </div>
-        <audio ref={audioRef} onEnded={() => setAudioPlaying(false)}>
+        <audio
+          ref={audioRef}
+          onEnded={() => setAudioPlaying(false)}
+          onTimeUpdate={() => {
+            if (audioRef.current) {
+              setCurrentTime(audioRef.current.currentTime);
+            }
+          }}
+          onLoadedMetadata={() => {
+            if (audioRef.current) {
+              setCurrentTime(audioRef.current.currentTime);
+            }
+          }}
+        >
           <source src="/audioFiles/mappingtheSemiconductorSupply.mp3" />
           <source
             src={frontmatter.audioFile.replace(".mp3", ".wav")}
