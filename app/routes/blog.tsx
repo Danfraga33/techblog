@@ -7,15 +7,13 @@ import { getPosts } from "~/.server/posts";
 import Header from "~/components/Dashboard/Header";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
 import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
-import { blogPost } from "~/data/blogPosts";
 import { cn } from "~/lib/utils";
 
 export async function loader() {
   return json(await getPosts());
 }
 const Blog = () => {
-  const blogPost123 = useLoaderData<typeof loader>();
-  console.log("posts: ", blogPost123);
+  const blogPosts = useLoaderData<typeof loader>();
   const [filter, setFilter] = useState("View all");
   return (
     <>
@@ -47,7 +45,7 @@ const Blog = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {blogPost123.map((post) => (
+          {blogPosts.map((post) => (
             <Card className="group" key={post.frontmatter.id}>
               <Link to={`/blog/${post.slug}`} className="block space-y-4">
                 <div className="relative overflow-hidden">
@@ -58,7 +56,7 @@ const Blog = () => {
                   />
                   <div className="p-3">
                     <div className="mb-2 text-sm font-semibold">
-                      {post.frontmatter.author}
+                      Daniel Fraga
                     </div>
                     <div className="text-sm opacity-70">
                       {post.frontmatter.date}
