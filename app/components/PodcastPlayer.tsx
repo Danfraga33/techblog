@@ -142,7 +142,7 @@ export default function PodcastPlayer({
             }
           }}
         >
-          <source src="/audioFiles/mappingtheSemiconductorSupply.mp3" />
+          <source src={frontmatter.audioFile} />
           <source
             src={frontmatter.audioFile.replace(".mp3", ".wav")}
             type="audio/mp3"
