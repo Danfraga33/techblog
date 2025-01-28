@@ -46,7 +46,7 @@ const data = {
     },
     {
       title: "Whiteboard Animation",
-      url: "#",
+      url: "/whiteboardAnimation",
       icon: BookOpen,
     },
   ],

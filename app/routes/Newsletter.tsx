@@ -1,3 +1,4 @@
+import ComingSoon from "~/components/Dashboard/ComingSoon";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
@@ -38,7 +39,8 @@ const Newsletter = () => {
         description="New product features, the latest in technology, solutions, and
             updates."
       >
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ComingSoon />
+        {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, index) => (
             <Card
               key={index}
@@ -65,7 +67,7 @@ const Newsletter = () => {
               </CardFooter>
             </Card>
           ))}
-        </div>
+        </div> */}
       </ContentLayout>
     </>
   );
