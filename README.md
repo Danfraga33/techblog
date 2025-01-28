@@ -4,4 +4,4 @@ To do
 - Make first blog
 - Make first podcast
 - Make first newsletter
-- Fix blog dynamic fetching
+- Make first whiteboard amimation
