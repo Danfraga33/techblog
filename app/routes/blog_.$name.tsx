@@ -1,14 +1,41 @@
-import { json, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { cn } from "~/lib/utils";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
-import Example from "./content/example.mdx";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { json } from "@remix-run/node";
+import { bundleMDX } from "mdx-bundler";
+import { useLoaderData } from "@remix-run/react";
+import { getMDXComponent } from "mdx-bundler/client";
+import { useMemo } from "react";
 
-import { read } from "to-vfile";
-import { matter } from "vfile-matter";
+export async function loader({ params }: { params: { slug: string } }) {
+  console.log("params: ", params);
+  const postsDirectory = path.join(process.cwd(), "app/content/posts");
+  const filePath = path.join(postsDirectory, `${params.name}.mdx`); // This is the problem, its not dynamic
+
+  if (!fs.existsSync(filePath)) {
+    throw new Response("Post not found", { status: 404 });
+  }
+
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const { content } = matter(fileContent);
+  console.log("content: ", content);
+
+  // Compile MDX to React components
+  const { code, frontmatter } = await bundleMDX({
+    source: fileContent,
+  });
+
+  return json({
+    code,
+    frontmatter,
+  });
+}
 
 export interface FrontmatterTypes {
   title: string;
@@ -21,19 +48,18 @@ export interface FrontmatterTypes {
   toc?: { title: string; id: string }[];
 }
 
-export async function loader() {
-  const frontmatter = await read("./app/routes/content/example.mdx");
-  matter(frontmatter);
-
-  return json({ frontmatter });
-}
-
 const DynamicBlog = () => {
-  const { frontmatter } = useLoaderData<typeof loader>();
-  const { title, description, tags, author, coverImage, toc } = frontmatter.data
-    .matter as FrontmatterTypes;
+  const { code, frontmatter } = useLoaderData<typeof loader>();
+  console.log("code: ", code);
+  console.log("frontmatter: ", frontmatter);
+  const { title, description, tags, author, coverImage, toc } = frontmatter;
+  //   .matter as FrontmatterTypes;
+  const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
+    // <div className="prose">
+    //   <Component />
+    // </div>
     <section className="relative flex flex-col justify-center rounded-2xl p-4">
       {/* Image Container */}
       <div className="relative flex h-[75vh] justify-center overflow-hidden">
@@ -74,7 +100,7 @@ const DynamicBlog = () => {
         <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-10">
           {/* Blog Content - Takes up 3 columns */}
           <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
-            <Example />
+            <Component />
 
             <div className="mt-4">
               <Separator />

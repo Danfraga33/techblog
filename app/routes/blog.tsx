@@ -1,17 +1,22 @@
 import { Button } from "@heroui/button";
 import { Card } from "@heroui/card";
-import { Link } from "@remix-run/react";
+import { Link, json, useLoaderData } from "@remix-run/react";
 import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
+import { getPosts } from "~/.server/posts";
 import Header from "~/components/Dashboard/Header";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
 import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
 import { blogPost } from "~/data/blogPosts";
 import { cn } from "~/lib/utils";
 
+export async function loader() {
+  return json(await getPosts());
+}
 const Blog = () => {
+  const blogPost123 = useLoaderData<typeof loader>();
+  console.log("posts: ", blogPost123);
   const [filter, setFilter] = useState("View all");
-
   return (
     <>
       <Header />
@@ -42,28 +47,30 @@ const Blog = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {blogPost.map((post) => (
-            <Card className="group" key={post.id}>
-              <Link to={`/blog/${post.title}`} className="block space-y-4">
+          {blogPost123.map((post) => (
+            <Card className="group" key={post.frontmatter.id}>
+              <Link to={`/blog/${post.slug}`} className="block space-y-4">
                 <div className="relative overflow-hidden">
                   <img
-                    src={post.image.url}
-                    alt={post.image.alt}
+                    src={post.frontmatter.coverImage}
+                    alt={post.frontmatter.title}
                     className="relative rounded-xl object-cover"
                   />
                   <div className="p-3">
                     <div className="mb-2 text-sm font-semibold">
-                      {post.author}
+                      {post.frontmatter.author}
                     </div>
-                    <div className="text-sm opacity-70">{post.date}</div>
+                    <div className="text-sm opacity-70">
+                      {post.frontmatter.date}
+                    </div>
                   </div>
                   <FadedDivider />
                   <div className="p-2">
                     <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
-                      {post.title}
+                      {post.frontmatter.title}
                     </h2>
                     <p className="mt-2 text-muted-foreground">
-                      {post.description}
+                      {post.frontmatter.description}
                     </p>
                     <Button
                       variant="flat"
