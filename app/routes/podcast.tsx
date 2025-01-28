@@ -16,8 +16,13 @@ import { Play } from "lucide-react";
 import { Link, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
 
+export async function loader() {
+  return await getPodcasts();
+}
 
 export default function Podcasts() {
+  const podcasts = useLoaderData<typeof loader>();
+
   return (
     <>
       <ContentLayout
@@ -27,14 +32,13 @@ export default function Podcasts() {
       >
         <section className="container flex min-h-[400px] w-3/4 flex-col">
           <section className="flex items-center gap-8 py-8">
-            {podcastList.map((podcast) => (
-              <Fragment key={podcast.id}>
+            {podcasts.map((podcast) => (
+              <Fragment key={podcast.frontmatter.title}>
                 <LatestPodcastCard
-                  title={podcast.title}
-                  description={podcast.description}
-                  category={podcast.category}
-                  href={podcast.href}
-                  slogan={podcast.slogan}
+                  title={podcast.frontmatter.title}
+                  description={podcast.frontmatter.description}
+                  category={podcast.frontmatter.category}
+                  slug={podcast.slug}
                 />
               </Fragment>
             ))}
@@ -56,21 +60,21 @@ export default function Podcasts() {
               <TableColumn>Listen</TableColumn>
             </TableHeader>
             <TableBody className="overflow-scroll">
-              {podcastList.map((podcast) => (
-                <Fragment key={podcast.id}>
+              {podcasts.map((podcast) => (
+                <Fragment key={podcast.frontmatter.title}>
                   <TableRow className="transition-all hover:bg-stone-50">
                     <TableCell>
-                      {new Date(podcast.pubDate).toDateString()}
+                      {new Date(podcast.frontmatter.date).toDateString()}
                     </TableCell>
-                    <TableCell>{podcast.title}</TableCell>
-                    <TableCell>{podcast.description}</TableCell>
+                    <TableCell>{podcast.frontmatter.title}</TableCell>
+                    <TableCell>{podcast.frontmatter.description}</TableCell>
                     <TableCell>
                       <Button
                         variant="outline"
                         className="flex items-center"
                         asChild
                       >
-                        <Link to={podcast.href}>
+                        <Link to={podcast.slug}>
                           <Play />
                           Listen
                         </Link>
