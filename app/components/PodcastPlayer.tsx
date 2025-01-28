@@ -17,10 +17,32 @@ import { useMemo, useRef, useState } from "react";
 import { PodcastFrontmatter } from "~/.server/podcasts";
 
 export default function PodcastPlayer({
-  selectedPodcast,
+  frontmatter,
+  code,
 }: {
-  selectedPodcast: podcastType;
+  code: string;
+  frontmatter: PodcastFrontmatter;
 }) {
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const Component = useMemo(() => getMDXComponent(code), [code]);
+  const audioRef = useRef<HTMLAudioElement>(null); // Ref for the audio element
+
+  const toggleAudio = async () => {
+    if (audioRef.current) {
+      try {
+        if (audioPlaying) {
+          audioRef.current.pause(); // Pause only if playing
+        } else {
+          await audioRef.current.play().catch((error) => {
+            console.error("Error playing audio:", error);
+          }); // Play only if paused
+        }
+        setAudioPlaying(!audioPlaying);
+      } catch (error) {
+        console.error("Error toggling audio:", error);
+      }
+    }
+  };
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-[#3d2329] to-[#1a1314] text-white">
@@ -36,7 +58,7 @@ export default function PodcastPlayer({
             </div>
 
             <div>
-              <h1 className="text-lg font-medium">{selectedPodcast.title}</h1>
+              <h1 className="text-lg font-medium">{frontmatter.title}</h1>
             </div>
             <button className="rounded-full p-2 transition hover:bg-white/10">
               <MoreVertical className="h-6 w-6" />
@@ -45,13 +67,13 @@ export default function PodcastPlayer({
 
           <div className="mb-12 text-center">
             <h2 className="mb-8 px-8 text-2xl font-bold md:text-3xl">
-              {selectedPodcast.slogan}
+              {frontmatter.slogan}
             </h2>
 
             {/* Add image fade here */}
             <div className="relative mb-12 inline-block">
               <img
-                src="/chip.jpg"
+                src={frontmatter.coverImage}
                 alt="Podcast host"
                 width={600}
                 height={600}
@@ -78,8 +100,16 @@ export default function PodcastPlayer({
               >
                 <SkipBack className="h-10 w-10" />
               </Link>
-              <button className="rounded-full bg-white p-3 transition hover:bg-white/90">
-                <Pause className="h-6 w-6 text-black" />
+              <button
+                className="rounded-full bg-white p-3 transition hover:bg-white/90"
+                onClick={toggleAudio}
+              >
+                {/* <Play /> */}
+                {audioPlaying ? (
+                  <Pause className="h-6 w-6 text-black" />
+                ) : (
+                  <Play className="h-6 w-6 text-black" />
+                )}
               </button>
               <button className="rounded-full border border-gray-500/100 p-2 transition hover:bg-white/10">
                 <SkipForward className="h-10 w-10" />
@@ -89,12 +119,19 @@ export default function PodcastPlayer({
               </button>
             </div>
 
-            {/* Caption */}
             <div className="text-sm text-gray-400">
-              <p>{selectedPodcast.description}</p>
+              <Component code={code} />
             </div>
           </div>
         </div>
+        <audio ref={audioRef} onEnded={() => setAudioPlaying(false)}>
+          <source src="/audioFiles/mappingtheSemiconductorSupply.mp3" />
+          <source
+            src={frontmatter.audioFile.replace(".mp3", ".wav")}
+            type="audio/mp3"
+          />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </>
   );
