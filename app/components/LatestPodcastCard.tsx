@@ -15,14 +15,12 @@ export default function LatestPodcastCard({
   title,
   description,
   category,
-  href,
-  slogan,
+  slug,
 }: {
   title: string;
   description: string;
   category: string;
-  href: string;
-  slogan: string;
+  slug: string;
 }) {
   return (
     <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg">
@@ -39,7 +37,7 @@ export default function LatestPodcastCard({
         <div className="flex flex-col gap-1">
           <div>
             <h3 className="text-lg">
-              <Link to={href}>
+              <Link to={`/podcast/${slug}`}>
                 <span aria-hidden="true" className="absolute inset-0" />
                 {title}
               </Link>

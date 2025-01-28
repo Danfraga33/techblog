@@ -16,7 +16,7 @@ export function TeamSwitcher({
     plan: string;
   }[];
 }) {
-  const [activeTeam] = React.useState(teams[0]); // Always showing the first team as active
+  const [activeTeam] = React.useState(teams[0]);
 
   return (
     <SidebarMenu>

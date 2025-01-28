@@ -6,7 +6,6 @@ import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
 import { useLoaderData } from "@remix-run/react";

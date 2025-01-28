@@ -1,12 +1,7 @@
 import { Link } from "@remix-run/react";
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import { Fragment } from "react";
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "~/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,

@@ -1,18 +1,15 @@
 import * as React from "react";
-import { AudioWaveform, BookOpen, FolderKanban, Settings2 } from "lucide-react"; // Icons used for demonstration, update as needed.
+import { AudioWaveform, BookOpen, FolderKanban, Settings2 } from "lucide-react";
 
 import { NavMain } from "~/components/nav-main";
 import { TeamSwitcher } from "~/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarRail,
 } from "~/components/ui/sidebar";
-import { NavUser } from "./nav-user";
 
-// Updated data for navigation
 const data = {
   user: {
     name: "Daniel",

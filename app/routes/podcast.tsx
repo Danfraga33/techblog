@@ -10,10 +10,12 @@ import {
 import { Fragment } from "react";
 import SearchBar from "~/components/Dashboard/SearchBar";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
-import { podcastList } from "~/data/podcasts";
+// import { podcastList } from "~/data/podcasts";
 import { Button } from "~/components/ui/button";
 import { Play } from "lucide-react";
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
+import { getPodcasts } from "~/.server/podcasts";
+
 
 export default function Podcasts() {
   return (
