@@ -13,18 +13,15 @@ import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 
 export async function loader({ params }: { params: { name: string } }) {
-  console.log("params: ", params);
   const postsDirectory = path.join(process.cwd(), "app/content/posts");
-  const filePath = path.join(postsDirectory, `${params.name}.mdx`); // This is the problem, its not dynamic
+  const filePath = path.join(postsDirectory, `${params.name}.mdx`);
 
   if (!fs.existsSync(filePath)) {
     throw new Response("Post not found", { status: 404 });
   }
 
   const fileContent = fs.readFileSync(filePath, "utf8");
-  const { content } = matter(fileContent);
-
-  // Compile MDX to React components
+  // const { content } = matter(fileContent);
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
   });
@@ -50,7 +47,7 @@ const DynamicBlog = () => {
   const { code, frontmatter } = useLoaderData<typeof loader>();
 
   const { title, description, tags, author, coverImage, toc } = frontmatter;
-  //   .matter as FrontmatterTypes;
+
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
@@ -58,25 +55,22 @@ const DynamicBlog = () => {
     //   <Component />
     // </div>
     <section className="relative flex flex-col justify-center rounded-2xl p-4">
-      {/* Image Container */}
       <div className="relative flex h-[75vh] justify-center overflow-hidden">
-        {/* Set height to 50% of viewport height */}
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 z-10 rounded-b-xl bg-gradient-to-t from-black to-transparent"></div>
-        {/* Image */}
+
         <img
           src={coverImage}
           className={cn(
-            "h-full w-full rounded-2xl object-cover", // Ensure the image covers the container
-            "mask-image: linear-gradient(to top, transparent, black 50%)", // Fade-out effect
+            "h-full w-full rounded-2xl object-cover",
+            "mask-image: linear-gradient(to top, transparent, black 50%)",
           )}
           alt="Image of a chip"
         />
-        {/* Sidebar Trigger */}
+
         <div className="absolute left-4 top-5 z-20 rounded-xl bg-stone-400/50 p-1">
           <SidebarTrigger />
         </div>
-        {/* Text Overlay */}
+
         <div className="absolute bottom-8 left-4 z-20 w-4/5 rounded-lg bg-stone-400/70 px-4 py-2 text-white lg:w-1/2">
           <div className="flex flex-col gap-2">
             <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl">{title}</h1>
@@ -92,10 +86,8 @@ const DynamicBlog = () => {
         </div>
       </div>
 
-      {/* Content Below the Image */}
       <div className="px-2 py-12">
         <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-10">
-          {/* Blog Content - Takes up 3 columns */}
           <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
             <Component />
 
@@ -104,7 +96,6 @@ const DynamicBlog = () => {
             </div>
           </div>
 
-          {/* Sidebar - Takes up 1 column */}
           <div className="space-y-8 md:col-start-8 md:col-end-10">
             <div className="space-y-4">
               <h3 className="font-medium">Table of Contents</h3>
