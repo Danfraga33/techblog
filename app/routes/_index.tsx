@@ -7,8 +7,6 @@ import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
 import { author } from "~/data/constant/author";
 import { resources } from "~/data/constant/recommendedResources";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import { Smile } from "lucide-react";
 
 export type NewsArticleType = {
