@@ -16,6 +16,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
   // const { content } = matter(fileContent);
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
+    mdxOptions(options) {
+      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+      options.rehypePlugins = [...(options.rehypePlugins ?? [])];
+      return options;
+    },
   });
 
   return json({
