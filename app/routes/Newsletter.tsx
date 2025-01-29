@@ -8,7 +8,7 @@ const blogPosts = [
     title: "Street art festival",
     excerpt:
       "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl: "/water.jpg",
+    imageUrl: "/chip.jpg",
     readTime: "3 min",
     category: "Street Art",
   },
