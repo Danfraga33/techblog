@@ -42,7 +42,7 @@ export const blogPost: BlogPostTypes[] = [
     tableOfContents: ["Introduction", "AR"],
     topic: "Artificial Intelligence",
     image: {
-      url: "/ar.jpg",
+      url: "/chip.jpg",
       alt: "Person using augmented reality glasses",
     },
     author: "Daniel Fraga",

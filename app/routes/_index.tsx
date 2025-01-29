@@ -125,7 +125,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="water.jpg"
+                    src="chip.jpg"
                     alt="Fashion"
                     width={600}
                     height={400}
@@ -135,7 +135,7 @@ export default function Home() {
                 <div className="mt-4">
                   <div className="mb-2 flex items-center gap-2">
                     <img
-                      src="water.jpg"
+                      src="chip.jpg"
                       alt="Author"
                       width={24}
                       height={24}
