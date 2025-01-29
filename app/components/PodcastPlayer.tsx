@@ -71,7 +71,7 @@ export default function PodcastPlayer({
             </button>
           </div>
 
-          <div className="mb-12 text-center">
+          <div className="text-center">
             <h2 className="mb-8 px-8 text-2xl font-bold md:text-3xl">
               {frontmatter.slogan}
             </h2>
@@ -96,9 +96,6 @@ export default function PodcastPlayer({
             </div>
 
             <div className="mb-8 flex items-center justify-evenly gap-8">
-              <button className="rounded-full p-2 transition hover:bg-white/10">
-                <Shuffle className="h-10 w-10 text-gray-400" />
-              </button>
               <Link
                 to="/podcasts"
                 className="rounded-full border border-gray-500/100 p-2 transition hover:bg-white/10"
@@ -118,12 +115,8 @@ export default function PodcastPlayer({
               <button className="rounded-full border border-gray-500/100 p-2 transition hover:bg-white/10">
                 <SkipForward className="h-10 w-10" />
               </button>
-              <button className="rounded-full p-2 transition hover:bg-white/10">
-                <Repeat className="h-10 w-10 text-gray-400" />
-              </button>
             </div>
-
-            <div className="text-sm text-gray-400">
+            <div className="md:text-md px-20 text-sm text-gray-300 lg:text-lg">
               <Component code={code} />
             </div>
           </div>
