@@ -39,7 +39,6 @@ export const getPosts = async () => {
     }),
   );
 
-  // Sort posts by date (newest first)
   const sortedPosts = posts.sort(
     (a, b) =>
       new Date(b.frontmatter.date).getTime() -
