@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Play } from "~/node_modules/lucide-react/dist/esm/icons";
+import { Play } from "lucide-react";
 
 const podcasts = [
   {

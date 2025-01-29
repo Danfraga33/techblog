@@ -13,7 +13,7 @@ import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
 import { ReactNode } from "react";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/app/tailwind.css" },
+  { rel: "stylesheet", href: "./app/tailwind.css" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
