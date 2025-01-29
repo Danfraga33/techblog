@@ -18,8 +18,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
     source: fileContent,
   });
 
-  console.log("frontmatter: ", frontmatter);
-
   return json({
     code,
     frontmatter: frontmatter as PodcastFrontmatter,
