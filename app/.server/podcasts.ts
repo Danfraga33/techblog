@@ -14,7 +14,7 @@ export type PodcastFrontmatter = {
 };
 export const getPodcasts = async () => {
   const postsDirectory = path.join(process.cwd(), "app/content/podcasts");
-  const filenames = fs.promises.readdirSync(postsDirectory);
+  const filenames = fs.readdirSync(postsDirectory);
 
   const podcasts = await Promise.all(
     filenames.map((filename) => {
