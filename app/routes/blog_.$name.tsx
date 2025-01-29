@@ -21,7 +21,6 @@ export async function loader({ params }: { params: { name: string } }) {
   }
 
   const fileContent = fs.readFileSync(filePath, "utf8");
-  // const { content } = matter(fileContent);
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
     mdxOptions(options) {
