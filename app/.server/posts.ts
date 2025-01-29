@@ -14,30 +14,30 @@ type Frontmatter = {
 };
 
 const postsDirectory = path.join(process.cwd(), "app/content/posts");
-
 export const getPosts = async () => {
-  const filenames = fs.readdirSync(postsDirectory);
+  const filenames = await fs.promises.readdir(postsDirectory);
 
-  const posts = filenames.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(fileContent);
-    const frontmatter = data as Frontmatter;
-    const slug = filename.replace(/\.mdx$/, "");
+  const posts = await Promise.all(
+    filenames.map(async (filename) => {
+      const filePath = path.join(postsDirectory, filename);
+      const fileContent = await fs.promises.readFile(filePath, "utf8");
+      const { data } = matter(fileContent);
+      const frontmatter = data as Frontmatter;
+      const slug = filename.replace(/\.mdx$/, "");
 
-    const id = crypto
-      .createHash("md5")
-      .update(filename + frontmatter.title + frontmatter.date)
-      .digest("hex");
-
-    return {
-      slug,
-      frontmatter: {
-        ...frontmatter,
-        id,
-      },
-    };
-  });
+      const id = crypto
+        .createHash("md5")
+        .update(filename + frontmatter.title + frontmatter.date)
+        .digest("hex");
+      return {
+        slug,
+        frontmatter: {
+          ...frontmatter,
+          id,
+        },
+      };
+    }),
+  );
 
   // Sort posts by date (newest first)
   const sortedPosts = posts.sort(
@@ -45,5 +45,6 @@ export const getPosts = async () => {
       new Date(b.frontmatter.date).getTime() -
       new Date(a.frontmatter.date).getTime(),
   );
+
   return sortedPosts;
 };
