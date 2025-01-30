@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import crypto from "crypto";
@@ -14,36 +14,31 @@ export type PodcastFrontmatter = {
   id?: string;
 };
 
-const limit = pLimit(10); // Limit to 10 concurrent file operations
+const postsDirectory = path.join(process.cwd(), "app/content/podcasts");
 
 export const getPodcasts = async () => {
-  const postsDirectory = path.join(process.cwd(), "app/content/podcasts");
-  const filenames = await fs.readdir(postsDirectory);
+  const filenames = fs.readdirSync(postsDirectory);
+  console.log("filenames: ", filenames);
 
-  const podcasts = await Promise.all(
-    filenames.map((filename) =>
-      limit(async () => {
-        const filePath = path.join(postsDirectory, filename);
-        const fileContent = await fs.readFile(filePath, "utf8");
-        const { data } = matter(fileContent);
-        const frontmatter = data as PodcastFrontmatter;
-        const slug = filename.replace(/\.mdx$/, "");
+  const podcasts = filenames.map((filename) => {
+    const filePath = path.join(postsDirectory, filename);
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const { data } = matter(fileContent);
+    const frontmatter = data as PodcastFrontmatter;
+    const slug = filename.replace(/\.mdx$/, "");
 
-        const id = crypto
-          .createHash("md5")
-          .update(filename + frontmatter.title + frontmatter.date)
-          .digest("hex");
-
-        return {
-          slug,
-          frontmatter: {
-            ...frontmatter,
-            id,
-          },
-        };
-      }),
-    ),
-  );
+    const id = crypto
+      .createHash("md5")
+      .update(filename + frontmatter.title + frontmatter.date)
+      .digest("hex");
+    return {
+      slug,
+      frontmatter: {
+        ...frontmatter,
+        id,
+      },
+    };
+  });
 
   const sortedPodcasts = podcasts.sort(
     (a, b) =>

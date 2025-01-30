@@ -14,8 +14,11 @@ type Frontmatter = {
 };
 
 const postsDirectory = path.join(process.cwd(), "app/content/posts");
-export const getPosts = async () => {
+
+export const getPosts = () => {
   const filenames = fs.readdirSync(postsDirectory);
+  console.log("filenames: ", filenames);
+
   const posts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContent = fs.readFileSync(filePath, "utf8");
@@ -27,7 +30,6 @@ export const getPosts = async () => {
       .createHash("md5")
       .update(filename + frontmatter.title + frontmatter.date)
       .digest("hex");
-
     return {
       slug,
       frontmatter: {
@@ -37,7 +39,6 @@ export const getPosts = async () => {
     };
   });
 
-  // Sort posts by date (newest first)
   const sortedPosts = posts.sort(
     (a, b) =>
       new Date(b.frontmatter.date).getTime() -
