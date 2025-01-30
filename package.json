@@ -61,6 +61,7 @@
     "vfile-matter": "^5.0.0"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.4",
     "@remix-run/dev": "^2.13.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
