@@ -55,9 +55,6 @@ const DynamicBlog = () => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    // <div className="prose">
-    //   <Component />
-    // </div>
     <section className="relative flex flex-col justify-center rounded-2xl p-4">
       <div className="relative flex h-[75vh] justify-center overflow-hidden">
         <div className="absolute inset-0 z-10 rounded-b-xl bg-gradient-to-t from-black to-transparent"></div>

@@ -45,8 +45,6 @@ export default function Podcasts() {
           </section>
         </section>
 
-        {/* Recently Added Section */}
-
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
           Recently Added
         </h1>
