@@ -1,6 +1,6 @@
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
-import { cn } from "~/lib/utils";
+import { cn, sortByDate } from "~/lib/utils";
 import { useState } from "react";
 import { Separator } from "~/components/ui/separator";
 import Header from "~/components/Dashboard/Header";
@@ -8,6 +8,13 @@ import RecentBlogs from "~/components/Dashboard/RecentBlogs";
 import { author } from "~/data/constant/author";
 import { resources } from "~/data/constant/recommendedResources";
 import { Smile } from "lucide-react";
+
+import { getPosts } from "~/.server/posts";
+import { Link, json, useLoaderData } from "@remix-run/react";
+import { getPodcasts } from "~/.server/podcasts";
+import { Avatar } from "~/components/ui/avatar";
+import CatFilter from "~/components/CatFilter";
+import { Card } from "~/components/ui/card";
 
 export type NewsArticleType = {
   uuid: string;
@@ -24,6 +31,12 @@ export type NewsArticleType = {
   relevance_score: number;
   locale: string;
 };
+
+export async function loader() {
+  const blogPosts = await getPosts();
+  const podcasts = await getPodcasts();
+  return json({ blogPosts, podcasts });
+}
 
 // const cacheTTL = 24 * 60 * 60 * 1000; // 24 hours
 // let cache = new Map();
@@ -63,194 +76,75 @@ export type NewsArticleType = {
 // }
 
 export default function Home() {
+  const { blogPosts, podcasts } = useLoaderData<typeof loader>();
   const [category, setCategory] = useState("Most Recent");
   // const news = useLoaderData<typeof loader>();
+  const totalContent = [...blogPosts, ...podcasts];
+
+  const sortedData = sortByDate(totalContent);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#eeeeee]">
       <Header />
-      {/* Navigation */}
-      <div className="border-b">
-        <div className="px-4">
-          <div className="no-scrollbar flex gap-4 overflow-x-auto py-4">
-            <Badge variant="secondary"> Data Centre's</Badge>
-            <Badge variant="secondary"> Algorithims</Badge>
-            <Badge variant="secondary"> Photolithography</Badge>
-            <Badge variant="secondary"> TSMC</Badge>
-          </div>
-          <div className="flex gap-8 py-4">
-            <button
-              className={cn(
-                "text-muted-foreground",
-                category === "Most Recent" && "border-b-2 border-primary",
-              )}
-              onClick={() => setCategory("Most Recent")}
-            >
-              Most Recent
-            </button>
-            <button
-              className={cn(
-                "text-muted-foreground",
-                category === "AI" && "border-b-2 border-primary",
-              )}
-              onClick={() => setCategory("AI")}
-            >
-              AI
-            </button>
-            <button
-              className={cn(
-                "text-muted-foreground",
-                category === "Semiconductors" && "border-b-2 border-primary",
-              )}
-              onClick={() => setCategory("Semiconductors")}
-            >
-              Semiconductors
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {/* Main Content */}
-      <main className="px-4 py-6">
+      <main className="px-4">
         <div className="grid gap-6 lg:grid-cols-3">
-          {/* Main Feed */}
-          <div className="space-y-6 lg:col-span-2">
-            <div className="grid gap-6 md:grid-cols-2">
-              {/* Trending #1 */}
-              <div className="group relative">
-                <div className="absolute left-4 top-4 z-10">
-                  <Badge className="bg-white/90 text-foreground">Blog</Badge>
-                </div>
-                <div className="overflow-hidden rounded-xl">
-                  <img
-                    src="chip.jpg"
-                    alt="Fashion"
-                    width={600}
-                    height={400}
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <div className="mb-2 flex items-center gap-2">
+          <div className="space-y-6 lg:col-span-3">
+            <div className="col-span-3 py-6">
+              <div className="grid gap-8 lg:grid-cols-3 lg:gap-16">
+                <div className="relative lg:col-span-3">
+                  <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-2xl sm:h-[500px] lg:h-[600px]">
                     <img
                       src="chip.jpg"
-                      alt="Author"
-                      width={24}
-                      height={24}
-                      className="rounded-full"
+                      alt="Chip"
+                      className="absolute inset-0 h-full w-full rounded-2xl object-cover"
                     />
-                    <span className="font-medium">Esther Howard</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-muted-foreground">Fashion</span>
-                  </div>
-                  <h2 className="mb-2 text-xl font-semibold">
-                    Fashion Icon's New Collection Embraces Nature Elegance
-                  </h2>
-                  <p className="line-clamp-2 text-muted-foreground">
-                    Renowned for pushing the boundaries of fashion, the latest
-                    collection captures the serene beauty of nature.
-                  </p>
-                </div>
-              </div>
 
-              {/* Trending #2 */}
-              <div className="group relative">
-                <div className="absolute left-4 top-4 z-10">
-                  <Badge className="bg-white/90 text-foreground">Podcast</Badge>
-                </div>
-                <div className="overflow-hidden rounded-xl">
-                  <img
-                    src="chip.jpg"
-                    alt="Environment"
-                    width={600}
-                    height={400}
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <div className="mb-2 flex items-center gap-2">
-                    <img
-                      src="chip.jpg"
-                      alt="Author"
-                      width={24}
-                      height={24}
-                      className="rounded-full"
-                    />
-                    <span className="font-medium">Corey Rhiel Madsen</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-muted-foreground">Environment</span>
+                    <div className="absolute inset-0 bg-black/60"></div>
                   </div>
-                  <h2 className="mb-2 text-xl font-semibold">
-                    Endangered Orangutan Population Shows Signs of Recovery in
-                    Borneo
-                  </h2>
-                  <p className="line-clamp-2 text-muted-foreground">
-                    In a heartening development, conservation efforts in Borneo
-                    have begun to show positive results.
-                  </p>
+
+                  <div className="absolute inset-0 flex flex-col justify-center space-y-8 px-4 sm:px-8 lg:px-16">
+                    <div className="space-y-4">
+                      <h1 className="text-6xl font-bold tracking-tight text-white sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl">
+                        Emerging
+                        <br />
+                        Technology
+                      </h1>
+                      <p className="max-w-[600px] text-lg text-white/80">
+                        Unprecedented innovation, unparalleled returns.
+                        Capitalizing on the future of technology.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4">
+                      <Button variant="default" asChild>
+                        <Link to="/blog">Explore</Link>
+                      </Button>
+                      <Button variant="outline" asChild>
+                        <Link to="/podcast">Listen</Link>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <Separator />
-            {/* Regular Articles */}
-            <RecentBlogs />
           </div>
+        </div>
 
-          {/* Sidebar */}
-          <div className="space-y-8">
+        <div className="col-span-2 grid gap-8 px-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="col-span-2 gap-8 p-4">
+            <RecentBlogs blogPosts={sortedData} />
+          </Card>
+          <Card className="col-span-2 space-y-8 p-4 shadow-xl lg:col-span-1">
             <section>
-              <div className="flex gap-2">
-                <h2 className="mb-4 text-xl font-semibold">Recent News</h2>
+              <div>
+                <h2 className="mb-4 text-xl font-semibold">Trending News</h2>
+              </div>
+              <div className="flex items-center gap-2">
                 Coming soon... <Smile color="red" />
               </div>
-              {/* <div className="space-y-4">
-                {news.data.map((article: NewsArticleType, i: number) => (
-                  <article key={i} className="flex gap-4">
-                    <a
-                      href={article.url}
-                      className="flex flex-1 items-center gap-4"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div className="flex-1">
-                        <div className="mb-1 flex items-center gap-2">
-                          <img
-                            src={article.image_url}
-                            alt="Author"
-                            width={20}
-                            height={20}
-                            className="rounded-full"
-                          />
-                          <span className="text-sm font-medium">
-                            {article.source}
-                          </span>
-                          <span className="text-sm text-green-600">•</span>
-                          <span className="text-sm text-muted-foreground">
-                            {new Date(article.published_at).toDateString()}
-                          </span>
-                        </div>
-                        <h3 className="mb-1 line-clamp-2 font-medium">
-                          {article.title}
-                        </h3>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span>5 min read</span>
-                        </div>
-                      </div>
-
-                      <div className="h-20 w-20">
-                        <img
-                          src={article.image_url}
-                          alt="Article"
-                          className="h-full w-full rounded-lg object-cover"
-                        />
-                      </div>
-                    </a>
-                  </article>
-                ))}
-              </div> */}
             </section>
-            <section>
+            <section className="pr-2">
               <h2 className="mb-4 text-xl font-semibold">Semiconductor</h2>
               <div className="space-y-4">
                 {[
@@ -343,7 +237,7 @@ export default function Home() {
                 ))}
               </div>
             </section>
-          </div>
+          </Card>
         </div>
       </main>
     </div>
