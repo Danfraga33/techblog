@@ -11,6 +11,8 @@ type Frontmatter = {
   toc: string;
   date: string;
   id?: string;
+  coverImageAlt: string;
+  type: "Blog" | "Podcast";
 };
 
 const postsDirectory = path.join(process.cwd(), "app/content/posts");
