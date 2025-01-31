@@ -18,7 +18,6 @@ const postsDirectory = path.join(process.cwd(), "app/content/podcasts");
 
 export const getPodcasts = async () => {
   const filenames = fs.readdirSync(postsDirectory);
-  console.log("filenames: ", filenames);
 
   const podcasts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
