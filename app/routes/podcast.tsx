@@ -27,8 +27,7 @@ export default function Podcasts() {
     <>
       <ContentLayout
         title="Podcasts"
-        description="New product features, the latest in technology, solutions, and
-       updates."
+        description="Deep dives into emerging technology, covering AI, quantum computing, semiconductors, and trends shaping the future."
       >
         <section className="container flex min-h-[400px] w-3/4 flex-col">
           <section className="flex items-center gap-8 py-8">

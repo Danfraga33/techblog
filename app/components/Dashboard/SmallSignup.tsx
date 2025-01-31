@@ -1,3 +1,4 @@
+import { Form } from "@remix-run/react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import Title from "./Title";
@@ -7,17 +8,21 @@ export const SmallSignup = () => {
     <>
       <Title
         title="Blog"
-        description="New product features, the latest in technology, solutions, and
-        updates."
+        description=" Insightful analysis on emerging technology, exploring AI, quantum computing, semiconductors, and industry advancements."
       />
-      <div className="flex max-w-md gap-2">
-        <Input
-          type="email"
-          placeholder="Enter your email"
-          className="rounded-full"
-        />
-        <Button className="rounded-full px-6">Subscribe</Button>
-      </div>
+      <Form method="post" className="flex flex-col gap-2">
+        <div className="flex max-w-md gap-2">
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            className="rounded-full"
+            name="email"
+          />
+          <Button type="submit" className="rounded-full px-6">
+            Subscribe
+          </Button>
+        </div>
+      </Form>
     </>
   );
 };

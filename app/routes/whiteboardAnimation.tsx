@@ -7,7 +7,7 @@ const whiteboardAnimation = () => {
     <>
       <ContentLayout
         title="Whiteboard Animations"
-        description="Whiteboard animations explaining key emerging technology trends"
+        description="Engaging visual storytelling simplifies AI, quantum computing, semiconductors, and emerging technology concepts effectively."
       >
         <ComingSoon />
       </ContentLayout>

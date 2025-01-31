@@ -36,8 +36,7 @@ const Newsletter = () => {
     <>
       <ContentLayout
         title="Newsletter"
-        description="New product features, the latest in technology, solutions, and
-            updates."
+        description="Curated updates on emerging technology, highlighting AI, quantum computing, semiconductors, and breakthrough innovations."
       >
         <ComingSoon />
         {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
