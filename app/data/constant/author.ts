@@ -1,5 +1,12 @@
-export const author = {
+type AuthorType = {
+  name: string;
+  avatarImage: string;
+  role: string;
+};
+
+export const author: AuthorType = {
   name: "Daniel Fraga",
-  coverImage: "",
+
   avatarImage: "/AvatarImg.jpg",
+  role: "AI Engineer",
 };
