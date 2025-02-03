@@ -36,3 +36,12 @@ export function PageTitle(str: string): string {
     )
     .join(" ");
 }
+
+export function sortByDate(data: any[]) {
+  return data.sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date);
+    const dateB = new Date(b.frontmatter.date);
+
+    return dateB - dateA;
+  });
+}
