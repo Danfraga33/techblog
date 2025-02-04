@@ -1,6 +1,6 @@
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { cn } from "~/lib/utils";
+import { cn, extractHeadings } from "~/lib/utils";
 import { Chip } from "@heroui/react";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
@@ -10,7 +10,9 @@ import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
 import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
+import rehypeSlug from "rehype-slug";
+import matter from "gray-matter";
 
 export async function loader({ params }: { params: { name: string } }) {
   const postsDirectory = path.join(process.cwd(), "app/content/posts");
@@ -21,19 +23,19 @@ export async function loader({ params }: { params: { name: string } }) {
   }
 
   const fileContent = fs.readFileSync(filePath, "utf8");
+  const { content } = matter(fileContent);
+  const headings = await extractHeadings(content);
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
     mdxOptions(options) {
       options.remarkPlugins = [...(options.remarkPlugins ?? [])];
-      options.rehypePlugins = [...(options.rehypePlugins ?? [])];
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeSlug];
       return options;
     },
   });
+  const estimatedReadingTime = Math.ceil(content.split(/\s+/).length / 200);
 
-  return json({
-    code,
-    frontmatter,
-  });
+  return json({ estimatedReadingTime, headings, code, frontmatter });
 }
 
 export interface FrontmatterTypes {
@@ -48,7 +50,9 @@ export interface FrontmatterTypes {
 }
 
 const DynamicBlog = () => {
-  const { code, frontmatter } = useLoaderData<typeof loader>();
+  const { code, frontmatter, headings, estimatedReadingTime } =
+    useLoaderData<typeof loader>();
+  console.log("headings: ", headings);
 
   const { title, description, tags, author, coverImage, toc } = frontmatter;
 
@@ -99,9 +103,21 @@ const DynamicBlog = () => {
 
           <div className="space-y-8 md:col-start-8 md:col-end-10">
             <div className="space-y-4">
-              <h3 className="font-medium">Table of Contents</h3>
+              <h2 className="mb-4 text-lg font-bold text-foreground">
+                {title}
+              </h2>
               <ul className="space-y-2">
-                {toc
+                {headings.map((heading) => (
+                  <Fragment key={heading.id}>
+                    <a
+                      href={`#${heading.id}`}
+                      className={`block text-sm text-muted-foreground transition-colors hover:text-primary ${heading.depth === 1 ? "pl-0 font-medium" : ""} ${heading.depth === 2 ? "pl-4" : ""} ${heading.depth === 3 ? "pl-8" : ""} `}
+                    >
+                      {heading.text}
+                    </a>
+                  </Fragment>
+                ))}
+                {/* {toc
                   ? toc.map((item: { id: string; title: string }) => (
                       <li
                         className="block text-sm text-gray-600 hover:text-gray-900"
@@ -117,7 +133,7 @@ const DynamicBlog = () => {
                       >
                         {item.title}
                       </li>
-                    ))}
+                    ))} */}
               </ul>
             </div>
 
