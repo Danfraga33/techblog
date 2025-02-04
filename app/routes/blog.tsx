@@ -15,6 +15,7 @@ export async function loader() {
 const Blog = () => {
   const blogPosts = useLoaderData<typeof loader>();
   const [filter, setFilter] = useState("View all");
+
   return (
     <>
       <Header />

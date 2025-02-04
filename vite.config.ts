@@ -8,7 +8,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
-export default defineConfig({  
+export default defineConfig({
   plugins: [
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
