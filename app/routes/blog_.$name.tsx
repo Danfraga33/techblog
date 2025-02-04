@@ -52,7 +52,6 @@ export interface FrontmatterTypes {
 const DynamicBlog = () => {
   const { code, frontmatter, headings, estimatedReadingTime } =
     useLoaderData<typeof loader>();
-  console.log("headings: ", headings);
 
   const { title, description, tags, author, coverImage, toc } = frontmatter;
 
