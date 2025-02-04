@@ -53,10 +53,17 @@ const DynamicBlog = () => {
   const { code, frontmatter, headings, estimatedReadingTime } =
     useLoaderData<typeof loader>();
 
-  const { title, description, tags, author, coverImage, toc } = frontmatter;
+  const { title, description, tags, author, coverImage } = frontmatter;
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
-
+  function translateEstimatedReadingTime(readingTime: number) {
+    return (
+      <p className="mb-8 text-sm text-muted-foreground">
+        Estimated Reading Time:{" "}
+        <span className="font-bold">{readingTime} minutes</span>
+      </p>
+    );
+  }
   return (
     <section className="relative flex flex-col justify-center rounded-2xl p-4">
       <div className="relative flex h-[75vh] justify-center overflow-hidden">
@@ -93,8 +100,8 @@ const DynamicBlog = () => {
       <div className="px-2 py-12">
         <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-10">
           <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
+            <span>{translateEstimatedReadingTime(estimatedReadingTime)}</span>
             <Component />
-
             <div className="mt-4">
               <Separator />
             </div>
