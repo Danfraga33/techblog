@@ -78,13 +78,12 @@ export async function loader() {
 export default function Home() {
   const { blogPosts, podcasts } = useLoaderData<typeof loader>();
   const [category, setCategory] = useState("Most Recent");
-  // const news = useLoaderData<typeof loader>();
   const totalContent = [...blogPosts, ...podcasts];
 
   const sortedData = sortByDate(totalContent);
 
   return (
-    <div className="min-h-screen bg-[#eeeeee]">
+    <div className="min-h-screen bg-primary">
       <Header />
 
       <main className="px-4">
@@ -118,7 +117,12 @@ export default function Home() {
 
                     <div className="flex flex-wrap gap-4">
                       <Button variant="default" asChild>
-                        <Link to="/blog">Explore</Link>
+                        <Link
+                          to="/blog"
+                          className="text-stone-900 hover:text-stone-700"
+                        >
+                          Explore
+                        </Link>
                       </Button>
                       <Button variant="outline" asChild>
                         <Link to="/podcast">Listen</Link>
