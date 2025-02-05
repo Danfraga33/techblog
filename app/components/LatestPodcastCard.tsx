@@ -3,6 +3,7 @@ import { AudioWaveform } from "lucide-react";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
 import { Link } from "@remix-run/react";
 import { Badge } from "./ui/badge";
+import { capitalizeWords } from "~/lib/utils";
 
 const truncateDescription = (description: string, wordLimit: number = 4) => {
   const words = description.split(" ");
@@ -42,7 +43,9 @@ export default function LatestPodcastCard({
                 {title}
               </Link>
             </h3>
-            <Badge className="text-xs text-foreground-50">{category}</Badge>
+            <Badge className="text-muted-foreground-50 text-xs">
+              {capitalizeWords(category)}
+            </Badge>
           </div>
           <p className="text-sm text-muted-foreground">
             {truncateDescription(description)}

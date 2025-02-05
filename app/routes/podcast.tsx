@@ -14,6 +14,7 @@ import { Button } from "~/components/ui/button";
 import { Play } from "lucide-react";
 import { Link, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
+import { capitalizeWords } from "~/lib/utils";
 
 export async function loader() {
   return await getPodcasts();
@@ -35,7 +36,7 @@ export default function Podcasts() {
                 <LatestPodcastCard
                   title={podcast.frontmatter.title}
                   description={podcast.frontmatter.description}
-                  category={podcast.frontmatter.category}
+                  category={podcast.frontmatter.subject}
                   slug={podcast.slug}
                 />
               </Fragment>
@@ -51,6 +52,7 @@ export default function Podcasts() {
           <Table aria-label="Example static collection table">
             <TableHeader>
               <TableColumn>Date Published</TableColumn>
+              <TableColumn>Subject</TableColumn>
               <TableColumn>Title</TableColumn>
               <TableColumn>Description</TableColumn>
               <TableColumn>Listen</TableColumn>
@@ -61,6 +63,9 @@ export default function Podcasts() {
                   <TableRow className="transition-all hover:bg-stone-50">
                     <TableCell>
                       {new Date(podcast.frontmatter.date).toDateString()}
+                    </TableCell>
+                    <TableCell>
+                      {capitalizeWords(podcast.frontmatter.subject)}
                     </TableCell>
                     <TableCell>{podcast.frontmatter.title}</TableCell>
                     <TableCell>{podcast.frontmatter.description}</TableCell>

@@ -29,6 +29,13 @@ export function getDomainUrl(request: Request) {
   return `${protocol}://${host}`;
 }
 
+export function capitalizeWords(words: string) {
+  return words
+    .split(" ")
+    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function PageTitle(str: string): string {
   return str
     .split(" ")
