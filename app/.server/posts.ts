@@ -8,9 +8,9 @@ type Frontmatter = {
   description: string;
   coverImage: string;
   tags: string[];
-  toc: string;
   date: string;
   id?: string;
+  subject: string;
   coverImageAlt: string;
   type: "Blog" | "Podcast";
 };
