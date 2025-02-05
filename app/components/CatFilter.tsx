@@ -1,57 +1,26 @@
 import React, { useState } from "react";
 import { cn } from "~/lib/utils";
 import { Badge } from "./ui/badge";
+import { filterMenu } from "~/data/constant/filterMenu";
 
-const CatFilter = () => {
-  const [category, setCategory] = useState("AI");
+type TagsTypes = {
+  tags: string[];
+};
+
+const CatFilter = ({ tags }: TagsTypes) => {
   return (
     <div className="border-b">
       <div className="px-4">
-        <div className="no-scrollbar flex cursor-pointer gap-4 overflow-x-auto py-4">
-          <Badge
-            variant="secondary"
-            className="transition-all hover:bg-stone-200"
-          >
-            Data Centre's
-          </Badge>
-          <Badge
-            variant="secondary"
-            className="transition-all hover:bg-stone-200"
-          >
-            Algorithims
-          </Badge>
-          <Badge
-            variant="secondary"
-            className="transition-all hover:bg-stone-200"
-          >
-            Photolithography
-          </Badge>
-          <Badge
-            variant="secondary"
-            className="transition-all hover:bg-stone-200"
-          >
-            TSMC
-          </Badge>
-        </div>
-        <div className="flex gap-8 py-4">
-          <button
-            className={cn(
-              "text-muted-foreground",
-              category === "AI" && "border-b-2 border-primary",
-            )}
-            onClick={() => setCategory("AI")}
-          >
-            AI
-          </button>
-          <button
-            className={cn(
-              "text-muted-foreground",
-              category === "Semiconductors" && "border-b-2 border-primary",
-            )}
-            onClick={() => setCategory("Semiconductors")}
-          >
-            Semiconductors
-          </button>
+        <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
+          {tags.map((tag) => (
+            <Badge
+              key={tag}
+              variant="default"
+              className="text-sm text-secondary transition-all hover:bg-stone-300"
+            >
+              {tag}
+            </Badge>
+          ))}
         </div>
       </div>
     </div>

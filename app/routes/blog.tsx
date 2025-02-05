@@ -5,8 +5,11 @@ import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import { getPosts } from "~/.server/posts";
 import Header from "~/components/Dashboard/Header";
+import RecentBlogList from "~/components/Dashboard/RecentBlogList";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
 import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
+import { Badge } from "~/components/ui/badge";
+import { filterMenu } from "~/data/constant/filterMenu";
 import { cn } from "~/lib/utils";
 
 export async function loader() {
@@ -14,8 +17,21 @@ export async function loader() {
 }
 const Blog = () => {
   const blogPosts = useLoaderData<typeof loader>();
-  const [filter, setFilter] = useState("View all");
+  const [subject, setSubject] = useState("View all");
+  const [tags, setTags] = useState("");
 
+  const blogTags: string[] = [
+    ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
+  ];
+  const filteredPosts = blogPosts.filter((post) => {
+    const subjectFilter =
+      subject === "View all" ||
+      post.frontmatter.subject.toLowerCase() === subject.toLowerCase();
+
+    const tagFilter = tags === "" || post.frontmatter.tags.includes(tags);
+
+    return subjectFilter && tagFilter;
+  });
   return (
     <>
       <Header />
@@ -23,66 +39,89 @@ const Blog = () => {
         <div className="mb-12 space-y-8">
           <SmallSignup />
           <nav className="border-b">
+            <div className="px-4">
+              <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
+                {blogTags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="default"
+                    className="text-sm text-secondary transition-all hover:bg-stone-300"
+                    onClick={() => setTags(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
             <ul className="-mb-px flex gap-8">
-              {["View all", "Artificial Intelligence", "Semiconductor"].map(
-                (item) => (
-                  <Fragment key={item}>
-                    <li>
-                      <button
-                        onClick={() => setFilter(item)}
-                        className={cn(
-                          "inline-block py-3 font-medium",
-                          filter === item && "border-b-3 border-b-stone-300",
-                        )}
-                      >
-                        {item}
-                      </button>
-                    </li>
-                  </Fragment>
-                ),
-              )}
+              {filterMenu.map((item) => (
+                <Fragment key={item}>
+                  <li>
+                    <button
+                      onClick={() => {
+                        setSubject(item);
+                      }}
+                      className={cn(
+                        "inline-block py-3 font-medium",
+                        subject === item && "border-b-3 border-b-stone-300",
+                      )}
+                    >
+                      {item}
+                    </button>
+                  </li>
+                </Fragment>
+              ))}
             </ul>
           </nav>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {blogPosts.map((post) => (
-            <Card className="group" key={post.frontmatter.id}>
-              <Link to={`/blog/${post.slug}`} className="block space-y-4">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={post.frontmatter.coverImage}
-                    alt={post.frontmatter.title}
-                    className="relative rounded-xl object-cover"
-                  />
-                  <div className="p-3">
-                    <div className="mb-2 text-sm font-semibold">
-                      Daniel Fraga
+          {/* <RecentBlogList
+            blogPosts={filteredPosts}
+            tags={tags}
+            subject={subject}
+          /> */}
+          {blogPosts &&
+            filteredPosts.map((post) => (
+              <Fragment key={post.frontmatter.id}>
+                <Card className="group">
+                  <Link to={`/blog/${post.slug}`} className="block space-y-4">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={post.frontmatter.coverImage}
+                        alt={post.frontmatter.title}
+                        className="relative rounded-xl object-cover"
+                      />
+                      <div className="p-3">
+                        <div className="mb-2 text-sm font-semibold">
+                          Daniel Fraga
+                        </div>
+                        <div className="text-sm opacity-70">
+                          {post.frontmatter.date}
+                        </div>
+                      </div>
+                      <FadedDivider />
+                      <div className="p-2">
+                        <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
+                          {post.frontmatter.title}
+                        </h2>
+                        <p className="mt-2 text-muted-foreground">
+                          {post.frontmatter.description}
+                        </p>
+                        <Button
+                          variant="flat"
+                          className="mt-4 flex items-center gap-2 text-sm font-medium"
+                        >
+                          Read post
+                          <ArrowRight />
+                        </Button>
+                      </div>
                     </div>
-                    <div className="text-sm opacity-70">
-                      {post.frontmatter.date}
-                    </div>
-                  </div>
-                  <FadedDivider />
-                  <div className="p-2">
-                    <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
-                      {post.frontmatter.title}
-                    </h2>
-                    <p className="mt-2 text-muted-foreground">
-                      {post.frontmatter.description}
-                    </p>
-                    <Button
-                      variant="flat"
-                      className="mt-4 flex items-center gap-2 text-sm font-medium"
-                    >
-                      Read post
-                      <ArrowRight />
-                    </Button>
-                  </div>
-                </div>
-              </Link>
-            </Card>
-          ))}
+                  </Link>
+                </Card>
+              </Fragment>
+            ))}
         </div>
       </div>
     </>

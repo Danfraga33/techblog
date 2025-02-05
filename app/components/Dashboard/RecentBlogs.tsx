@@ -1,64 +1,53 @@
-import { Fragment } from "react";
-import { Link } from "@remix-run/react";
+import { useState } from "react";
 import { Badge } from "../ui/badge";
-import { Calendar, Eye } from "lucide-react";
-import FadedDivider from "./StyleComponents.tsx/FadedDivider";
-import { author } from "~/data/constant/author";
-import CatFilter from "../CatFilter";
+import { filterMenu } from "~/data/constant/filterMenu";
+import { cn } from "~/lib/utils";
+import RecentBlogList from "./RecentBlogList";
 
 const RecentBlogs = ({ blogPosts }) => {
+  const [subject, setSubject] = useState("View all");
+  const [tags, setTags] = useState("");
+
+  const blogTags: string[] = [
+    ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
+  ];
+
+  console.log("tags: ", tags);
   return (
     <article className="flex gap-4">
       <div className="flex-1">
         <h1 className="text-3xl">Recent</h1>
-        <CatFilter />
-        {blogPosts.map((blog) => (
-          <Fragment key={blog.frontmatter.id}>
-            <Link
-              to={
-                blog.frontmatter.type === "Blog"
-                  ? `blog/${blog.slug}`
-                  : `podcast/${blog.slug}`
-              }
-              className="mb-2 flex gap-4 py-4 transition-all hover:bg-stone-100/50"
+        <div className="border-b">
+          <div className="px-4">
+            <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
+              {blogTags.map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="default"
+                  className="text-sm text-secondary transition-all hover:bg-stone-300"
+                  onClick={() => setTags(tag)}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-8 py-4">
+          {filterMenu.map((item, index) => (
+            <button
+              className={cn(
+                "text-muted-foreground",
+                subject === item && "border-b-2 border-primary",
+              )}
+              onClick={() => setSubject(item)}
+              key={index}
             >
-              <img
-                src={blog.frontmatter.coverImage}
-                alt={blog.frontmatter.coverImageAlt}
-                className="h-44 w-48 rounded-3xl object-cover"
-              />
-              <div className="flex flex-col justify-evenly">
-                <div className="flex items-center gap-1">
-                  <span>{author.name}</span> <span>•</span>
-                  <span className="text-muted-foreground">
-                    <Badge>{blog.frontmatter.type}</Badge>
-                  </span>
-                </div>
-                <div>
-                  <h3 className="mb-2 text-xl font-semibold">
-                    {blog.frontmatter.title}
-                  </h3>
-                  <p className="line-clamp-2 text-muted-foreground">
-                    {blog.frontmatter.description}
-                  </p>
-                </div>
-                <div>
-                  <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={16} />
-                      {blog.frontmatter.date}
-                    </div>
-
-                    <span className="flex items-center gap-1">
-                      <Eye size={16} />2 min read
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <FadedDivider className="my-2" />
-          </Fragment>
-        ))}
+              {item}
+            </button>
+          ))}
+        </div>
+        <RecentBlogList blogPosts={blogPosts} tags={tags} subject={subject} />
       </div>
     </article>
   );
