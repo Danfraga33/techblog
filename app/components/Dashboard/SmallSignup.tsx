@@ -18,7 +18,11 @@ export const SmallSignup = () => {
             className="rounded-full"
             name="email"
           />
-          <Button type="submit" className="rounded-full px-6">
+          <Button
+            type="submit"
+            variant="default"
+            className="rounded-full px-6 text-secondary"
+          >
             Subscribe
           </Button>
         </div>
