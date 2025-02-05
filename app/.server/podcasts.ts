@@ -7,6 +7,7 @@ export type PodcastFrontmatter = {
   title: string;
   description: string;
   date: string;
+  subject: string;
   category: string;
   slogan: string;
   coverImage: string;
