@@ -117,29 +117,12 @@ const DynamicBlog = () => {
                   <Fragment key={heading.id}>
                     <a
                       href={`#${heading.id}`}
-                      className={`block text-sm text-muted-foreground transition-colors hover:text-primary ${heading.depth === 1 ? "pl-0 font-medium" : ""} ${heading.depth === 2 ? "pl-4" : ""} ${heading.depth === 3 ? "pl-8" : ""} `}
+                      className={`block text-sm text-muted-foreground transition-colors ${heading.depth === 1 ? "pl-0 font-medium" : ""} ${heading.depth === 2 ? "pl-4" : ""} ${heading.depth === 3 ? "pl-8" : ""} `}
                     >
                       {heading.text}
                     </a>
                   </Fragment>
                 ))}
-                {/* {toc
-                  ? toc.map((item: { id: string; title: string }) => (
-                      <li
-                        className="block text-sm text-gray-600 hover:text-gray-900"
-                        key={item.id}
-                      >
-                        <a href={`#${item.id}`}>{item.title}</a>
-                      </li>
-                    ))
-                  : [{ title: "Technology", id: 1 }].map((item) => (
-                      <li
-                        className="block text-sm text-gray-600 hover:text-gray-900"
-                        key={item.id}
-                      >
-                        {item.title}
-                      </li>
-                    ))} */}
               </ul>
             </div>
 
