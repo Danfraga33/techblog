@@ -70,8 +70,8 @@ export default function PodcastPlayer({
           </div>
 
           <div className="text-center">
-            <h2 className="mb-8 px-8 text-2xl font-bold md:text-3xl">
-              {frontmatter.slogan}
+            <h2 className="mb-8 px-8 text-xl font-bold md:text-xl">
+              {frontmatter.description}
             </h2>
 
             <div className="relative mb-12 inline-block">
