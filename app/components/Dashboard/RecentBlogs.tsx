@@ -12,7 +12,7 @@ const RecentBlogs = ({ blogPosts }) => {
     ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
   ];
 
-  console.log("tags: ", tags);
+
   return (
     <article className="flex gap-4">
       <div className="flex-1">
