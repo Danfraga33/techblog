@@ -23,7 +23,7 @@ const RecentBlogList = ({ blogPosts, subject, tags }) => {
         <Fragment key={blog.frontmatter.id}>
           <Link
             to={
-              blog.frontmatter.type === "Blog"
+              blog.frontmatter.type === "blog"
                 ? `blog/${blog.slug}`
                 : `podcast/${blog.slug}`
             }
@@ -38,7 +38,7 @@ const RecentBlogList = ({ blogPosts, subject, tags }) => {
               <div className="flex items-center gap-1">
                 <span>{author.name}</span> <span>•</span>
                 <span className="text-muted-foreground">
-                  <Badge variant="default" className="text-secondary">
+                  <Badge variant="default" className="text-stone-200">
                     {capitalizeWords(blog.frontmatter.type)}
                   </Badge>
                 </span>

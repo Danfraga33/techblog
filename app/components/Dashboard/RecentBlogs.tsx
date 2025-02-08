@@ -12,7 +12,6 @@ const RecentBlogs = ({ blogPosts }) => {
     ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
   ];
 
-
   return (
     <article className="flex gap-4">
       <div className="flex-1">
@@ -24,7 +23,7 @@ const RecentBlogs = ({ blogPosts }) => {
                 <Badge
                   key={tag}
                   variant="default"
-                  className="text-sm text-secondary transition-all hover:bg-stone-300"
+                  className="text-sm text-stone-100 transition-all hover:bg-stone-300"
                   onClick={() => setTags(tag)}
                 >
                   {tag}
