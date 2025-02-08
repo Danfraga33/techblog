@@ -23,7 +23,7 @@ export const getPosts = () => {
   const posts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(fileContent);
+    const { data, content } = matter(fileContent);
     const frontmatter = data as Frontmatter;
     const slug = filename.replace(/\.mdx$/, "");
 
@@ -31,10 +31,21 @@ export const getPosts = () => {
       .createHash("md5")
       .update(filename + frontmatter.title + frontmatter.date)
       .digest("hex");
+
+    let publishedDate = frontmatter.date;
+
+    if (!publishedDate) {
+      publishedDate = new Date().toISOString().split("T")[0];
+
+      const updatedFrontmatter = { ...frontmatter, date: publishedDate };
+      const updatedContent = matter.stringify(content, updatedFrontmatter);
+      fs.writeFileSync(filePath, updatedContent, "utf8");
+    }
     return {
       slug,
       frontmatter: {
         ...frontmatter,
+        date: publishedDate,
         id,
       },
     };
@@ -45,5 +56,7 @@ export const getPosts = () => {
       new Date(b.frontmatter.date).getTime() -
       new Date(a.frontmatter.date).getTime(),
   );
+
+  console.log("sortedPosts: ", sortedPosts);
   return sortedPosts;
 };

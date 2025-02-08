@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import crypto from "crypto";
-import pLimit from "p-limit";
 export type PodcastFrontmatter = {
   title: string;
   description: string;
@@ -23,9 +22,19 @@ export const getPodcasts = async () => {
   const podcasts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(fileContent);
+    const { data, content } = matter(fileContent);
     const frontmatter = data as PodcastFrontmatter;
     const slug = filename.replace(/\.mdx$/, "");
+
+    let publishedDate = frontmatter.date;
+
+    if (!publishedDate) {
+      publishedDate = new Date().toISOString().split("T")[0];
+
+      const updatedFrontmatter = { ...frontmatter, date: publishedDate };
+      const updatedContent = matter.stringify(content, updatedFrontmatter);
+      fs.writeFileSync(filePath, updatedContent, "utf8");
+    }
 
     const id = crypto
       .createHash("md5")
@@ -35,6 +44,7 @@ export const getPodcasts = async () => {
       slug,
       frontmatter: {
         ...frontmatter,
+        date: publishedDate,
         id,
       },
     };
