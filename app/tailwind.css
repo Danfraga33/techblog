@@ -9,6 +9,45 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
+  mjx-container {
+    display: inline-block;
+  }
+
+  .prose {
+    h1,
+    h2,
+    h3,
+    h4 {
+      scroll-margin-top: 100px; /* Adjust based on header height */
+      position: relative;
+
+      a[aria-hidden="true"] {
+        @apply absolute -left-6 top-1/2 -translate-y-1/2 opacity-0 transition-opacity;
+        &:hover {
+          @apply opacity-100;
+        }
+        &::before {
+          content: "#";
+          @apply text-muted-foreground;
+        }
+      }
+
+      &:hover a[aria-hidden="true"] {
+        @apply opacity-100;
+      }
+    }
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    scroll-margin-top: 100px;
+    @apply text-primary;
+  }
+  .prose ul li strong {
+    @apply text-primary;
+  }
 }
 h1 {
   @apply my-4 text-4xl font-bold;
@@ -22,7 +61,7 @@ h1 {
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 0 0% 90%;
+    --primary: 200 30% 60%;
     --primary-foreground: 60 9.1% 97.8%;
     --secondary: 60 4.8% 30%;
     --secondary-foreground: 24 9.8% 10%;
