@@ -38,7 +38,9 @@ export function Layout({ children }: { children: ReactNode }) {
       <body>
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset className="bg-[#F5f5f5 ]">{children}</SidebarInset>
+          <SidebarInset className="bg-[#F5f5f5] shadow-xl">
+            {children}
+          </SidebarInset>
         </SidebarProvider>
         <ScrollRestoration />
         <Scripts />
