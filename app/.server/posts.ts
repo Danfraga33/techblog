@@ -57,6 +57,5 @@ export const getPosts = () => {
       new Date(a.frontmatter.date).getTime(),
   );
 
-  console.log("sortedPosts: ", sortedPosts);
   return sortedPosts;
 };
