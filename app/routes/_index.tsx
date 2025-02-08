@@ -83,7 +83,7 @@ export default function Home() {
   const sortedData = sortByDate(totalContent);
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-zinc-200">
       <Header />
 
       <main className="px-4">
