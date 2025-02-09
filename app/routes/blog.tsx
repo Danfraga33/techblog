@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import { getPosts } from "~/.server/posts";
 import Header from "~/components/Dashboard/Header";
-import RecentBlogList from "~/components/Dashboard/RecentBlogList";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
 import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
 import { Badge } from "~/components/ui/badge";
@@ -13,10 +12,11 @@ import { filterMenu } from "~/data/constant/filterMenu";
 import { cn } from "~/lib/utils";
 
 export async function loader() {
-  return json(await getPosts());
+  const blogPosts = await getPosts();
+  return json({ blogPosts });
 }
 const Blog = () => {
-  const blogPosts = useLoaderData<typeof loader>();
+  const { blogPosts } = useLoaderData<typeof loader>();
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
 

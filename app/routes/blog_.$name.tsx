@@ -8,11 +8,15 @@ import fs from "fs";
 import path from "path";
 import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useRouteLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { Fragment, useMemo } from "react";
 import rehypeSlug from "rehype-slug";
 import matter from "gray-matter";
+import rehypeExternalLinks from "rehype-external-links";
+import remarkGfm from "remark-gfm";
+import remarkImages from "remark-images";
+import { getPosts } from "~/.server/posts";
 
 export async function loader({ params }: { params: { name: string } }) {
   const postsDirectory = path.join(process.cwd(), "app/content/posts");
@@ -28,14 +32,27 @@ export async function loader({ params }: { params: { name: string } }) {
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
     mdxOptions(options) {
-      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeSlug];
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        remarkGfm,
+        remarkImages,
+      ];
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeSlug,
+        [
+          rehypeExternalLinks,
+          { target: "_blank", rel: ["noopener", "noreferrer"] },
+        ],
+      ];
       return options;
     },
   });
+
   const estimatedReadingTime = Math.ceil(content.split(/\s+/).length / 200);
 
-  return json({ estimatedReadingTime, headings, code, frontmatter });
+  const blogPosts = await getPosts();
+  return json({ estimatedReadingTime, headings, code, frontmatter, blogPosts });
 }
 
 export interface FrontmatterTypes {
@@ -50,8 +67,9 @@ export interface FrontmatterTypes {
 }
 
 const DynamicBlog = () => {
-  const { code, frontmatter, headings, estimatedReadingTime } =
+  const { code, frontmatter, headings, estimatedReadingTime, blogPosts } =
     useLoaderData<typeof loader>();
+  console.log("blogPosts: ", blogPosts);
 
   const { title, description, tags, author, coverImage } = frontmatter;
 
@@ -98,18 +116,20 @@ const DynamicBlog = () => {
       </div>
 
       <div className="px-2 py-12">
-        <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-10">
+        <div className="md:grid-cols-14 grid grid-cols-1 gap-12 px-10">
           <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
-            <span>{translateEstimatedReadingTime(estimatedReadingTime)}</span>
+            <span className="text-xs">
+              {translateEstimatedReadingTime(estimatedReadingTime)}
+            </span>
             <Component />
             <div className="mt-4">
               <Separator />
             </div>
           </div>
 
-          <div className="space-y-8 md:col-start-8 md:col-end-10">
+          <div className="space-y-8 md:col-start-8 md:col-end-11">
             <div className="space-y-4">
-              <h2 className="mb-4 text-lg font-bold text-foreground">
+              <h2 className="mb-4 text-sm font-bold text-foreground">
                 {title}
               </h2>
               <ul className="space-y-2">
@@ -155,6 +175,10 @@ const DynamicBlog = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mx-auto flex w-full items-center">
+          <Button>asd</Button>
+          <Button>asd</Button>
         </div>
       </div>
     </section>
