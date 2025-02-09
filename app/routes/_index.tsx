@@ -1,8 +1,6 @@
 import { Button } from "~/components/ui/button";
-import { Badge } from "~/components/ui/badge";
-import { cn, sortByDate } from "~/lib/utils";
+import { sortByDate } from "~/lib/utils";
 import { useState } from "react";
-import { Separator } from "~/components/ui/separator";
 import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
 import { author } from "~/data/constant/author";
@@ -12,8 +10,6 @@ import { Smile } from "lucide-react";
 import { getPosts } from "~/.server/posts";
 import { Link, json, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
-import { Avatar } from "~/components/ui/avatar";
-import CatFilter from "~/components/CatFilter";
 import { Card } from "~/components/ui/card";
 
 export type NewsArticleType = {

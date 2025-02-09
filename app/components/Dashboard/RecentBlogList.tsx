@@ -24,8 +24,8 @@ const RecentBlogList = ({ blogPosts, subject, tags }) => {
           <Link
             to={
               blog.frontmatter.type === "blog"
-                ? `blog/${blog.slug}`
-                : `podcast/${blog.slug}`
+                ? `/blog/${blog.slug}`
+                : `/podcast/${blog.slug}`
             }
             className="mb-2 flex gap-4 py-4 transition-all hover:bg-stone-100/50"
           >
