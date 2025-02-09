@@ -44,7 +44,7 @@ export default function Podcasts() {
           </section>
         </section>
 
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
           Recently Added
         </h1>
         <SearchBar />
