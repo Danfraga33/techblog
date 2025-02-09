@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
-import { useLoaderData, useRouteLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useRouteLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { Fragment, useMemo } from "react";
 import rehypeSlug from "rehype-slug";
@@ -17,6 +17,13 @@ import rehypeExternalLinks from "rehype-external-links";
 import remarkGfm from "remark-gfm";
 import remarkImages from "remark-images";
 import { getPosts } from "~/.server/posts";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export async function loader({ params }: { params: { name: string } }) {
   const postsDirectory = path.join(process.cwd(), "app/content/posts");
@@ -52,7 +59,22 @@ export async function loader({ params }: { params: { name: string } }) {
   const estimatedReadingTime = Math.ceil(content.split(/\s+/).length / 200);
 
   const blogPosts = await getPosts();
-  return json({ estimatedReadingTime, headings, code, frontmatter, blogPosts });
+  const currentIndex = blogPosts.findIndex((post) => post.slug === params.name);
+
+  const previousArticle = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextArticle =
+    currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+
+  console.log([previousArticle, nextArticle]);
+  return json({
+    estimatedReadingTime,
+    headings,
+    code,
+    frontmatter,
+    blogPosts,
+    previousArticle,
+    nextArticle,
+  });
 }
 
 export interface FrontmatterTypes {
@@ -67,11 +89,19 @@ export interface FrontmatterTypes {
 }
 
 const DynamicBlog = () => {
-  const { code, frontmatter, headings, estimatedReadingTime, blogPosts } =
-    useLoaderData<typeof loader>();
-  console.log("blogPosts: ", blogPosts);
+  const {
+    code,
+    frontmatter,
+    headings,
+    estimatedReadingTime,
+    blogPosts,
+    previousArticle,
+    nextArticle,
+  } = useLoaderData<typeof loader>();
+  console.log("blogPosts: ", [previousArticle, nextArticle]);
 
   const { title, description, tags, author, coverImage } = frontmatter;
+  console.log("blogPosts: ", blogPosts);
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
   function translateEstimatedReadingTime(readingTime: number) {
@@ -116,7 +146,7 @@ const DynamicBlog = () => {
       </div>
 
       <div className="px-2 py-12">
-        <div className="md:grid-cols-14 grid grid-cols-1 gap-12 px-10">
+        <div className="grid grid-cols-1 gap-12 px-10 md:grid-cols-12">
           <div className="prose flex max-w-full flex-col items-end md:col-start-2 md:col-end-8">
             <span className="text-xs">
               {translateEstimatedReadingTime(estimatedReadingTime)}
@@ -124,6 +154,42 @@ const DynamicBlog = () => {
             <Component />
             <div className="mt-4">
               <Separator />
+            </div>
+            <div className="flex w-full justify-evenly">
+              {previousArticle ? (
+                <Link to={`/blog/${previousArticle.slug}`}>
+                  <Card className="h-full transition-colors hover:border-primary">
+                    <CardHeader>
+                      <CardDescription className="flex items-center text-sm font-medium text-muted-foreground group-hover:text-primary">
+                        <ChevronLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                        Previous
+                      </CardDescription>
+                      <CardTitle className="mt-2 text-base font-semibold group-hover:text-primary sm:text-lg">
+                        {previousArticle.frontmatter.title}
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              ) : (
+                <div className="flex-1" />
+              )}
+              {nextArticle ? (
+                <Link to={`/blog/${nextArticle.slug}`}>
+                  <Card className="h-full transition-colors hover:border-primary">
+                    <CardHeader>
+                      <CardDescription className="flex items-center text-sm font-medium text-muted-foreground group-hover:text-primary">
+                        <ChevronRight className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                        Next
+                      </CardDescription>
+                      <CardTitle className="mt-2 flex flex-wrap text-base font-semibold group-hover:text-primary sm:text-lg">
+                        {nextArticle.frontmatter.title}
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              ) : (
+                <div className="flex-1" />
+              )}
             </div>
           </div>
 
@@ -175,10 +241,6 @@ const DynamicBlog = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mx-auto flex w-full items-center">
-          <Button>asd</Button>
-          <Button>asd</Button>
         </div>
       </div>
     </section>
