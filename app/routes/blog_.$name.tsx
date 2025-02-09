@@ -155,16 +155,16 @@ const DynamicBlog = () => {
             <div className="mt-4">
               <Separator />
             </div>
-            <div className="flex w-full justify-evenly">
+            <div className="col-span-4 col-start-2 flex justify-between gap-8">
               {previousArticle ? (
                 <Link to={`/blog/${previousArticle.slug}`}>
-                  <Card className="h-full transition-colors hover:border-primary">
+                  <Card className="col-start-2 col-end-4 h-full transition-colors hover:border-primary">
                     <CardHeader>
                       <CardDescription className="flex items-center text-sm font-medium text-muted-foreground group-hover:text-primary">
                         <ChevronLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                         Previous
                       </CardDescription>
-                      <CardTitle className="mt-2 text-base font-semibold group-hover:text-primary sm:text-lg">
+                      <CardTitle className="sm:text-md mt-2 text-base font-semibold group-hover:text-primary">
                         {previousArticle.frontmatter.title}
                       </CardTitle>
                     </CardHeader>
@@ -175,7 +175,7 @@ const DynamicBlog = () => {
               )}
               {nextArticle ? (
                 <Link to={`/blog/${nextArticle.slug}`}>
-                  <Card className="h-full transition-colors hover:border-primary">
+                  <Card className="col-start-6 col-end-8 h-full transition-colors hover:border-primary">
                     <CardHeader>
                       <CardDescription className="flex items-center text-sm font-medium text-muted-foreground group-hover:text-primary">
                         <ChevronRight className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
