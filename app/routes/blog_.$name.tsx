@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
-import { Link, useLoaderData, useRouteLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { Fragment, useMemo } from "react";
 import rehypeSlug from "rehype-slug";
