@@ -24,7 +24,7 @@ export default function LatestPodcastCard({
   slug: string;
 }) {
   return (
-    <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg">
+    <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg transition-all hover:shadow-xl">
       <figure className="transition-all group-hover:opacity-90">
         <img
           className="aspect-square w-full"
@@ -43,9 +43,7 @@ export default function LatestPodcastCard({
                 {title}
               </Link>
             </h3>
-            <Badge className="text-muted-foreground-50 text-xs">
-              {capitalizeWords(category)}
-            </Badge>
+            <Badge className="text-xs">{capitalizeWords(category)}</Badge>
           </div>
           <p className="text-sm text-muted-foreground">
             {truncateDescription(description)}
