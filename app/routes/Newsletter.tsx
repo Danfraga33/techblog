@@ -1,37 +1,22 @@
+import { json, useLoaderData } from "@remix-run/react";
+import { GridFSBucket } from "mongodb";
 import ComingSoon from "~/components/Dashboard/ComingSoon";
 import ContentLayout from "~/components/Dashboard/ContentLayout";
+import NewsletterCard from "~/components/NewsletterCard";
+import PdfRenderer from "~/components/PdfRenderer";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
+import { connectToDatabase, getAllPdfs } from "~/lib/db";
 
-const blogPosts = [
-  {
-    title: "Street art festival",
-    excerpt:
-      "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl: "/chip.jpg",
-    readTime: "3 min",
-    category: "Street Art",
-  },
-  {
-    title: "Street art festival",
-    excerpt:
-      "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl: "/chip.jpg",
-    readTime: "3 min",
-    category: "Street Art",
-  },
-  {
-    title: "Street art festival",
-    excerpt:
-      "Celebrating urban creativity and community expression through the lens of contemporary street art.",
-    imageUrl:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-23%20at%2010.52.03_2000c969.jpg-0aiFiA8wNs31qWLWZlPWCbiGIAbjlU.jpeg",
-    readTime: "3 min",
-    category: "Street Art",
-  },
-];
+export async function loader() {
+  const pdfs = await getAllPdfs();
+  return json(pdfs);
+}
 
 const Newsletter = () => {
+  const pdfs = useLoaderData<typeof loader>();
+  console.log("pdfs: ", pdfs);
+
   return (
     <>
       <ContentLayout
@@ -39,6 +24,23 @@ const Newsletter = () => {
         description="Curated updates on emerging technology, highlighting AI, quantum computing, semiconductors, and breakthrough innovations."
       >
         <ComingSoon />
+        <div>
+          <h1>PDF Report</h1>
+          <ul>
+            <hr />
+            <section className="grid gap-4 py-8 md:grid-cols-2 lg:grid-cols-4">
+              {pdfs.map((pdf) => (
+                <li key={pdf._id}>
+                  <NewsletterCard
+                    title={pdf.filename}
+                    createdAt={new Date(pdf.uploadDate).toDateString()}
+                    link={pdf._id}
+                  />
+                </li>
+              ))}
+            </section>
+          </ul>
+        </div>
         {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, index) => (
             <Card
