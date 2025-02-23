@@ -41,7 +41,7 @@ const NewsletterCard = ({
           </Badge>
         </div>
         <CardDescription>{newsletter.description}</CardDescription>
-        <p className="mt-2 text-sm text-muted-foreground">{newsletter.date}</p>
+        <p className="mt-2 text-sm text-muted-foreground">{uploadDate}</p>
       </CardHeader>
 
       <CardFooter className="mt-auto">
