@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 export interface Newsletter {
   _id: string;
   title: string;
-  date: string;
+  uploadDate: string;
   description: string;
   category: "AI" | "Semiconductor";
 }
@@ -24,10 +24,12 @@ const NewsletterCard = ({
   newsletter,
   setSelectedNewsletter,
 }: NewsletterCardProps) => {
+  const uploadDate = new Date(newsletter.uploadDate).toDateString();
   return (
     <Card className="flex flex-col">
       <CardHeader>
         <div className="flex min-w-fit flex-col items-start justify-between p-3">
+          <span className="text-xs">{uploadDate}</span>
           <CardTitle className="text-md mb-2 w-full lg:text-xl">
             {newsletter.title}
           </CardTitle>
