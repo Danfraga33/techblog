@@ -115,12 +115,16 @@ export default function Home() {
                       <Button variant="default" asChild>
                         <Link
                           to="/blog"
-                          className="text-stone-900 hover:text-stone-700"
+                          className="font-semibold text-white hover:text-stone-700"
                         >
                           Explore
                         </Link>
                       </Button>
-                      <Button variant="outline" asChild>
+                      <Button
+                        variant="outline"
+                        className="text-stone-700"
+                        asChild
+                      >
                         <Link to="/podcast">Listen</Link>
                       </Button>
                     </div>
