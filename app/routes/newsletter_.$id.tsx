@@ -14,7 +14,6 @@ export async function loader({ params }: { params: { id: string } }) {
       throw new Response("File not found", { status: 404 });
     }
 
-    // Create a stream to read the file from GridFS
     const downloadStream = bucket.openDownloadStream(objectId);
 
     return new Response(downloadStream as any, {

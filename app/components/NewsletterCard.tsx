@@ -1,52 +1,53 @@
-import { Card } from "@heroui/card";
-import { Link } from "@remix-run/react";
-import { ArrowRight } from "lucide-react";
-
-import React from "react";
-import { CardContent } from "./ui/card";
+import React, { Dispatch, SetStateAction } from "react";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+export interface Newsletter {
+  _id: string;
+  title: string;
+  date: string;
+  description: string;
+  category: "AI" | "Semiconductor";
+}
+interface NewsletterCardProps {
+  newsletter: Newsletter;
+  setSelectedNewsletter: Dispatch<SetStateAction<string>>;
+}
 
 const NewsletterCard = ({
-  title,
-  createdAt,
-  link,
-}: {
-  title: string;
-  createdAt: any;
-  link: string;
-}) => {
-  function cutTitle(fileName: string) {
-    const title = fileName.split(".")[0];
-    return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
-  }
+  newsletter,
+  setSelectedNewsletter,
+}: NewsletterCardProps) => {
   return (
-    <Card className="group relative w-[400px] space-y-4 overflow-hidden bg-white py-3 shadow-lg transition-all hover:bg-stone-50 hover:shadow-xl hover:transition-all">
-      <figure className="transition-all group-hover:opacity-90">
-        <img
-          className="w-full"
-          src={"/newsletter_cover.jpg"}
-          width={200}
-          height={200}
-          alt={title}
-        />
-      </figure>
-      <CardContent className="px-4 py-0 transition-all">
-        <div className="flex h-[20rem] flex-col justify-between">
-          <div>
-            <h3 className="text-lg">
-              <a
-                href={`/newsletter/${link}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span aria-hidden="true" className="absolute inset-0" />
-              </a>
-            </h3>
-            <Badge className="text-xs text-muted">{cutTitle(title)}</Badge>
-          </div>
-          <p className="text-2xl font-medium">{createdAt}</p>
+    <Card className="flex h-full flex-col">
+      <CardHeader>
+        <div className="flex items-start justify-between">
+          <CardTitle className="mb-2 text-xl">{newsletter.title}</CardTitle>
+          <Badge
+            variant={newsletter.category === "AI" ? "default" : "secondary"}
+            className="font-semibold text-muted hover:bg-gray-600 hover:transition-all"
+          >
+            {newsletter.category}
+          </Badge>
         </div>
-      </CardContent>
+        <CardDescription>{newsletter.description}</CardDescription>
+        <p className="mt-2 text-sm text-muted-foreground">{newsletter.date}</p>
+      </CardHeader>
+
+      <CardFooter className="mt-auto">
+        <Button
+          onClick={() => setSelectedNewsletter(newsletter._id)}
+          className="w-full"
+        >
+          View PDF
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
