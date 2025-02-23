@@ -22,17 +22,11 @@ const NewsletterGrid = ({
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {newsletters.map((newsletter, index) => (
-        <a
-          onClick={() => setSelectedNewsletter(newsletter._id)}
-          key={newsletter._id}
-          className="h-fit w-fit"
-        >
-          <NewsletterCard
-            key={index}
-            newsletter={newsletter}
-            setSelectedNewsletter={setSelectedNewsletter}
-          />
-        </a>
+        <NewsletterCard
+          key={index}
+          newsletter={newsletter}
+          setSelectedNewsletter={setSelectedNewsletter}
+        />
       ))}
     </div>
   );
