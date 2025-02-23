@@ -3,14 +3,11 @@ import { Badge } from "../ui/badge";
 import { filterMenu } from "~/data/constant/filterMenu";
 import { cn } from "~/lib/utils";
 import RecentBlogList from "./RecentBlogList";
+import FilterTags from "./FilterTags";
 
 const RecentBlogs = ({ blogPosts }) => {
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
-
-  const blogTags: string[] = [
-    ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
-  ];
 
   return (
     <article className="flex gap-4">
@@ -19,16 +16,7 @@ const RecentBlogs = ({ blogPosts }) => {
         <div className="border-b">
           <div className="px-4">
             <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
-              {blogTags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="default"
-                  className="text-sm text-stone-100 transition-all hover:bg-stone-300"
-                  onClick={() => setTags(tag)}
-                >
-                  {tag}
-                </Badge>
-              ))}
+              <FilterTags blogPosts={blogPosts} setTags={setTags} />
             </div>
           </div>
         </div>

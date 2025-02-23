@@ -4,10 +4,10 @@ import { Link, json, useLoaderData } from "@remix-run/react";
 import { ArrowRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import { getPosts } from "~/.server/posts";
+import FilterTags from "~/components/Dashboard/FilterTags";
 import Header from "~/components/Dashboard/Header";
 import { SmallSignup } from "~/components/Dashboard/SmallSignup";
 import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
-import { Badge } from "~/components/ui/badge";
 import { filterMenu } from "~/data/constant/filterMenu";
 import { cn } from "~/lib/utils";
 
@@ -41,16 +41,7 @@ const Blog = () => {
           <nav className="border-b">
             <div className="px-4">
               <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
-                {blogTags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="default"
-                    className="text-sm text-secondary transition-all hover:bg-stone-300"
-                    onClick={() => setTags(tag)}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
+                <FilterTags blogPosts={blogPosts} setTags={setTags} />
               </div>
             </div>
 
