@@ -15,13 +15,13 @@ export const SmallSignup = () => {
           <Input
             type="email"
             placeholder="Enter your email"
-            className="rounded-full"
+            className="rounded-full border-secondary-50 shadow-md"
             name="email"
           />
           <Button
             type="submit"
             variant="default"
-            className="rounded-full px-6 text-secondary"
+            className="rounded-full px-6 text-muted shadow-md"
           >
             Subscribe
           </Button>
