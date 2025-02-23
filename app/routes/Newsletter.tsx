@@ -21,20 +21,25 @@ const Newsletter = () => {
       title="Newsletter"
       description="Curated updates on emerging technology, highlighting AI, quantum computing, semiconductors, and breakthrough innovations."
     >
-      <main className="flex">
-        <div className="w-1/3 overflow-y-auto p-6">
+      <main className="flex flex-col-reverse lg:flex-row">
+        <div className="mx-auto overflow-y-auto p-6 lg:w-1/2">
           <NewsletterGrid
             newsletters={newsletters}
             setSelectedNewsletter={setSelectedNewsletter}
           />
         </div>
-        <div className="w-2/3 p-6">
+        <div className="hidden h-screen border-l-large lg:block" />
+        <div className="flex min-w-fit p-6 md:w-1/2">
           {selectedNewsletter ? (
-            <PDFViewer selectedNewsletter={selectedNewsletter} />
+            <>
+              <PDFViewer selectedNewsletter={selectedNewsletter} />
+            </>
           ) : (
-            <div className="flex h-full items-center justify-center text-gray-500">
-              Select a newsletter to view the PDF.
-            </div>
+            <>
+              <div className="h-full text-gray-500">
+                Select a newsletter to view the PDF.
+              </div>
+            </>
           )}
         </div>
       </main>

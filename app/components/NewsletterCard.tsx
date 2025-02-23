@@ -25,10 +25,12 @@ const NewsletterCard = ({
   setSelectedNewsletter,
 }: NewsletterCardProps) => {
   return (
-    <Card className="flex h-full flex-col">
+    <Card className="flex flex-col">
       <CardHeader>
-        <div className="flex items-start justify-between">
-          <CardTitle className="mb-2 text-xl">{newsletter.title}</CardTitle>
+        <div className="flex min-w-fit flex-col items-start justify-between p-3">
+          <CardTitle className="text-md mb-2 w-full lg:text-xl">
+            {newsletter.title}
+          </CardTitle>
           <Badge
             variant={newsletter.category === "AI" ? "default" : "secondary"}
             className="font-semibold text-muted hover:bg-gray-600 hover:transition-all"

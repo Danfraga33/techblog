@@ -7,7 +7,7 @@ interface PDFViewerProps {
 const PDFViewer = ({ selectedNewsletter }: PDFViewerProps) => {
   console.log("selectedNewsletter: ", selectedNewsletter);
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div style={{ width: "100%", height: "50vh" }}>
       {selectedNewsletter ? (
         <>
           <PDFUI newsletter={selectedNewsletter} />
