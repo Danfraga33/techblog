@@ -1,9 +1,7 @@
 import { Button } from "~/components/ui/button";
 import { sortByDate } from "~/lib/utils";
-import { useState } from "react";
 import Header from "~/components/Dashboard/Header";
 import RecentBlogs from "~/components/Dashboard/RecentBlogs";
-import { author } from "~/data/constant/author";
 import { resources } from "~/data/constant/recommendedResources";
 import { Smile } from "lucide-react";
 
@@ -12,22 +10,6 @@ import { Link, json, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
 import { Card } from "~/components/ui/card";
 import ComingSoon from "~/components/Dashboard/ComingSoon";
-
-export type NewsArticleType = {
-  uuid: string;
-  title: string;
-  description: string;
-  keywords: string;
-  snippet: string;
-  url: string;
-  image_url: string;
-  language: string;
-  published_at: string;
-  source: string;
-  categories: string[];
-  relevance_score: number;
-  locale: string;
-};
 
 export async function loader() {
   const blogPosts = await getPosts();

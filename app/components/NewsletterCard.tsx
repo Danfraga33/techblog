@@ -8,13 +8,8 @@ import {
 } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-export interface Newsletter {
-  _id: string;
-  title: string;
-  uploadDate: string;
-  description: string;
-  category: "AI" | "Semiconductor";
-}
+import { Newsletter } from "~/utils/types";
+
 interface NewsletterCardProps {
   newsletter: Newsletter;
   setSelectedNewsletter: Dispatch<SetStateAction<string>>;
@@ -34,10 +29,10 @@ const NewsletterCard = ({
             {newsletter.title}
           </CardTitle>
           <Badge
-            variant={newsletter.category === "AI" ? "default" : "secondary"}
+            variant={newsletter.topic === "AI" ? "default" : "secondary"}
             className="font-semibold text-muted hover:bg-gray-600 hover:transition-all"
           >
-            {newsletter.category}
+            {newsletter.topic}
           </Badge>
         </div>
         <CardDescription>{newsletter.description}</CardDescription>

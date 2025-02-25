@@ -1,8 +1,8 @@
-export type Document = {
+export type Newsletter = {
   _id: string;
   filename: string;
   description: string;
-  category: string;
+  topic: string;
   title: string;
   chunkSize: number;
   length: number;
@@ -23,4 +23,20 @@ export type BlogPost = {
     date: string;
     id: string;
   };
+};
+
+export type NewsArticleType = {
+  uuid: string;
+  title: string;
+  description: string;
+  keywords: string;
+  snippet: string;
+  url: string;
+  image_url: string;
+  language: string;
+  published_at: string;
+  source: string;
+  categories: string[];
+  relevance_score: number;
+  locale: string;
 };

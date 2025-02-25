@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import NewsletterCard, { Newsletter } from "./NewsletterCard";
+import NewsletterCard from "./NewsletterCard";
+import { Newsletter } from "~/utils/types";
 
 interface NewsletterGridProps {
   newsletters: Newsletter[];
