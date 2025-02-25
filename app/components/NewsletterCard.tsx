@@ -21,7 +21,7 @@ const NewsletterCard = ({
 }: NewsletterCardProps) => {
   const uploadDate = new Date(newsletter.uploadDate).toDateString();
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col shadow-lg transition-all hover:shadow-xl hover:transition-all">
       <CardHeader>
         <div className="flex min-w-fit flex-col items-start justify-between p-3">
           <span className="text-xs">{uploadDate}</span>
