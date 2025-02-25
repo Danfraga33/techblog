@@ -1,11 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Badge } from "../ui/badge";
+import { BlogPost } from "~/utils/types";
 
 const FilterTags = ({
   setTags,
   blogPosts,
 }: {
   setTags: Dispatch<SetStateAction<string>>;
+  blogPosts: BlogPost;
 }) => {
   const blogTags: string[] = [
     ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),

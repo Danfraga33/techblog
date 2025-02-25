@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Badge } from "../ui/badge";
 import { filterMenu } from "~/data/constant/filterMenu";
 import { cn } from "~/lib/utils";
 import RecentBlogList from "./RecentBlogList";
 import FilterTags from "./FilterTags";
+import { BlogPost } from "~/utils/types";
 
-const RecentBlogs = ({ blogPosts }) => {
+const RecentBlogs = ({ blogPosts }: { blogPosts: BlogPost }) => {
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
+  console.log("blogPosts: ", blogPosts);
 
   return (
     <article className="flex gap-4">
