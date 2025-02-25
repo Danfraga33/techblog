@@ -42,7 +42,7 @@ const Newsletter = () => {
         </ScrollArea>
 
         <div className="hidden h-screen border-l-large lg:block" />
-        <div className="flex min-w-fit p-6 md:w-3/4">
+        <div className="flex min-w-fit p-6 md:w-1/2">
           {selectedNewsletter ? (
             <>
               <PDFViewer selectedNewsletter={selectedNewsletter} />
