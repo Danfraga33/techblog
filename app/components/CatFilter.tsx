@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { cn } from "~/lib/utils";
+import React from "react";
 import { Badge } from "./ui/badge";
-import { filterMenu } from "~/data/constant/filterMenu";
 
 type TagsTypes = {
   tags: string[];

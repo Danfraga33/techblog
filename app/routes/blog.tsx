@@ -20,9 +20,6 @@ const Blog = () => {
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
 
-  const blogTags: string[] = [
-    ...new Set(blogPosts.flatMap((post) => post.frontmatter.tags || [])),
-  ];
   const filteredPosts = blogPosts.filter((post) => {
     const subjectFilter =
       subject === "View all" ||
