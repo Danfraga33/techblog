@@ -8,7 +8,7 @@ interface PDFViewerProps {
 const PDFUI: React.FC<PDFViewerProps> = ({ newsletter }) => {
   return (
     <>
-      <div className="mx-auto w-full max-w-3xl gap-3 p-4">
+      <div className="mx-auto w-full max-w-4xl gap-3">
         <div className="flex items-center gap-3">
           <h1>PDF Viewer </h1>
           <Button asChild>
