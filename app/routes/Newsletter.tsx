@@ -15,7 +15,9 @@ export async function loader() {
 const Newsletter = () => {
   const [selectedNewsletter, setSelectedNewsletter] = useState("");
   const newsletters = useLoaderData<typeof loader>();
-  console.log("newsletters: ", newsletters);
+  const sortedNewsletters = newsletters.sort((a, b) => {
+    return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+  });
 
   return (
     <ContentLayout
@@ -23,20 +25,9 @@ const Newsletter = () => {
       description="Curated updates on emerging technology, highlighting AI, quantum computing, semiconductors, and breakthrough innovations."
     >
       <main className="flex flex-col-reverse space-x-6 lg:flex-row">
-        <ScrollArea className="h-[calc(100vh-200px)]">
+        <ScrollArea className="flex flex-col">
           <NewsletterGrid
-            newsletters={newsletters.filter(
-              (n: Newsletter) => n.topic.toLowerCase() === "ai",
-            )}
-            setSelectedNewsletter={setSelectedNewsletter}
-          />
-        </ScrollArea>
-
-        <ScrollArea className="h-[calc(100vh-200px)]">
-          <NewsletterGrid
-            newsletters={newsletters.filter(
-              (n: Newsletter) => n.topic.toLowerCase() === "semiconductor",
-            )}
+            newsletters={sortedNewsletters}
             setSelectedNewsletter={setSelectedNewsletter}
           />
         </ScrollArea>
