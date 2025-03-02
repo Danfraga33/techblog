@@ -17,18 +17,20 @@ export default function LatestPodcastCard({
   description,
   category,
   slug,
+  coverImage,
 }: {
   title: string;
   description: string;
   category: string;
   slug: string;
+  coverImage: string;
 }) {
   return (
     <Card className="group relative w-[400px] space-y-4 overflow-hidden py-0 shadow-lg transition-all hover:shadow-xl">
       <figure className="transition-all group-hover:opacity-90">
         <img
           className="aspect-square w-full"
-          src={"/chip.jpg"}
+          src={coverImage}
           width={300}
           height={500}
           alt={title}

@@ -38,6 +38,7 @@ export default function Podcasts() {
                   description={podcast.frontmatter.description}
                   category={podcast.frontmatter.subject}
                   slug={podcast.slug}
+                  coverImage={podcast.frontmatter.coverImage}
                 />
               </Fragment>
             ))}
