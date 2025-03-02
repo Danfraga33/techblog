@@ -10,6 +10,7 @@ import { Link, json, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
 import { Card } from "~/components/ui/card";
 import ComingSoon from "~/components/Dashboard/ComingSoon";
+import SmallComingSoon from "~/components/SmallComingSoon";
 
 export async function loader() {
   const blogPosts = await getPosts();
@@ -90,7 +91,7 @@ export default function Home() {
                 <h2 className="mb-4 text-xl font-semibold">Trending News</h2>
               </div>
               <div className="flex items-center gap-2">
-                Coming soon... <Smile color="red" />
+                <SmallComingSoon />
               </div>
             </section>
             <section className="pr-2">
@@ -98,7 +99,7 @@ export default function Home() {
                 Small Caps Riding the Wave
               </h2>
               <div className="space-y-4">
-                <ComingSoon />
+                <SmallComingSoon />
               </div>
             </section>
             <section>
