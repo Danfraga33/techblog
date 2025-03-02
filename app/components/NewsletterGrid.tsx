@@ -11,7 +11,7 @@ const NewsletterGrid = ({
   setSelectedNewsletter,
 }: NewsletterGridProps) => {
   return (
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid grid-cols-2 gap-4 md:gap-6">
       {newsletters.map((newsletter, index) => (
         <NewsletterCard
           key={index}

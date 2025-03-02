@@ -24,8 +24,8 @@ const NewsletterCard = ({
     <Card className="m-0 flex flex-col p-0 shadow-lg transition-all hover:shadow-xl hover:transition-all">
       <CardHeader>
         <div className="flex min-w-fit flex-col items-start justify-between p-0 lg:p-3">
-          <span className="text-xs">{uploadDate}</span>
-          <CardTitle className="md:text-md mb-2 w-full text-sm lg:text-xl">
+          <span className="w-1/2 text-xs md:w-full">{uploadDate}</span>
+          <CardTitle className="md:text-md mb-2 text-sm md:min-h-fit md:w-full lg:text-xl">
             {newsletter.title}
           </CardTitle>
           <Badge
@@ -35,7 +35,7 @@ const NewsletterCard = ({
             {newsletter.topic}
           </Badge>
         </div>
-        <CardDescription className="text-xs">
+        <CardDescription className="w-1/2 text-xs md:min-h-fit">
           {newsletter.description}
         </CardDescription>
       </CardHeader>
@@ -43,7 +43,7 @@ const NewsletterCard = ({
       <CardFooter className="mt-auto">
         <Button
           onClick={() => setSelectedNewsletter(newsletter._id)}
-          className="w-full"
+          className="w-full text-xs md:text-sm"
         >
           View PDF
         </Button>
