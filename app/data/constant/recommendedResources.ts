@@ -1,6 +1,6 @@
 export const resources = [
   {
-    name: "CB Insihgts",
+    name: "CB Insights",
     link: "https://www.cbinsights.com/",
     avatarImg: "/CB_Insights_Logo.png",
     category: "AI",
