@@ -13,9 +13,9 @@ export async function loader() {
 }
 
 const Newsletter = () => {
-  const [selectedNewsletter, setSelectedNewsletter] = useState("");
   const newsletters = useLoaderData<typeof loader>();
-  const sortedNewsletters = newsletters.sort((a, b) => {
+  const [selectedNewsletter, setSelectedNewsletter] = useState("");
+  const sortedNewsletters = newsletters.sort((a: string, b: string) => {
     return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
   });
 
@@ -24,8 +24,9 @@ const Newsletter = () => {
       title="Newsletter"
       description="Curated updates on emerging technology, highlighting AI, quantum computing, semiconductors, and breakthrough innovations."
     >
-      <main className="flex flex-col-reverse space-x-6 lg:flex-row">
-        <ScrollArea className="flex flex-col">
+      <main className="flex flex-col lg:flex-row lg:space-x-6">
+        {/* Newsletter Grid Section */}
+        <ScrollArea className="">
           <NewsletterGrid
             newsletters={sortedNewsletters}
             setSelectedNewsletter={setSelectedNewsletter}
@@ -33,17 +34,14 @@ const Newsletter = () => {
         </ScrollArea>
 
         <div className="hidden h-screen border-l-large lg:block" />
-        <div className="flex min-w-fit p-6 md:w-1/2">
+
+        <div className="w-3/4 p-4 lg:w-1/2 lg:p-6">
           {selectedNewsletter ? (
-            <>
-              <PDFViewer selectedNewsletter={selectedNewsletter} />
-            </>
+            <PDFViewer selectedNewsletter={selectedNewsletter} />
           ) : (
-            <>
-              <div className="h-full text-gray-500">
-                Select a newsletter to view the PDF.
-              </div>
-            </>
+            <div className="flex h-full items-center justify-center text-gray-500">
+              Select a newsletter to view the PDF.
+            </div>
           )}
         </div>
       </main>

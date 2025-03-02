@@ -21,11 +21,11 @@ const NewsletterCard = ({
 }: NewsletterCardProps) => {
   const uploadDate = new Date(newsletter.uploadDate).toDateString();
   return (
-    <Card className="flex flex-col shadow-lg transition-all hover:shadow-xl hover:transition-all">
+    <Card className="m-0 flex flex-col p-0 shadow-lg transition-all hover:shadow-xl hover:transition-all">
       <CardHeader>
-        <div className="flex min-w-fit flex-col items-start justify-between p-3">
+        <div className="flex min-w-fit flex-col items-start justify-between p-0 lg:p-3">
           <span className="text-xs">{uploadDate}</span>
-          <CardTitle className="text-md mb-2 w-full lg:text-xl">
+          <CardTitle className="md:text-md mb-2 w-full text-sm lg:text-xl">
             {newsletter.title}
           </CardTitle>
           <Badge
@@ -35,8 +35,9 @@ const NewsletterCard = ({
             {newsletter.topic}
           </Badge>
         </div>
-        <CardDescription>{newsletter.description}</CardDescription>
-        <p className="mt-2 text-sm text-muted-foreground">{uploadDate}</p>
+        <CardDescription className="text-xs">
+          {newsletter.description}
+        </CardDescription>
       </CardHeader>
 
       <CardFooter className="mt-auto">
