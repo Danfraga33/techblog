@@ -90,9 +90,7 @@ export default function Home() {
               <div>
                 <h2 className="mb-4 text-xl font-semibold">Trending News</h2>
               </div>
-              <div className="flex items-center gap-2">
-                <SmallComingSoon />
-              </div>
+              <SmallComingSoon />
             </section>
             <section className="pr-2">
               <h2 className="mb-4 text-xl font-semibold">

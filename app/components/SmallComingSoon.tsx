@@ -3,7 +3,7 @@ import React from "react";
 
 const SmallComingSoon = () => {
   return (
-    <div>
+    <div className="flex items-center gap-2">
       Coming soon... <Smile color="red" />
     </div>
   );
