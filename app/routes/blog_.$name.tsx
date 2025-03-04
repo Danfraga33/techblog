@@ -193,7 +193,7 @@ const DynamicBlog = () => {
             </div>
           </div>
 
-          <div className="space-y-8 md:col-start-8 md:col-end-11">
+          <div className="space-y-8 text-start md:col-start-8 md:col-end-11">
             <div className="space-y-4">
               <h2 className="mb-4 text-sm font-bold text-foreground">
                 {title}
