@@ -113,7 +113,7 @@ const DynamicBlog = () => {
     );
   }
   return (
-    <section className="relative flex flex-col justify-center rounded-2xl p-4">
+    <section className="relative flex flex-col justify-center rounded-2xl p-4 text-right">
       <div className="relative flex h-[75vh] justify-center overflow-hidden">
         <div className="absolute inset-0 z-10 rounded-b-xl bg-gradient-to-t from-black to-transparent"></div>
 
