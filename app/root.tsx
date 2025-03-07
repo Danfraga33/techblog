@@ -4,8 +4,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import { AppSidebar } from "./components/app-sidebar";
@@ -48,6 +49,29 @@ export const links: LinksFunction = () => [
   },
   { rel: "manifest", href: "/favicon/site.webmanifest" },
 ];
+
+export const meta: MetaFunction = () => {
+  const location = useLocation();
+  console.log("location: ", location);
+
+  const path = (str: string) => {
+    const p = str.split("/").pop() || "Home";
+    return p ? p[0].toUpperCase() + p.slice(1) : "";
+  };
+
+  return [
+    { title: `Next Frontier | ${path(location.pathname)} ` },
+    {
+      property: "og:title",
+      content: "Next Frontier Hub",
+    },
+    {
+      name: "description",
+      content:
+        "Next Frontier Hub delivers the latest insights on emerging technologies, helping investors stay ahead of the curve. From AI and semiconductors to quantum computing and beyond, we break down key trends, market shifts, and investment opportunities in the tech industry",
+    },
+  ];
+};
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
