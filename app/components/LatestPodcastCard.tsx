@@ -45,7 +45,9 @@ export default function LatestPodcastCard({
                 {title}
               </Link>
             </h3>
-            <Badge className="text-xs">{capitalizeWords(category)}</Badge>
+            <Badge className="bg-background text-xs text-primary">
+              {capitalizeWords(category)}
+            </Badge>
           </div>
           <p className="text-sm text-muted-foreground">
             {truncateDescription(description)}

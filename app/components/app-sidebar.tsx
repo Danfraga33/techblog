@@ -44,11 +44,6 @@ const data = {
       url: "/podcast",
       icon: AudioWaveform,
     },
-    {
-      title: "Whiteboard Animation",
-      url: "/whiteboardAnimation",
-      icon: BookOpen,
-    },
   ],
 };
 

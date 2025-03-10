@@ -31,10 +31,8 @@ const Blog = () => {
   });
   return (
     <>
-      <Header />
-      <div className="min-w-screen px-4 py-8 sm:px-6 lg:px-8">
+      <div className="min-w-screen container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-8">
-          <SmallSignup />
           <nav className="border-b">
             <div className="px-4">
               <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
@@ -51,7 +49,7 @@ const Blog = () => {
                         setSubject(item);
                       }}
                       className={cn(
-                        "inline-block py-3 font-medium",
+                        "inline-block py-3 font-medium text-white",
                         subject === item && "border-b-3 border-b-stone-300",
                       )}
                     >
@@ -65,15 +63,10 @@ const Blog = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {/* <RecentBlogList
-            blogPosts={filteredPosts}
-            tags={tags}
-            subject={subject}
-          /> */}
           {blogPosts &&
             filteredPosts.map((post) => (
               <Fragment key={post.frontmatter.id}>
-                <Card className="group">
+                <Card className="bg-stacked group">
                   <Link to={`/blog/${post.slug}`} className="block space-y-4">
                     <div className="relative overflow-hidden">
                       <img
@@ -82,24 +75,24 @@ const Blog = () => {
                         className="relative rounded-xl object-cover"
                       />
                       <div className="p-3">
-                        <div className="mb-2 text-sm font-semibold">
+                        <div className="mb-2 text-sm font-semibold text-white">
                           Daniel Fraga
                         </div>
-                        <div className="text-sm opacity-70">
+                        <div className="text-sm text-gray-100 opacity-70">
                           {post.frontmatter.date}
                         </div>
                       </div>
                       <FadedDivider />
                       <div className="p-2">
-                        <h2 className="text-xl font-semibold transition-colors group-hover:text-primary">
+                        <h2 className="text-xl font-semibold text-white transition-colors">
                           {post.frontmatter.title}
                         </h2>
-                        <p className="mt-2 text-muted-foreground">
+                        <p className="mt-2 text-white">
                           {post.frontmatter.description}
                         </p>
                         <Button
                           variant="flat"
-                          className="mt-4 flex items-center gap-2 text-sm font-medium"
+                          className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:transition-all"
                         >
                           Read post
                           <ArrowRight />

@@ -9,10 +9,9 @@ type TitleProps = {
 const ContentLayout = ({ title, description, children }: TitleProps) => {
   return (
     <>
-      <Header />
       <div className="min-w-screen min-h-screen px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-12 space-y-8">
-          <Title title={title} description={description} />
+          {/* <Title title={title} description={description} /> */}
         </div>
         {children}
       </div>

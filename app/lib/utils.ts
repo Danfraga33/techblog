@@ -83,3 +83,8 @@ export async function extractHeadings(content: string) {
   await processor.process(content);
   return headings;
 }
+
+export const dateChange = (date: string) => {
+  const originalDate = new Date(date);
+  return originalDate.toDateString();
+};

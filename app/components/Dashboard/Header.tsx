@@ -1,35 +1,56 @@
-import React from "react";
+import { Link } from "@remix-run/react";
+import { Fragment, useState } from "react";
+import { SmallSignup } from "./SmallSignup";
+import { Crown, Menu, Paperclip, Plus, Search, X } from "lucide-react";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "../ui/breadcrumb";
-import { Separator } from "../ui/separator";
-import { SidebarTrigger } from "../ui/sidebar";
-import { getPathName } from "~/lib/utils";
-import { useLocation } from "@remix-run/react";
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@heroui/navbar";
+import { Button } from "../ui/button";
+
+function NavItem({ label }: { label: string }) {
+  return (
+    <div className="group relative">
+      <Button
+        variant="secondary"
+        className="flex items-center rounded-2xl bg-white px-4 py-0.5 text-sm font-medium text-gray-700 hover:text-gray-900"
+      >
+        {label === "NextFrontier" ? <Crown /> : ""}
+        {label}
+        {label === "NextFrontier" ? "" : <Plus />}
+      </Button>
+    </div>
+  );
+}
 
 const Header = () => {
-  let path = getPathName(useLocation().pathname) as string;
-  if (!path) {
-    path = "Hub";
-  }
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = [
+    "NextFrontier",
+    "Articles",
+    "Podcast",
+    "Newsletters",
+    "Contact",
+  ];
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-      <div className="flex items-center gap-2 px-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 h-4" />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{path}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+    <header className="sticky top-0 z-10 bg-transparent">
+      <div className="">
+        <div className="flex items-center space-x-4">
+          <nav className="hidden items-center space-x-1 md:flex">
+            {menuItems.map((item, i) => (
+              <Fragment key={i}>
+                <NavItem label={item} />
+              </Fragment>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

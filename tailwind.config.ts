@@ -5,7 +5,7 @@ export default {
   darkMode: ["class"],
   content: [
     "./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@heroui/theme/dist/components/(button|card|table|ripple|spinner|checkbox|form|spacer).js",
+    "./node_modules/@heroui/theme/dist/components/(button|card|navbar|table|ripple|spinner|checkbox|form|spacer).js"
   ],
   theme: {
     extend: {
@@ -38,7 +38,8 @@ export default {
       },
       colors: {
         background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        stacked: "hsl(var(--card-placement))",
+        nav: "hsl(var(--nav)",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
@@ -49,11 +50,9 @@ export default {
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

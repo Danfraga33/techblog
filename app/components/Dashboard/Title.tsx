@@ -8,8 +8,10 @@ type TitleProps = {
 const Title = ({ title, description }: TitleProps) => {
   return (
     <div className="space-y-2">
-      <h1 className="text-4xl font-bold tracking-tight">{title}</h1>
-      <p className="text-lg text-muted-foreground">{description}</p>
+      <h1 className="text-4xl font-bold tracking-tight text-primary">
+        {title}
+      </h1>
+      <p className="text-lg text-primary">{description}</p>
     </div>
   );
 };

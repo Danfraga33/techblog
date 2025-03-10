@@ -1,5 +1,1 @@
-export const filterMenu = [
-  "View all",
-  "Artificial Intelligence",
-  "Semiconductor",
-];
+export const filterMenu = ["All", "Artificial Intelligence", "Semiconductor"];

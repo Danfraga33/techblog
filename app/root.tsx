@@ -9,13 +9,16 @@ import {
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import { AppSidebar } from "./components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
+
 import { ReactNode } from "react";
+import Header from "./components/Dashboard/Header";
+// import stylesheet from "./tailwind.css?url";
 
 export const links: LinksFunction = () => [
+  // { rel: "stylesheet", href: stylesheet },
   { rel: "stylesheet", href: "./app/tailwind.css" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preload", href: "/font/karlo.tff", type: "font/tff" },
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
@@ -52,7 +55,6 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => {
   const location = useLocation();
-  console.log("location: ", location);
 
   const path = (str: string) => {
     const p = str.split("/").pop() || "Home";
@@ -82,13 +84,8 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset className="bg-[#F5f5f5] shadow-xl">
-            {children}
-          </SidebarInset>
-        </SidebarProvider>
+      <body className="bg-gradient-to-t from-[#8670DB]/35 to-[#f5f8fc]">
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
