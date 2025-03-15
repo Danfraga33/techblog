@@ -8,7 +8,6 @@ import { BlogPost } from "~/utils/types";
 const RecentBlogs = ({ blogPosts }: { blogPosts: BlogPost }) => {
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
-  console.log("blogPosts: ", blogPosts);
 
   return (
     <article className="flex gap-4">

@@ -1,25 +1,35 @@
-import { Button } from "@heroui/button";
-import { Card } from "@heroui/card";
 import { Link, json, useLoaderData } from "@remix-run/react";
-import { ArrowRight } from "lucide-react";
-import { Fragment, useState } from "react";
-import { getPosts } from "~/.server/posts";
-import FilterTags from "~/components/Dashboard/FilterTags";
+import { useState } from "react";
 import Header from "~/components/Dashboard/Header";
-import { SmallSignup } from "~/components/Dashboard/SmallSignup";
-import FadedDivider from "~/components/Dashboard/StyleComponents.tsx/FadedDivider";
-import { filterMenu } from "~/data/constant/filterMenu";
-import { cn } from "~/lib/utils";
+
+import Footer from "~/components/Dashboard/Footer";
+import { getBlogs } from "~/.server/posts";
+import { formatDate } from "~/lib/utils";
+import UnderlineAnimation from "~/components/Dashboard/UnderlineAnimation";
 
 export async function loader() {
-  const blogPosts = await getPosts();
+  const blogPosts = await getBlogs();
+
   return json({ blogPosts });
 }
 const Blog = () => {
   const { blogPosts } = useLoaderData<typeof loader>();
+  const updatedBlogPosts = blogPosts.map((post) => {
+    const estimatedReadingTime = Math.ceil(
+      post.content.split(/\s+/).length / 200,
+    );
+    const updatedFrontmatter = {
+      ...post.frontmatter,
+      estimatedReadingTime,
+    };
+
+    return {
+      ...post,
+      frontmatter: updatedFrontmatter,
+    };
+  });
   const [subject, setSubject] = useState("View all");
   const [tags, setTags] = useState("");
-
   const filteredPosts = blogPosts.filter((post) => {
     const subjectFilter =
       subject === "View all" ||
@@ -31,80 +41,64 @@ const Blog = () => {
   });
   return (
     <>
-      <div className="min-w-screen container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-12 space-y-8">
-          <nav className="border-b">
-            <div className="px-4">
-              <div className="no-scrollbar flex cursor-pointer flex-wrap gap-4 overflow-x-auto py-4">
-                <FilterTags blogPosts={blogPosts} setTags={setTags} />
-              </div>
-            </div>
+      <main className="min-h-screen bg-white">
+        <section className="container mx-auto px-4 py-16">
+          <h1 className="font-heading mb-16 text-7xl font-bold text-black">
+            MAGAZINE
+          </h1>
 
-            <ul className="-mb-px flex gap-8">
-              {filterMenu.map((item) => (
-                <Fragment key={item}>
-                  <li>
-                    <button
-                      onClick={() => {
-                        setSubject(item);
-                      }}
-                      className={cn(
-                        "inline-block py-3 font-medium text-white",
-                        subject === item && "border-b-3 border-b-stone-300",
-                      )}
-                    >
-                      {item}
-                    </button>
-                  </li>
-                </Fragment>
-              ))}
-            </ul>
-          </nav>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {blogPosts &&
-            filteredPosts.map((post) => (
-              <Fragment key={post.frontmatter.id}>
-                <Card className="bg-stacked group">
-                  <Link to={`/blog/${post.slug}`} className="block space-y-4">
-                    <div className="relative overflow-hidden">
+          <div className="grid grid-cols-1 gap-16 text-black">
+            {updatedBlogPosts.map((post, index) => (
+              <div
+                key={post.id}
+                className={`${index > 0 ? "border-t border-black pt-16" : ""}`}
+              >
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+                  <div className="md:col-span-1">
+                    <Link to={`/blogs/${post.slug}`}>
                       <img
-                        src={post.frontmatter.coverImage}
+                        src={post.frontmatter.coverImage || "/chip.png"}
                         alt={post.frontmatter.title}
-                        className="relative rounded-xl object-cover"
+                        width={300}
+                        height={300}
+                        className="h-auto w-full"
                       />
-                      <div className="p-3">
-                        <div className="mb-2 text-sm font-semibold text-white">
-                          Daniel Fraga
+                    </Link>
+                  </div>
+                  <div className="md:col-span-3">
+                    <UnderlineAnimation className="mb-4 text-4xl">
+                      <Link to={`/blog/${post.slug}`}>
+                        {post.frontmatter.title}
+                      </Link>
+                    </UnderlineAnimation>
+                    <p className="mb-6 text-black">
+                      {post.frontmatter.description}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-8">
+                        <div>
+                          <span className="text-sm font-medium">Date</span>
+                          <p>{formatDate(post.frontmatter.date)}</p>
                         </div>
-                        <div className="text-sm text-gray-100 opacity-70">
-                          {post.frontmatter.date}
+                        <div>
+                          <span className="text-sm font-medium">Read</span>
+                          <p>{post.frontmatter.estimatedReadingTime} min</p>
                         </div>
                       </div>
-                      <FadedDivider />
-                      <div className="p-2">
-                        <h2 className="text-xl font-semibold text-white transition-colors">
-                          {post.frontmatter.title}
-                        </h2>
-                        <p className="mt-2 text-white">
-                          {post.frontmatter.description}
-                        </p>
-                        <Button
-                          variant="flat"
-                          className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:transition-all"
-                        >
-                          Read post
-                          <ArrowRight />
-                        </Button>
-                      </div>
+                      {post.category && (
+                        <div className="rounded-full border border-black px-4 py-2 text-black">
+                          {post.frontmatter.subject}
+                        </div>
+                      )}
                     </div>
-                  </Link>
-                </Card>
-              </Fragment>
+                  </div>
+                </div>
+              </div>
             ))}
-        </div>
-      </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 };
