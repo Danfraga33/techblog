@@ -1,34 +1,16 @@
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { cn, extractHeadings, formatDate } from "~/lib/utils";
-import { Chip, select } from "@heroui/react";
-import { Separator } from "~/components/ui/separator";
-import { SidebarTrigger } from "~/components/ui/sidebar";
-import fs from "fs";
-import path from "path";
+import { extractHeadings, formatDate } from "~/lib/utils";
 import { json } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
-import { Fragment, useMemo } from "react";
+import { useMemo } from "react";
 import rehypeSlug from "rehype-slug";
-import matter from "gray-matter";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkGfm from "remark-gfm";
 import remarkImages from "remark-images";
-import { getPosts } from "~/.server/posts";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
-import { findBlog, getBlogs } from "~/lib/db";
-import { Link as Headinglink, animateScroll as scroll } from "react-scroll";
-import Footer from "~/components/Dashboard/Footer";
-import Header from "~/components/Dashboard/Header";
+
 import { author } from "~/data/constant/author";
+import { findBlog, getBlogs } from "~/.server/posts";
 
 export async function loader({ params }: { params: { name: string } }) {
   const blogs = await getBlogs();
