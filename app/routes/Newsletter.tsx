@@ -10,8 +10,8 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import { Newsletter } from "~/utils/types";
 
 export async function loader() {
-  const pdfs = await getAllNewsletters();
-  return json(pdfs);
+  const newsletters = await getAllNewsletters();
+  return json(newsletters);
 }
 
 const Newsletter = () => {
