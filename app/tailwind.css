@@ -1,18 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  @font-face {
-    font-family: "Open Sans";
-    src: url("/assets/fonts/karlo.ttf");
-    font-weight: normal;
+@layer components {
+  .mdx-content {
+  }
+
+  .mdx-content p {
+    @apply mb-4; /* Add spacing between paragraphs */
+  }
+
+  .mdx-content img {
+    @apply h-auto max-w-full; /* Ensure images don't overflow and maintain aspect ratio */
+  }
+
+  .mdx-content h1 {
+    @apply mb-4 text-3xl font-bold; /* Style for h1 headings */
+  }
+
+  .mdx-content h2 {
+    @apply mb-3 text-2xl font-bold; /* Style for h2 headings */
+  }
+
+  .mdx-content h3 {
+    @apply mb-2 text-xl font-bold; /* Style for h3 headings */
+  }
+
+  .mdx-content a {
+    @apply text-blue-600 hover:underline; /* Style for links */
+  }
+
+  .mdx-content ul {
+    @apply mb-4 list-disc pl-5; /* Style for unordered lists */
+  }
+
+  .mdx-content ol {
+    @apply mb-4 list-decimal pl-5; /* Style for ordered lists */
+  }
+
+  .mdx-content blockquote {
+    @apply mb-4 border-l-4 border-gray-300 pl-4 italic; /* Style for blockquotes */
+  }
+
+  .mdx-content code {
+    @apply rounded bg-gray-100 p-1 text-sm; /* Style for inline code */
+  }
+
+  .mdx-content pre {
+    @apply mb-4 rounded bg-gray-100 p-4; /* Style for code blocks */
+  }
+
+  .float-image {
+    @apply float-right mb-4 ml-4 w-48; /* Adjust width as needed */
+    height: auto; /* Ensure the height adjusts automatically */
+    object-fit: contain; /* Maintain aspect ratio */
   }
 }
-
 html,
 body {
   @apply bg-white dark:bg-gray-950;
+  scroll-behavior: smooth;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -29,6 +79,7 @@ body {
     h4 {
       scroll-margin-top: 100px; /* Adjust based on header height */
       position: relative;
+      color: var(--primary);
 
       a[aria-hidden="true"] {
         @apply absolute -left-6 top-1/2 -translate-y-1/2 opacity-0 transition-opacity;
@@ -70,7 +121,7 @@ h1 {
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 166 100% 62%;
+    --primary: 2, 80%, 47%, 1;
     --secondary: 210, 100%, 8%, 1;
     --muted: 60 4.8% 95.9%;
     --accent: 60 4.8% 95.9%;
