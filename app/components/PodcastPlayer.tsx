@@ -52,14 +52,15 @@ export default function PodcastPlayer({
       <div className="px-4 py-6">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-2 rounded-full bg-slate-200/10 p-2 px-3 transition hover:bg-white/10">
-            <Link to="/podcast" className="">
+            <Link to="/podcasts" className="">
               <ChevronLeft className="h-6 w-6 opacity-100" />
             </Link>
-            <Separator orientation="vertical" className="mr-2 h-4" />
           </div>
 
           <div>
-            <h1 className="text-lg font-medium">{frontmatter.title}</h1>
+            <h1 className="font-heading text-lg font-medium">
+              {frontmatter.title}
+            </h1>
           </div>
           <button className="rounded-full p-2 transition hover:bg-white/10">
             <MoreVertical className="h-6 w-6" />
