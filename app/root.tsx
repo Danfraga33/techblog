@@ -1,22 +1,16 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLocation,
-} from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, useLocation } from "@remix-run/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 
 import { ReactNode } from "react";
+import stylesheet from "./tailwind.css?url";
 import Header from "./components/Dashboard/Header";
-// import stylesheet from "./tailwind.css?url";
+import Footer from "./components/Dashboard/Footer";
 
 export const links: LinksFunction = () => [
-  // { rel: "stylesheet", href: stylesheet },
-  { rel: "stylesheet", href: "./app/tailwind.css" },
+  { rel: "stylesheet", href: stylesheet },
+  // { rel: "stylesheet", href: "./app/tailwind.css" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preload", href: "/font/karlo.tff", type: "font/tff" },
   {
@@ -84,9 +78,10 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gradient-to-t from-[#8670DB]/35 to-[#f5f8fc]">
+      <body>
+        <Header />
         {children}
-        <ScrollRestoration />
+        <Footer />
         <Scripts />
       </body>
     </html>
