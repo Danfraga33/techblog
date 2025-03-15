@@ -1,12 +1,11 @@
-import { Button } from "../ui/button";
+import { Form } from "@remix-run/react";
 import { Input } from "../ui/input";
-import Title from "./Title";
 
 export const SmallSignup = () => {
   return (
     <>
       <div className="flex items-center">
-        <div className="relative hidden items-center overflow-hidden rounded-full border border-gray-300 md:flex">
+        <Form className="relative items-center overflow-hidden rounded-full border border-gray-300 md:flex">
           <Input
             type="email"
             placeholder="Email "
@@ -15,7 +14,7 @@ export const SmallSignup = () => {
           <button className="absolute right-0 rounded-full bg-black px-4 py-2 text-xs font-medium uppercase text-white">
             Subscribe
           </button>
-        </div>
+        </Form>
       </div>
     </>
   );
