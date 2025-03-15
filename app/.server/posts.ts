@@ -1,61 +1,19 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import crypto from "crypto";
+import { connectToDatabase } from "~/lib/db";
 
-type Frontmatter = {
-  title: string;
-  description: string;
-  coverImage: string;
-  tags: string[];
-  date: string;
-  id?: string;
-  subject: string;
-  coverImageAlt: string;
-  type: "Blog" | "Podcast";
-};
+export async function getBlogs() {
+  const db = await connectToDatabase();
+  const blogs = await db
+    .collection("blog_posts")
+    .find({})
+    .sort({ "frontmatter.date": -1 })
+    .toArray();
 
-const postsDirectory = path.join(process.cwd(), "app/content/posts");
+  return blogs;
+}
 
-export const getPosts = () => {
-  const filenames = fs.readdirSync(postsDirectory);
+export async function findBlog(params: string) {
+  const db = await connectToDatabase();
+  const blog = await db.collection("blog_posts").findOne({ slug: params });
 
-  const posts = filenames.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContent);
-    const frontmatter = data as Frontmatter;
-    const slug = filename.replace(/\.mdx$/, "");
-
-    const id = crypto
-      .createHash("md5")
-      .update(filename + frontmatter.title + frontmatter.date)
-      .digest("hex");
-
-    let publishedDate = frontmatter.date;
-
-    if (!publishedDate) {
-      publishedDate = new Date().toISOString().split("T")[0];
-
-      const updatedFrontmatter = { ...frontmatter, date: publishedDate };
-      const updatedContent = matter.stringify(content, updatedFrontmatter);
-      fs.writeFileSync(filePath, updatedContent, "utf8");
-    }
-    return {
-      slug,
-      frontmatter: {
-        ...frontmatter,
-        date: publishedDate,
-        id,
-      },
-    };
-  });
-
-  const sortedPosts = posts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime(),
-  );
-
-  return sortedPosts;
-};
+  return blog;
+}

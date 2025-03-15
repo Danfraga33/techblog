@@ -66,8 +66,10 @@ export async function extractHeadings(content: string) {
 
     visit(tree, "heading", (node: Heading) => {
       const text = node.children
-        .filter((child) => child.type === "text")
-        .map((child) => child.value)
+        .filter((child) => child.type === "text" || child.type === "strong") // Also handle plain text
+        .map((child) => {
+          return child.children?.[0]?.value || child.value; // Ensure you return the value
+        })
         .join(" ");
 
       const id = text ? slugger.slug(text) : "";
@@ -83,8 +85,3 @@ export async function extractHeadings(content: string) {
   await processor.process(content);
   return headings;
 }
-
-export const dateChange = (date: string) => {
-  const originalDate = new Date(date);
-  return originalDate.toDateString();
-};
