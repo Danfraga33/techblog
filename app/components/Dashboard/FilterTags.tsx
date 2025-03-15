@@ -16,7 +16,7 @@ const FilterTags = ({
     <>
       <Badge
         variant="outline"
-        className="hover:bg-stacked text-sm text-white shadow-md transition-all hover:text-white"
+        className="text-sm text-black shadow-md transition-all hover:bg-stacked hover:text-white"
         onClick={() => setTags("")}
       >
         Clear
@@ -25,7 +25,7 @@ const FilterTags = ({
       {blogTags.map((tag) => (
         <Badge
           key={tag}
-          className="bg-background text-sm text-stone-100 text-white shadow-md transition-all hover:bg-stone-300"
+          className="bg-background text-sm text-black shadow-md transition-all hover:bg-stone-300"
           onClick={() => setTags(tag)}
         >
           {tag}
