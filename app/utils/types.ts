@@ -1,13 +1,19 @@
-export type Newsletter = {
+import { Dispatch, SetStateAction } from "react";
+
+export interface Newsletter {
   _id: string;
-  filename: string;
-  description: string;
-  topic: string;
   title: string;
-  chunkSize: number;
-  length: number;
+  description: string;
+  filename: string;
+  topic: string;
   uploadDate: string;
-};
+  length: number;
+  chunkSize: number;
+}
+export interface NewsletterGridProps {
+  newsletters: Newsletter[];
+  setSelectedNewsletter: Dispatch<SetStateAction<string>>;
+}
 
 export type BlogPost = {
   slug: string;
@@ -40,3 +46,13 @@ export type NewsArticleType = {
   relevance_score: number;
   locale: string;
 };
+export interface FrontmatterTypes {
+  title: string;
+  description: string;
+  tags: string[];
+  author: string;
+  authorImg: string;
+  coverImage: string;
+  date: string;
+  toc?: { title: string; id: string }[];
+}
