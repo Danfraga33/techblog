@@ -1,6 +1,5 @@
 import { Link } from "@remix-run/react";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
-import { Fragment } from "react";
 import { formatDate } from "~/lib/utils";
 
 export default function PodcastSection({ podcasts }: { podcasts: any }) {
@@ -17,10 +16,10 @@ export default function PodcastSection({ podcasts }: { podcasts: any }) {
       </div>
 
       <div className="grid grid-cols-1 gap-0 border border-black text-black md:grid-cols-3">
-        {podcasts.map((podcast) => (
+        {podcasts.map((podcast, index) => (
           <Link
             to={`podcasts/${podcast.slug}`}
-            key={podcast.id}
+            key={index}
             className="group border-r border-black p-6 last:border-r-0"
           >
             <div className={`relative mb-4 bg-blue-300`}>
@@ -47,10 +46,6 @@ export default function PodcastSection({ podcasts }: { podcasts: any }) {
                   {formatDate(podcast.frontmatter.date)}
                 </p>
               </div>
-              {/* <div>
-                <span className="text-sm font-medium text-black">Duration</span>
-                <p className="text-black">{podcast.frontmatter.}</p>
-              </div> */}
             </div>
           </Link>
         ))}

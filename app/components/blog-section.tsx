@@ -1,4 +1,4 @@
-import { Link, json } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { ArrowUpRight } from "lucide-react";
 import { resources } from "~/data/constant/recommendedResources";
 import { formatDate } from "~/lib/utils";
@@ -23,7 +23,7 @@ export default function BlogSection({
           {blogPosts.map((post, index) => (
             <Link
               to={`blog/${post.slug}`}
-              key={post.id}
+              key={index}
               className={` ${index > 0 ? "mt-8 border-t border-black pt-8" : ""}`}
             >
               <div className="grid grid-cols-1 gap-6 pb-4 md:grid-cols-4">
@@ -134,8 +134,8 @@ export default function BlogSection({
             </h3>
 
             <div className="space-y-6">
-              {resources.map((post) => (
-                <div key={post.id} className="text-md flex gap-4">
+              {resources.map((post, index) => (
+                <div key={index} className="text-md flex gap-4">
                   <div className="font-bold text-black">
                     {post.id.toString().padStart(2, "0")}
                   </div>
