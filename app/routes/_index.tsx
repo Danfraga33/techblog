@@ -61,7 +61,7 @@ export default function Home() {
       <section className="container mx-auto px-4 pt-8">
         <h1
           ref={headingRef}
-          className="font-heading mx-auto inline-flex items-center justify-center text-5xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
+          className="font-heading mx-auto inline-flex items-center justify-center text-6xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
         >
           {businessData.title}
         </h1>
