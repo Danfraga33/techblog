@@ -8,6 +8,7 @@ import NewsTicker from "~/components/news-ticker";
 import gsap from "gsap";
 import { getAllNewsletters } from "~/.server/newsletters";
 import { businessData } from "~/data/constant/admin";
+import { BlogPost } from "~/utils/types";
 
 export async function loader() {
   const blogPosts = await getBlogs();
@@ -41,7 +42,7 @@ export default function Home() {
       });
     }
   }, []); // Empty array ensures it only runs on initial mount
-  const updatedBlogPosts = blogPosts.map((post) => {
+  const updatedBlogPosts = blogPosts.map((post: BlogPost) => {
     const estimatedReadingTime = Math.ceil(
       post.content.split(/\s+/).length / 200,
     );
