@@ -4,7 +4,6 @@ import { connectToDatabase } from "~/lib/db";
 export async function loader({ params }: { params: { id: string } }) {
   const { id } = params;
 
-  // Validate ObjectId
   if (!ObjectId.isValid(id)) {
     return new Response("Invalid file ID", { status: 400 });
   }
@@ -16,7 +15,6 @@ export async function loader({ params }: { params: { id: string } }) {
   const bucket = new GridFSBucket(db, { bucketName: "fs" });
 
   try {
-    // Check if the file exists
     const file = await db.collection("fs.files").findOne({ _id: objectId });
     console.log("File found:", file);
 
@@ -24,10 +22,8 @@ export async function loader({ params }: { params: { id: string } }) {
       return new Response("File not found", { status: 404 });
     }
 
-    // Create a download stream
     const downloadStream = bucket.openDownloadStream(objectId);
 
-    // Convert GridFS stream to ReadableStream
     const readableStream = new ReadableStream({
       start(controller) {
         downloadStream.on("data", (chunk) => controller.enqueue(chunk));
@@ -36,7 +32,6 @@ export async function loader({ params }: { params: { id: string } }) {
       },
     });
 
-    // Return the response
     return new Response(readableStream, {
       headers: {
         "Content-Type": "application/pdf",
