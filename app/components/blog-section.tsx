@@ -30,7 +30,9 @@ export default function BlogSection({
               <div className="grid grid-cols-1 gap-6 pb-4 md:grid-cols-4">
                 <div className="md:col-span-1">
                   <img
-                    src={post.frontmatter.coverImage || "/chip.png"}
+                    src={
+                      post.frontmatter.image_url || post.frontmatter.coverImage
+                    }
                     alt={post.title}
                     width={300}
                     height={300}
