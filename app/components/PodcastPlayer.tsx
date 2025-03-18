@@ -9,7 +9,6 @@ import {
 import { Separator } from "./ui/separator";
 import FadedDivider from "./Dashboard/StyleComponents.tsx/FadedDivider";
 import { Link } from "@remix-run/react";
-import { SidebarTrigger } from "./ui/sidebar";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo, useRef, useState } from "react";
 import { PodcastFrontmatter } from "~/.server/podcasts";
