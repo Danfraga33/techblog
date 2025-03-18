@@ -7,6 +7,7 @@ import PodcastSection from "~/components/Dashboard/Podcast-section";
 import NewsTicker from "~/components/news-ticker";
 import gsap from "gsap";
 import { getAllNewsletters } from "~/.server/newsletters";
+import { businessData } from "~/data/constant/admin";
 
 export async function loader() {
   const blogPosts = await getBlogs();
@@ -60,9 +61,9 @@ export default function Home() {
       <section className="container mx-auto px-4 pt-8">
         <h1
           ref={headingRef}
-          className="font-heading mx-auto inline-flex items-center justify-center text-9xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
+          className="font-heading mx-auto inline-flex items-center justify-center text-5xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
         >
-          FRONTIER HUB
+          {businessData.title}
         </h1>
 
         <NewsTicker />

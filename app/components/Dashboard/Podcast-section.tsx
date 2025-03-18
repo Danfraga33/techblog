@@ -8,7 +8,7 @@ export default function PodcastSection({ podcasts }: { podcasts: any }) {
   return (
     <section className="container mx-auto border-t border-black px-4 py-16">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-6xl font-bold">PODCAST</h2>
+        <h2 className="text-6xl font-bold text-black">PODCAST</h2>
         <Link
           to="/podcasts"
           className="flex items-center gap-2 whitespace-nowrap font-bold text-black hover:text-primary hover:decoration-primary hover:transition-all"

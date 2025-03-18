@@ -38,8 +38,8 @@ export default function BlogSection({
                   />
                 </div>
                 <div className="md:col-span-3">
-                  <UnderlineAnimation className="mb-4 pb-1 text-3xl font-bold">
-                    {post.frontmatter.title}
+                  <UnderlineAnimation className="mb-4 pb-1 text-xl font-bold lg:text-3xl">
+                    <span> {post.frontmatter.title}</span>
                   </UnderlineAnimation>
                   <p className="mb-4 text-black">
                     {post.frontmatter.description}
@@ -90,11 +90,11 @@ export default function BlogSection({
           </div>
 
           <div className="relative mb-8">
-            <div className="bg-[#C4846A] p-8 text-white">
-              <div className="mb-16 text-4xl font-bold uppercase text-black">
+            <div className="bg-[#C4846A] p-4 text-white md:p-6">
+              <div className="mb-16 text-2xl font-bold uppercase text-black md:text-xl lg:text-3xl xl:text-4xl">
                 {monthlyReport.title}
                 <br />
-                MAGAZINE
+                Newsletter
               </div>
               <div className="flex items-end justify-between">
                 <div className="rounded-full bg-yellow-300 px-4 py-1 text-xs uppercase text-black">
