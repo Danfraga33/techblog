@@ -6,6 +6,7 @@ import Footer from "~/components/Dashboard/Footer";
 import { getBlogs } from "~/.server/posts";
 import { formatDate } from "~/lib/utils";
 import UnderlineAnimation from "~/components/Dashboard/UnderlineAnimation";
+import { BlogPost } from "~/utils/types";
 
 export async function loader() {
   const blogPosts = await getBlogs();
@@ -15,7 +16,7 @@ export async function loader() {
 const Blog = () => {
   const { blogPosts } = useLoaderData<typeof loader>();
 
-  const updatedBlogPosts = blogPosts.map((post) => {
+  const updatedBlogPosts: BlogPost[] = blogPosts.map((post: BlogPost) => {
     const estimatedReadingTime = Math.ceil(
       post.content.split(/\s+/).length / 200,
     );
@@ -41,7 +42,7 @@ const Blog = () => {
           <div className="grid grid-cols-1 gap-16 text-black">
             {updatedBlogPosts.map((post, index) => (
               <div
-                key={post.id}
+                key={post._id}
                 className={`${index > 0 ? "border-t border-black pt-16" : ""}`}
               >
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
@@ -77,7 +78,7 @@ const Blog = () => {
                           <p>{post.frontmatter.estimatedReadingTime} min</p>
                         </div>
                       </div>
-                      {post.category && (
+                      {post.frontmatter.subject && (
                         <div className="rounded-full border border-black px-4 py-2 text-black">
                           {post.frontmatter.subject}
                         </div>
