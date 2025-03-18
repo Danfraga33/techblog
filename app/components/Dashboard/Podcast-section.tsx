@@ -1,8 +1,10 @@
 import { Link } from "@remix-run/react";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import { formatDate } from "~/lib/utils";
+import { Podcast } from "~/utils/types";
 
-export default function PodcastSection({ podcasts }: { podcasts: any }) {
+export default function PodcastSection({ podcasts }: { podcasts: Podcast[] }) {
+  console.log("podcasts: ", podcasts);
   return (
     <section className="container mx-auto border-t border-black px-4 py-16">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -28,7 +30,7 @@ export default function PodcastSection({ podcasts }: { podcasts: any }) {
               </div>
               <img
                 src={podcast.frontmatter.coverImage}
-                alt={`Episode ${podcast.id}`}
+                alt={`Episode ${podcast.frontmatter.id}`}
                 width={400}
                 height={400}
                 className="h-auto w-full mix-blend-multiply"

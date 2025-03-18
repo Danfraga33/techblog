@@ -16,19 +16,36 @@ export interface NewsletterGridProps {
 }
 
 export type BlogPost = {
-  slug: string;
   frontmatter: {
-    title: string;
+    coverImage: string;
+    date: string;
     description: string;
-    subject: string;
-    audioFile: string;
-    type: string;
+    estimatedReadingTime: number;
+    image_url: string;
+    subject: string | null;
     tags: string[];
+    title: string;
+    type: string;
+  };
+  content: string;
+  slug: string;
+  _id: string;
+};
+
+export type Podcast = {
+  frontmatter: {
+    audioFile: string;
     coverImage: string;
     coverImageAlt: string;
     date: string;
+    description: string;
     id: string;
+    subject: string;
+    tags: string[];
+    title: string;
+    type: string;
   };
+  slug: string;
 };
 
 export type NewsArticleType = {
@@ -56,3 +73,20 @@ export interface FrontmatterTypes {
   date: string;
   toc?: { title: string; id: string }[];
 }
+
+// export type BlogPost = {
+//   slug: string;
+//   _id: string;
+//   title: string;
+//   type: "blog";
+//   description: string;
+//   date: string;
+//   estimatedReadingTime: number;
+//   tags: string[];
+//   content: string;
+//   frontmatter: {
+//     coverImage: string;
+//     image_url: string;
+//     subject: string | null;
+//   };
+// };

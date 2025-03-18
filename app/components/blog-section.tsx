@@ -4,15 +4,16 @@ import { resources } from "~/data/constant/recommendedResources";
 import { formatDate } from "~/lib/utils";
 import { magazine } from "~/data/constant/magazine";
 import UnderlineAnimation from "./Dashboard/UnderlineAnimation";
-import { Newsletter } from "~/utils/types";
+import { BlogPost, Newsletter } from "~/utils/types";
 
 export default function BlogSection({
   blogPosts,
   newsletters,
 }: {
-  blogPosts: any;
+  blogPosts: BlogPost[];
   newsletters: Newsletter[];
 }) {
+  console.log("blogPosts: ", blogPosts);
   const monthlyReport = newsletters[0];
 
   return (
@@ -32,7 +33,7 @@ export default function BlogSection({
                     src={
                       post.frontmatter.image_url || post.frontmatter.coverImage
                     }
-                    alt={post.title}
+                    alt={post.frontmatter.title}
                     width={300}
                     height={300}
                     className="h-auto w-full"

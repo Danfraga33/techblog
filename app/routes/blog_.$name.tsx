@@ -11,6 +11,7 @@ import remarkImages from "remark-images";
 
 import { author } from "~/data/constant/author";
 import { findBlog, getBlogs } from "~/.server/posts";
+import { BlogPost } from "~/utils/types";
 
 export async function loader({ params }: { params: { name: string } }) {
   const blogs = await getBlogs();
@@ -42,7 +43,7 @@ export async function loader({ params }: { params: { name: string } }) {
     selectedBlog.content.split(/\s+/).length / 200,
   );
 
-  const blogPosts = await getBlogs();
+  const blogPosts: BlogPost[] = await getBlogs();
   const currentIndex = blogPosts.findIndex((post) => post.slug === params.name);
 
   const previousArticle = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
