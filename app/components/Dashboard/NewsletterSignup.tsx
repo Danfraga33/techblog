@@ -61,7 +61,10 @@ export default function NewsletterSignUp({
   //   };
 
   return (
-    <form onSubmit={() => console.log("ASD")} className={`${formClassName}`}>
+    <form
+      onSubmit={() => console.log("Submitted")}
+      className={`${formClassName}`}
+    >
       <div className={`${formFieldsClassName}`}>
         <Input
           //  {...register("email")}
