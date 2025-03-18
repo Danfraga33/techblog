@@ -14,8 +14,7 @@ export default function BlogSection({
   newsletters: Newsletter[];
 }) {
   const monthlyReport = newsletters[0];
-  console.log("monthlyReport: ", monthlyReport);
-  console.log("blogPosts: ", blogPosts);
+
   return (
     <section className="container mx-auto px-4 py-16">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">

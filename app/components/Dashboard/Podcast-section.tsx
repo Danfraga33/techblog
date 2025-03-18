@@ -4,7 +4,6 @@ import { Fragment } from "react";
 import { formatDate } from "~/lib/utils";
 
 export default function PodcastSection({ podcasts }: { podcasts: any }) {
-  console.log("podcasts: ", podcasts);
   return (
     <section className="container mx-auto border-t border-black px-4 py-16">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">

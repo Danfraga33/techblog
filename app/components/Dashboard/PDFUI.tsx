@@ -6,7 +6,6 @@ interface PDFViewerProps {
 }
 
 const PDFUI: React.FC<PDFViewerProps> = ({ selectedNewsletterId }) => {
-  console.log("newsletter: ", selectedNewsletterId);
   return (
     <>
       {/* <div className="mx-auto w-full max-w-4xl gap-3"> */}

@@ -7,7 +7,6 @@ export default function NewsletterViewer({
 }: {
   selectedNewsletter: Newsletter;
 }) {
-  console.log("selectedNewsletter: ", selectedNewsletter._id);
   if (!selectedNewsletter) {
     return <p className="text-primary">No newsletter selected.</p>;
   }

@@ -15,7 +15,6 @@ import { findBlog, getBlogs } from "~/.server/posts";
 export async function loader({ params }: { params: { name: string } }) {
   const blogs = await getBlogs();
   const selectedBlog = await findBlog(params.name);
-  console.log("selectedBlog: ", selectedBlog);
 
   const headings = await extractHeadings(selectedBlog.content);
   const frontmatter = selectedBlog.frontmatter;
@@ -73,7 +72,6 @@ const DynamicBlog = () => {
   } = useLoaderData<typeof loader>();
 
   const { title, description, tags, coverImage, date, subject } = frontmatter;
-  console.log("frontmatter: ", frontmatter);
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
