@@ -14,6 +14,7 @@ export async function loader() {
 }
 const Blog = () => {
   const { blogPosts } = useLoaderData<typeof loader>();
+
   const updatedBlogPosts = blogPosts.map((post) => {
     const estimatedReadingTime = Math.ceil(
       post.content.split(/\s+/).length / 200,
@@ -28,23 +29,13 @@ const Blog = () => {
       frontmatter: updatedFrontmatter,
     };
   });
-  const [subject, setSubject] = useState("View all");
-  const [tags, setTags] = useState("");
-  const filteredPosts = blogPosts.filter((post) => {
-    const subjectFilter =
-      subject === "View all" ||
-      post.frontmatter.subject.toLowerCase() === subject.toLowerCase();
 
-    const tagFilter = tags === "" || post.frontmatter.tags.includes(tags);
-
-    return subjectFilter && tagFilter;
-  });
   return (
     <>
       <main className="min-h-screen bg-white">
         <section className="container mx-auto px-4 py-16">
           <h1 className="font-heading mb-16 text-7xl font-bold text-black">
-            MAGAZINE
+            BLOG<span className="text-primary">.</span>
           </h1>
 
           <div className="grid grid-cols-1 gap-16 text-black">
