@@ -1,12 +1,26 @@
 import { Link } from "@remix-run/react";
 import { ArrowUpRight } from "lucide-react";
 import UnderlineAnimation from "./Dashboard/UnderlineAnimation";
+import { useEffect, useState } from "react";
 
 export default function PodcastCard({ podcast }: { podcast: any }) {
+  const colors = [
+    "bg-blue-300",
+    "bg-red-300",
+    "bg-green-300",
+    "bg-yellow-300",
+    "bg-purple-300",
+  ];
+  const [bgColor, setBgColor] = useState(colors[0]);
+
+  useEffect(() => {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    setBgColor(randomColor);
+  }, []);
   return (
     <div className="group">
       <Link to={`/podcasts/${podcast.slug}`}>
-        <div className={`relative mb-4 overflow-hidden bg-primary`}>
+        <div className={`relative mb-4 overflow-hidden ${bgColor}`}>
           <div className="absolute left-4 top-4 z-10 font-bold uppercase text-white">
             Next Frontier
             <br />
@@ -42,8 +56,8 @@ export default function PodcastCard({ podcast }: { podcast: any }) {
             </p>
           </div>
           <div>
-            <span className="text-sm font-medium">Duration</span>
-            <p>{podcast.duration}</p>
+            <span className="text-sm font-medium">Subject</span>
+            <p className="text-primary">{podcast.frontmatter.subject}</p>
           </div>
         </div>
       </Link>
