@@ -123,12 +123,6 @@ export default function BlogSection({
             </div>
           </div>
 
-          <div className="mb-4 text-center">
-            <button className="rounded bg-black px-8 py-3 uppercase text-white">
-              Coming soon
-            </button>
-          </div>
-
           <div className="mt-16">
             <h3 className="group mb-8 inline-block text-xl font-bold uppercase text-black">
               Recommended Resources
