@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import {
   Card,
   CardDescription,
@@ -9,17 +9,7 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Newsletter } from "~/utils/types";
-import {
-  Dialog,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
-import { DialogContent } from "@radix-ui/react-dialog";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { DialogTrigger } from "./ui/dialog";
 
 interface NewsletterCardProps {
   newsletter: Newsletter;
@@ -32,7 +22,7 @@ const NewsletterCard = ({
 }: NewsletterCardProps) => {
   const uploadDate = new Date(newsletter.uploadDate).toDateString();
   return (
-    <Card className="bg-stacked m-0 flex flex-col items-start rounded-none border-0 p-0 shadow-lg transition-all hover:shadow-xl hover:transition-all">
+    <Card className="m-0 flex flex-col items-start rounded-none border-0 bg-stacked p-0 shadow-lg transition-all hover:shadow-xl hover:transition-all">
       <CardHeader>
         <div className="flex min-w-fit flex-col items-start justify-between p-0 lg:p-3">
           <span className="w-1/2 text-xs text-gray-100 md:w-full">
