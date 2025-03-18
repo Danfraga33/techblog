@@ -7,10 +7,6 @@ export default function NewsletterViewer({
 }: {
   selectedNewsletter: Newsletter;
 }) {
-  if (!selectedNewsletter) {
-    return <p className="text-primary">No newsletter selected.</p>;
-  }
-
   return (
     <div className="p-4">
       <div className="mb-6 text-black">
