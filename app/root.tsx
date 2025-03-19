@@ -1,5 +1,17 @@
-import { Links, Meta, Outlet, Scripts, useLocation } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  json,
+  redirect,
+  useLocation,
+} from "@remix-run/react";
+import type {
+  ActionFunctionArgs,
+  LinksFunction,
+  MetaFunction,
+} from "@remix-run/node";
 
 import "./tailwind.css";
 
@@ -7,6 +19,7 @@ import { ReactNode } from "react";
 import stylesheet from "./tailwind.css?url";
 import Header from "./components/Dashboard/Header";
 import Footer from "./components/Dashboard/Footer";
+import { sendWelcomeEmail } from "./utils/email.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -68,6 +81,29 @@ export const meta: MetaFunction = () => {
     },
   ];
 };
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const email = formData.get("email") as string;
+
+  console.log("Form data received:", { email }); // Debugging
+
+  // Validate form data
+  if (!email) {
+    return json({ error: "Email is required" }, { status: 400 });
+  }
+
+  try {
+    // Send welcome email
+    await sendWelcomeEmail(email);
+
+    // Redirect to a thank-you page or show a success message
+    return redirect("/send");
+  } catch (error) {
+    console.error("Error handling form submission:", error);
+    return json({ error: "Failed to submit form" }, { status: 500 });
+  }
+}
 
 export function Layout({ children }: { children: ReactNode }) {
   return (

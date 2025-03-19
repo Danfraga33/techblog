@@ -1,7 +1,6 @@
 import { Link } from "@remix-run/react";
 import { TwitterIcon } from "lucide-react";
 import { SmallSignup } from "./SmallSignup";
-import UnderlineAnimation from "./UnderlineAnimation";
 
 export default function Footer() {
   return (
