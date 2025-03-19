@@ -13,7 +13,6 @@ export default function BlogSection({
   blogPosts: BlogPost[];
   newsletters: Newsletter[];
 }) {
-  console.log("blogPosts: ", blogPosts);
   const monthlyReport = newsletters[0];
 
   return (

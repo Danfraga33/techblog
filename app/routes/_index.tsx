@@ -1,5 +1,5 @@
 import { getBlogs } from "~/.server/posts";
-import { json, useLoaderData } from "@remix-run/react";
+import { json, redirect, useActionData, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
 import { useEffect, useRef } from "react";
 import BlogSection from "~/components/blog-section";
@@ -32,13 +32,12 @@ export default function Home() {
 
       const tl = gsap.timeline();
 
-      // Animate the heading to slide up and reveal itself from below
       tl.to(headingRef.current, {
-        y: 0, // Move the text to its final position
-        opacity: 1, // Make it fully visible
-        clipPath: "inset(0% 0 0 0)", // Reveal the text as it moves above the line
-        duration: 3, // Animation duration
-        ease: "power4.out", // Easing for smoothness
+        y: 0,
+        opacity: 1,
+        clipPath: "inset(0% 0 0 0)",
+        duration: 3,
+        ease: "power4.out",
       });
     }
   }, []); // Empty array ensures it only runs on initial mount
@@ -62,7 +61,7 @@ export default function Home() {
       <section className="container mx-auto px-4 pt-8">
         <h1
           ref={headingRef}
-          className="font-heading mx-auto inline-flex items-center justify-center text-6xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
+          className="mx-auto inline-flex items-center justify-center font-heading text-6xl font-bold leading-none tracking-tighter text-black md:text-[10rem] lg:text-[14rem] xl:text-[18rem]"
         >
           {businessData.title}
         </h1>
