@@ -66,6 +66,7 @@
     "remark-gfm": "^4.0.0",
     "remark-images": "^4.1.0",
     "remark-mdx-frontmatter": "^5.0.0",
+    "resend": "^4.1.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "to-vfile": "^8.0.0",
