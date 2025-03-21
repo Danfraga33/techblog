@@ -19,8 +19,6 @@ export default function Footer() {
             <SmallSignup />
           </div>
         </div>
-
-        {/* Links Section */}
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
             <h3 className="mb-4 text-xl font-bold uppercase">
