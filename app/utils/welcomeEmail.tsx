@@ -19,177 +19,101 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export const SimpleEmail = () => (
+export const WelcomeEmail = () => (
   <Html>
     <Head />
+    <Preview>
+      Welcome to The Next Shift! Get ready for insights into emerging tech.
+    </Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section className="my-[40px] px-[32px] py-[40px]">
+        <Section style={headerSection}>
           <Row>
-            <Column className="w-[80%]">
+            <Column>
               <Img
-                alt="React Email logo"
-                height="42"
-                src="https://react.email/static/logo-without-background.png"
+                alt="The Next Shift Logo"
+                height="50"
+                src={`${baseUrl}/static/the-next-shift-logo.png`}
               />
             </Column>
-            <Column align="right">
-              <Row align="right">
-                <Column className="px-[8px]">
-                  <Link
-                    className="text-gray-600 [text-decoration:none]"
-                    href="#"
-                  >
-                    About
-                  </Link>
-                </Column>
-                <Column className="px-[8px]">
-                  <Link
-                    className="text-gray-600 [text-decoration:none]"
-                    href="#"
-                  >
-                    Company
-                  </Link>
-                </Column>
-                <Column className="px-[8px]">
-                  <Link
-                    className="text-gray-600 [text-decoration:none]"
-                    href="#"
-                  >
-                    Blog
-                  </Link>
-                </Column>
-              </Row>
-            </Column>
           </Row>
         </Section>
 
         <Section style={paragraphContent}>
           <Hr style={hr} />
-          <Text style={heading}>DEVELOPER UPDATE</Text>
-          <Text style={paragraph}>Hello Google Play Developer,</Text>
+          <Text style={heading}>Welcome to The Next Shift!</Text>
           <Text style={paragraph}>
-            We strive to make Google Play a safe and trusted experience for
-            users.
+            You’ve just joined <span style={highlight}>The Next Shift</span>,
+            your go-to source for the most relevant, actionable insights in{" "}
+            <span style={highlight}>emerging technology</span>.
           </Text>
           <Text style={paragraph}>
-            We've added clarifications to our{" "}
-            <Link href="https://notifications.google.com" style={link}>
-              Target API Level policy
-            </Link>
-            . Because this is a clarification, our enforcement standards and
-            practices for this policy remain the same.
+            Each week, I dive deep into{" "}
+            <span style={highlight}>cutting-edge trends</span> in{" "}
+            <span style={highlight}>
+              AI, semiconductors, quantum computing, and other disruptive
+              innovations
+            </span>{" "}
+            — curating high-value content, including blogs, podcasts, and
+            newsletters that I produce. My goal is to provide you with{" "}
+            <span style={highlight}>expert analysis</span> and{" "}
+            <span style={highlight}>investment signals</span> that help you stay
+            ahead of the curve and make it easier to invest in the next
+            frontier.
           </Text>
-        </Section>
-        <Section style={paragraphList}>
           <Text style={paragraph}>
-            We’re noting exceptions to the{" "}
-            <Link href="https://notifications.google.com" style={link}>
-              Target API Level policy
-            </Link>
-            , which can be found in our updated{" "}
-            <Link href="https://notifications.google.com" style={link}>
-              Help Center article.
-            </Link>
-            These exceptions include permanently private apps and apps that
-            target automotive or wearables form factors and are bundled within
-            the same package.{" "}
-            <Link href="https://notifications.google.com" style={link}>
-              Learn more
-            </Link>
+            At <span style={highlight}>Next Frontier Hub</span>, I’m all about
+            identifying and investing in the technologies shaping the future.
           </Text>
         </Section>
-        <Section style={paragraphContent}>
-          <Text style={paragraph}>
-            We’re also extending the deadline to give you more time to adjust to
-            these changes. Now, apps that target API level 29 or below will
-            start experiencing reduced distribution starting <b>Jan 31, 2023</b>{" "}
-            instead of Nov 1, 2022. If you need more time to update your app,
-            you can request an extension to keep your app discoverable to all
-            users until May 1, 2023.
-          </Text>
-          <Hr style={hr} />
+
+        <Section style={ctaSection}>
+          <Text style={ctaText}>Explore my latest insights now:</Text>
+          <Link href="https://yourblog.com" style={ctaButton}>
+            Visit Next Frontier Hub
+          </Link>
         </Section>
 
         <Section style={paragraphContent}>
-          <Text style={paragraph}>Thank you,</Text>
-          <Text style={{ ...paragraph, fontSize: "20px" }}>
-            The Google Play team
+          <Text style={paragraph}>
+            🔍 <span style={highlight}>Stay ahead of the curve.</span>
           </Text>
+          <Text style={paragraph}>Welcome aboard!</Text>
+          <Text style={signature}>– The Next Frontier Hub Team</Text>
         </Section>
 
-        <Section style={containerContact}>
-          <Row>
-            <Text style={paragraph}>Connect with us</Text>
-          </Row>
-          <Row
-            align="left"
-            style={{
-              width: "84px",
-              float: "left",
-            }}
-          >
-            <Column style={{ paddingRight: "4px" }}>
-              <Link href="https://notifications.google.com">
-                <Img
-                  width="28"
-                  height="28"
-                  src={`${baseUrl}/static/google-play-chat.png`}
-                />
-              </Link>
-            </Column>
-            <Column style={{ paddingRight: "4px" }}>
-              <Link href="https://notifications.google.com">
-                <Img
-                  width="28"
-                  height="28"
-                  src={`${baseUrl}/static/google-play-icon.png`}
-                />
-              </Link>
-            </Column>
-            <Column style={{ paddingRight: "4px" }}>
-              <Link href="https://notifications.google.com">
-                <Img
-                  width="28"
-                  height="28"
-                  src={`${baseUrl}/static/google-play-academy.png`}
-                />
-              </Link>
-            </Column>
-          </Row>
-          <Row>
-            <Img
-              style={footer}
-              width="540"
-              height="48"
-              src={`${baseUrl}/static/google-play-footer.png`}
-            />
-          </Row>
-        </Section>
+        <Hr style={hr} />
 
-        <Section style={{ ...paragraphContent, paddingBottom: 30 }}>
-          <Text
-            style={{
-              ...paragraph,
-              fontSize: "12px",
-              textAlign: "center",
-              margin: 0,
-            }}
-          >
-            © 2022 Google LLC 1600 Amphitheatre Parkway, Mountain View, CA
-            94043, USA
-          </Text>
-          <Text
-            style={{
-              ...paragraph,
-              fontSize: "12px",
-              textAlign: "center",
-              margin: 0,
-            }}
-          >
-            You have received this mandatory email service announcement to
-            update you about important changes to your Google Play Developer
-            account.
+        <Section style={footerSection}>
+          <Text style={paragraph}>Connect with me:</Text>
+          <Row>
+            <Column style={{ paddingRight: "8px" }}>
+              <Link href="https://twitter.com/yourhandle">
+                <Img
+                  width="24"
+                  height="24"
+                  src={`${baseUrl}/static/twitter-icon.png`}
+                />
+              </Link>
+            </Column>
+            <Column style={{ paddingRight: "8px" }}>
+              <Link href="https://linkedin.com/in/yourprofile">
+                <Img
+                  width="24"
+                  height="24"
+                  src={`${baseUrl}/static/linkedin-icon.png`}
+                />
+              </Link>
+            </Column>
+          </Row>
+          <Text style={footerText}>
+            You received this email because you subscribed to{" "}
+            <span style={highlight}>The Next Shift</span>. If this wasn’t you,
+            or you'd like to unsubscribe, click{" "}
+            <Link href="https://yourblog.com/unsubscribe" style={link}>
+              here
+            </Link>
+            .
           </Text>
         </Section>
       </Container>
@@ -198,47 +122,39 @@ export const SimpleEmail = () => (
 );
 
 const main = {
-  backgroundColor: "#dbddde",
+  backgroundColor: "#f5f5f5",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
-const sectionLogo = {
-  padding: "0 40px",
-};
-
-const headerBlue = {
-  marginTop: "-1px",
-};
-
 const container = {
-  margin: "30px auto",
-  backgroundColor: "#fff",
-  borderRadius: 5,
+  margin: "40px auto",
+  backgroundColor: "#ffffff",
+  borderRadius: "8px",
   overflow: "hidden",
+  padding: "30px",
+  maxWidth: "600px",
 };
 
-const containerContact = {
-  backgroundColor: "#f0fcff",
-  width: "90%",
-  borderRadius: "5px",
-  overflow: "hidden",
-  paddingLeft: "20px",
-};
-
-const heading = {
-  fontSize: "14px",
-  lineHeight: "26px",
-  fontWeight: "700",
-  color: "#004dcf",
+const headerSection = {
+  textAlign: "center",
+  paddingBottom: "20px",
 };
 
 const paragraphContent = {
-  padding: "0 40px",
+  padding: "0 20px",
 };
 
-const paragraphList = {
-  paddingLeft: 40,
+const ctaSection = {
+  textAlign: "center",
+  margin: "30px 0",
+};
+
+const heading = {
+  fontSize: "18px",
+  fontWeight: "700",
+  color: "#000",
+  textAlign: "center",
 };
 
 const paragraph = {
@@ -247,9 +163,48 @@ const paragraph = {
   color: "#3c4043",
 };
 
+const highlight = {
+  color: "#d81e18",
+  fontWeight: "bold",
+};
+
+const ctaText = {
+  fontSize: "16px",
+  fontWeight: "600",
+  color: "#333",
+};
+
+const ctaButton = {
+  display: "inline-block",
+  backgroundColor: "#004dcf",
+  color: "#ffffff",
+  padding: "12px 20px",
+  borderRadius: "5px",
+  textDecoration: "none",
+  fontWeight: "600",
+  marginTop: "10px",
+};
+
+const signature = {
+  fontSize: "14px",
+  fontWeight: "600",
+  color: "#333",
+};
+
+const footerSection = {
+  textAlign: "center",
+  paddingTop: "20px",
+};
+
+const footerText = {
+  fontSize: "12px",
+  color: "#777",
+  paddingTop: "10px",
+};
+
 const link = {
-  ...paragraph,
-  color: "#004dcf",
+  color: "#000",
+  textDecoration: "none",
 };
 
 const hr = {
@@ -257,8 +212,4 @@ const hr = {
   margin: "20px 0",
 };
 
-const footer = {
-  maxWidth: "100%",
-};
-
-export const emailHtml = await render(<SimpleEmail />);
+export const emailHtml = await render(<WelcomeEmail />);
