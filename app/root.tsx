@@ -98,7 +98,7 @@ export async function action({ request }: ActionFunctionArgs) {
     await sendWelcomeEmail(email);
 
     // Redirect to a thank-you page or show a success message
-    return redirect("/send");
+    return redirect("/blog");
   } catch (error) {
     console.error("Error handling form submission:", error);
     return json({ error: "Failed to submit form" }, { status: 500 });

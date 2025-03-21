@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { emailHtml } from "./welcomeEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -9,7 +10,7 @@ export async function sendWelcomeEmail(to: string) {
       to,
 
       subject: "Welcome to Our Service",
-      html: `<p>Hi ,</p><p>Thank you for contacting us! We will get back to you shortly.</p><p>Best regards,<br>Your Company</p>`,
+      html: emailHtml,
     });
 
     console.log("Email sent successfully:", data);
