@@ -182,7 +182,5 @@ const hr = {
 
 const sendWelcomeEmail = async () => {
   const emailHtml = await render(<WelcomeEmail />);
-  // You can now use the emailHtml as needed
-  console.log(emailHtml);
 };
 sendWelcomeEmail();
