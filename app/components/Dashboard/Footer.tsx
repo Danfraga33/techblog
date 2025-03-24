@@ -24,12 +24,17 @@ export default function Footer() {
             <h3 className="mb-4 text-xl font-bold uppercase">
               Next Frontier Hub
             </h3>
-            <Link to="https://twitter.com" aria-label="Twitter">
+            <a
+              href="https://x.com/Danfraga33"
+              aria-label="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <TwitterIcon
                 className="hover:text-primary hover:transition-all"
                 size={20}
               />
-            </Link>
+            </a>
           </div>
 
           <div>

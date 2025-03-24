@@ -25,17 +25,17 @@ export default function Header() {
               <Link to="/podcasts">Podcasts</Link>
             </UnderlineAnimation>
           </nav>
-
-          <Link
-            to="https://x.com/Danfraga33"
+          <a
+            href="https://x.com/Danfraga33"
             aria-label="Twitter"
-            className="pl-10"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <TwitterIcon
-              className="text-black hover:text-primary hover:transition-all"
+              className="hover:text-primary hover:transition-all"
               size={20}
             />
-          </Link>
+          </a>
         </div>
       </div>
     </header>
