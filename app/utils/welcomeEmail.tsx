@@ -180,4 +180,9 @@ const hr = {
   margin: "16px 0",
 };
 
-export const emailHtml = await render(<WelcomeEmail />);
+const sendWelcomeEmail = async () => {
+  const emailHtml = await render(<WelcomeEmail />);
+  // You can now use the emailHtml as needed
+  console.log(emailHtml);
+};
+sendWelcomeEmail();
