@@ -18,7 +18,7 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
     ? newsletters.filter((newsletter) => newsletter.topic === topic)
     : newsletters;
   const filteredFeatured = filteredNewsletters[0] || featuredNewsletter;
-  const filteredTop = filteredNewsletters.slice(1, 4);
+  const filteredTop = filteredNewsletters.slice(1, 5);
 
   return (
     <main className="mb-2 min-h-screen bg-white">
