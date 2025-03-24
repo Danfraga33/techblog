@@ -86,9 +86,8 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const email = formData.get("email") as string;
 
-  console.log("Form data received:", { email }); // Debugging
+  console.log("Form data received:", { email });
 
-  // Validate form data
   if (!email) {
     return json({ error: "Email is required" }, { status: 400 });
   }
