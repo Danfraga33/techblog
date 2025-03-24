@@ -1,8 +1,5 @@
 import { Link, json, useLoaderData } from "@remix-run/react";
-import { useState } from "react";
-import Header from "~/components/Dashboard/Header";
 
-import Footer from "~/components/Dashboard/Footer";
 import { getBlogs } from "~/.server/posts";
 import { formatDate } from "~/lib/utils";
 import UnderlineAnimation from "~/components/Dashboard/UnderlineAnimation";

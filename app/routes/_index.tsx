@@ -1,5 +1,5 @@
 import { getBlogs } from "~/.server/posts";
-import { json, redirect, useActionData, useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import { getPodcasts } from "~/.server/podcasts";
 import { useEffect, useRef } from "react";
 import BlogSection from "~/components/blog-section";

@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface Newsletter {
   _id: string;
   title: string;
@@ -12,7 +10,6 @@ export interface Newsletter {
 }
 export interface NewsletterGridProps {
   newsletters: Newsletter[];
-  setSelectedNewsletter: Dispatch<SetStateAction<string>>;
 }
 
 export type BlogPost = {

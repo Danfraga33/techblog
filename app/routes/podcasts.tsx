@@ -3,7 +3,6 @@ import { Play, Search } from "lucide-react";
 import { getPodcasts } from "~/.server/podcasts";
 import PodcastCard from "~/components/PodcastCard";
 export async function loader() {
-  const posts = await getPodcasts();
   return await getPodcasts();
 }
 // Helper function to capitalize words

@@ -17,4 +17,7 @@ export default defineConfig({
     remix(),
     tsconfigPaths(),
   ],
+  build: {
+    target: "es2022", // Update the target environment
+  },
 });

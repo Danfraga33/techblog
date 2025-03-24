@@ -6,7 +6,6 @@ import {
   SkipForward,
   Play,
 } from "lucide-react";
-import { Separator } from "./ui/separator";
 import FadedDivider from "./Dashboard/StyleComponents.tsx/FadedDivider";
 import { Link } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";

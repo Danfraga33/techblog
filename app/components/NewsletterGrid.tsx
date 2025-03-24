@@ -111,7 +111,9 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
                 aria-description="pdf display of report"
                 className="max-w-4xl text-black"
               >
-                <NewsletterViewer selectedNewsletter={selectedNewsletter} />
+                {selectedNewsletter && (
+                  <NewsletterViewer selectedNewsletter={selectedNewsletter} />
+                )}
               </DialogContent>
             </Dialog>
           </div>
@@ -164,9 +166,11 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
                         aria-description="pdf display"
                         className="max-w-4xl"
                       >
-                        <NewsletterViewer
-                          selectedNewsletter={selectedNewsletter}
-                        />
+                        {selectedNewsletter && (
+                          <NewsletterViewer
+                            selectedNewsletter={selectedNewsletter}
+                          />
+                        )}
                       </DialogContent>
                     </Dialog>
                     <hr className="my-6 border-t border-gray-200" />

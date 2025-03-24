@@ -12,18 +12,15 @@ export async function loader() {
 
 const Newsletter = () => {
   const newsletters = useLoaderData<typeof loader>();
-  const [selectedNewsletter, setSelectedNewsletter] = useState("");
-  const sortedNewsletters = newsletters.sort((a: string, b: string) => {
+
+  const sortedNewsletters = newsletters.sort((a: Newsletter, b: Newsletter) => {
     return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
   });
 
   return (
     <main>
       <ScrollArea>
-        <NewsletterGrid
-          newsletters={sortedNewsletters}
-          setSelectedNewsletter={setSelectedNewsletter}
-        />
+        <NewsletterGrid newsletters={sortedNewsletters} />
       </ScrollArea>
     </main>
   );
