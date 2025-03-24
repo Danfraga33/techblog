@@ -35,7 +35,7 @@ const Blog = () => {
     <>
       <main className="min-h-screen bg-white">
         <section className="container mx-auto px-4 py-16">
-          <h1 className="font-heading mb-16 text-7xl font-bold text-black">
+          <h1 className="mb-16 font-heading text-7xl font-bold text-black">
             BLOG<span className="text-primary">.</span>
           </h1>
 
@@ -47,9 +47,9 @@ const Blog = () => {
               >
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                   <div className="md:col-span-1">
-                    <Link to={`/blogs/${post.slug}`}>
+                    <Link to={`/blog/${post.slug}`}>
                       <img
-                        src={post.frontmatter.image_url || "/chip.png"}
+                        src={post.frontmatter.image_url || "/chip.jpg"}
                         alt={post.frontmatter.title}
                         width={300}
                         height={300}
