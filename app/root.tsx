@@ -20,6 +20,8 @@ import stylesheet from "./tailwind.css?url";
 import Header from "./components/Dashboard/Header";
 import Footer from "./components/Dashboard/Footer";
 import { sendWelcomeEmail } from "./utils/email.server";
+import { subscriptionSchema } from "~/schemas/subscriptionSchema"; // Adjust path if necessary
+import { z } from "zod";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -93,10 +95,15 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
+    subscriptionSchema.parse({ email });
     await sendWelcomeEmail(email);
-
     return redirect("/blog");
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      const errorMessages = error.errors.map((err) => err.message).join(", ");
+      console.error("Zod Validation Error:", errorMessages);
+      return json({ error: errorMessages }, { status: 400 });
+    }
     console.error("Error handling form submission:", error);
     return json({ error: "Failed to submit form" }, { status: 500 });
   }
