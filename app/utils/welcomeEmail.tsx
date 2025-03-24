@@ -13,17 +13,20 @@ import {
   Text,
 } from "@react-email/components";
 import { render } from "@react-email/render";
+import { Twitter } from "lucide-react";
 import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
+console.log("baseUrl: ", baseUrl);
+// baseUrl:  https://www.nextfrontierhub.com
 
 export const WelcomeEmail = () => (
   <Html>
     <Head />
     <Preview>
-      Welcome to The Next Shift! Get ready for insights into emerging tech.
+      Welcome to The Next Shift! Stay ahead with the latest in emerging tech.
     </Preview>
     <Body style={main}>
       <Container style={container}>
@@ -32,84 +35,56 @@ export const WelcomeEmail = () => (
             <Column>
               <Img
                 alt="The Next Shift Logo"
-                height="50"
-                src={`${baseUrl}/static/the-next-shift-logo.png`}
+                height="40"
+                src={`${baseUrl}/hero.png`}
               />
             </Column>
           </Row>
         </Section>
 
         <Section style={paragraphContent}>
-          <Hr style={hr} />
-          <Text style={heading}>Welcome to The Next Shift!</Text>
+          <Text style={heading}>Welcome to The Next Shift</Text>
           <Text style={paragraph}>
-            You’ve just joined <span style={highlight}>The Next Shift</span>,
-            your go-to source for the most relevant, actionable insights in{" "}
+            You’ve joined a newsletter focused on the latest in{" "}
+            <span style={highlight}>AI</span>,
+            <span style={highlight}>semiconductors</span>, and{" "}
             <span style={highlight}>emerging technology</span>.
           </Text>
           <Text style={paragraph}>
-            Each week, I dive deep into{" "}
-            <span style={highlight}>cutting-edge trends</span> in{" "}
-            <span style={highlight}>
-              AI, semiconductors, quantum computing, and other disruptive
-              innovations
-            </span>{" "}
-            — curating high-value content, including blogs, podcasts, and
-            newsletters that I produce. My goal is to provide you with{" "}
-            <span style={highlight}>expert analysis</span> and{" "}
-            <span style={highlight}>investment signals</span> that help you stay
-            ahead of the curve and make it easier to invest in the next
-            frontier.
+            Each week, I break down key trends, insights, and
+            opportunities—through blogs, podcasts, and deep dives that cut
+            through the noise.
           </Text>
           <Text style={paragraph}>
-            At <span style={highlight}>Next Frontier Hub</span>, I’m all about
-            identifying and investing in the technologies shaping the future.
+            The goal? To keep you ahead of the curve with expert analysis and
+            clear investment signals.
           </Text>
         </Section>
 
         <Section style={ctaSection}>
-          <Text style={ctaText}>Explore my latest insights now:</Text>
-          <Link href="https://yourblog.com" style={ctaButton}>
-            Visit Next Frontier Hub
+          <Link href="https://nextfrontierhub.com/" style={ctaButton}>
+            Read the latest insights →
           </Link>
         </Section>
 
         <Section style={paragraphContent}>
-          <Text style={paragraph}>
-            🔍 <span style={highlight}>Stay ahead of the curve.</span>
-          </Text>
-          <Text style={paragraph}>Welcome aboard!</Text>
-          <Text style={signature}>– The Next Frontier Hub Team</Text>
+          <Text style={paragraph}>Stay curious. Stay ahead.</Text>
+          <Text style={signature}>— The Next Shift</Text>
         </Section>
 
         <Hr style={hr} />
 
         <Section style={footerSection}>
-          <Text style={paragraph}>Connect with me:</Text>
           <Row>
-            <Column style={{ paddingRight: "8px" }}>
-              <Link href="https://twitter.com/yourhandle">
-                <Img
-                  width="24"
-                  height="24"
-                  src={`${baseUrl}/static/twitter-icon.png`}
-                />
-              </Link>
-            </Column>
-            <Column style={{ paddingRight: "8px" }}>
-              <Link href="https://linkedin.com/in/yourprofile">
-                <Img
-                  width="24"
-                  height="24"
-                  src={`${baseUrl}/static/linkedin-icon.png`}
-                />
+            <Column>
+              <Link href="https://x.com/Danfraga33">
+                <Twitter width={20} height={20} />
               </Link>
             </Column>
           </Row>
           <Text style={footerText}>
-            You received this email because you subscribed to{" "}
-            <span style={highlight}>The Next Shift</span>. If this wasn’t you,
-            or you'd like to unsubscribe, click{" "}
+            You received this email because you subscribed to The Next Shift.
+            Unsubscribe{" "}
             <Link href="https://yourblog.com/unsubscribe" style={link}>
               here
             </Link>
@@ -122,78 +97,71 @@ export const WelcomeEmail = () => (
 );
 
 const main = {
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "#ffffff",
   fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+  padding: "20px",
 };
 
 const container = {
-  margin: "40px auto",
-  backgroundColor: "#ffffff",
-  borderRadius: "8px",
-  overflow: "hidden",
-  padding: "30px",
-  maxWidth: "600px",
+  margin: "0 auto",
+  maxWidth: "520px",
+  padding: "20px",
 };
 
 const headerSection = {
   textAlign: "center",
-  paddingBottom: "20px",
+  paddingBottom: "16px",
 };
 
 const paragraphContent = {
-  padding: "0 20px",
+  padding: "0 16px",
 };
 
 const ctaSection = {
   textAlign: "center",
-  margin: "30px 0",
+  margin: "24px 0",
 };
 
 const heading = {
   fontSize: "18px",
-  fontWeight: "700",
-  color: "#000",
+  fontWeight: "600",
+  color: "#222",
   textAlign: "center",
 };
 
 const paragraph = {
   fontSize: "14px",
   lineHeight: "22px",
-  color: "#3c4043",
+  color: "#444",
 };
 
 const highlight = {
   color: "#d81e18",
-  fontWeight: "bold",
-};
-
-const ctaText = {
-  fontSize: "16px",
-  fontWeight: "600",
-  color: "#333",
 };
 
 const ctaButton = {
   display: "inline-block",
   backgroundColor: "#004dcf",
   color: "#ffffff",
-  padding: "12px 20px",
+  padding: "10px 18px",
   borderRadius: "5px",
   textDecoration: "none",
+  fontSize: "14px",
   fontWeight: "600",
-  marginTop: "10px",
 };
 
 const signature = {
   fontSize: "14px",
   fontWeight: "600",
   color: "#333",
+  textAlign: "center",
+  paddingTop: "8px",
 };
 
 const footerSection = {
   textAlign: "center",
-  paddingTop: "20px",
+  paddingTop: "16px",
 };
 
 const footerText = {
@@ -203,13 +171,13 @@ const footerText = {
 };
 
 const link = {
-  color: "#000",
+  color: "#222",
   textDecoration: "none",
 };
 
 const hr = {
-  borderColor: "#e8eaed",
-  margin: "20px 0",
+  borderColor: "#e0e0e0",
+  margin: "16px 0",
 };
 
 export const emailHtml = await render(<WelcomeEmail />);
