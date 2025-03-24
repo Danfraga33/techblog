@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { emailHtml } from "./welcomeEmail";
+import { renderEmailHtml } from "./welcomeEmail";
 import { connectToDatabase } from "~/lib/db";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -15,7 +15,7 @@ export async function sendWelcomeEmail(to: string) {
       to,
 
       subject: "Welcome to the hub",
-      html: emailHtml,
+      html: await renderEmailHtml(),
     });
 
     console.log("Email sent successfully:", data);

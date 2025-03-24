@@ -16,9 +16,7 @@ import { render } from "@react-email/render";
 import { Twitter } from "lucide-react";
 import * as React from "react";
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
+const baseUrl = process.env.BASE_URL ? `https://${process.env.BASE_URL}` : "";
 console.log("baseUrl: ", baseUrl);
 // baseUrl:  https://www.nextfrontierhub.com
 
@@ -180,7 +178,7 @@ const hr = {
   margin: "16px 0",
 };
 
-const sendWelcomeEmail = async () => {
+export const renderEmailHtml = async () => {
   const emailHtml = await render(<WelcomeEmail />);
+  return emailHtml;
 };
-sendWelcomeEmail();
