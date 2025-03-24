@@ -36,7 +36,7 @@ export default function Footer() {
             <ul className="space-y-2 text-white">
               <li>
                 <Link to="/blog" className="hover:text-primary">
-                  Writings
+                  Blog
                 </Link>
               </li>
               <li>
