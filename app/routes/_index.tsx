@@ -40,7 +40,7 @@ export default function Home() {
         ease: "power4.out",
       });
     }
-  }, []); // Empty array ensures it only runs on initial mount
+  }, []);
   const updatedBlogPosts = blogPosts.map((post: BlogPost) => {
     const estimatedReadingTime = Math.ceil(
       post.content.split(/\s+/).length / 200,

@@ -11,7 +11,7 @@ export default function Sidebar() {
       <p className="text-5xl font-semibold">03/2022</p>
       <img
         className="w-[20rem] pb-4 pt-8"
-        src="/chip.png"
+        src="/chip.jpg"
         alt="A rust-colored magazine cover, showing a sculpture of a man, the words 'FYRRE MAGAZINE' on the top left and '03/2022' on the bottom right, a gold badge just above with 'EXCLUSIVE JAKOB GRONBERG INTERVIEW' printed on it, and an arrow pointing in the bottom right corner"
       />
       <Button>Order</Button>
