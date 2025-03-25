@@ -72,9 +72,11 @@ const DynamicBlog = () => {
     nextArticle,
   } = useLoaderData<typeof loader>();
 
-  const { title, description, tags, coverImage, date, subject } = frontmatter;
+  const { title, description, tags, image_url, coverImage, date, subject } =
+    frontmatter;
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
+  console.log("coverImage: ", coverImage);
 
   return (
     <>
@@ -83,12 +85,9 @@ const DynamicBlog = () => {
           <div className="bg-black px-4 py-2 text-white">
             <p className="text-xs font-medium uppercase">by {author.name}</p>
           </div>
-          <div className="px-4 py-2">
-            <p className="text-xs font-medium">SCIENCE</p>
-          </div>
         </div>
-        <div className="px-4 pb-4 pt-10">
-          <h1 className="border-b border-black pb-2 text-5xl font-bold leading-tight tracking-tight text-black md:text-6xl lg:text-7xl">
+        <div className="px-4 pb-4 pt-2">
+          <h1 className="border-b border-black pb-2 text-5xl font-bold leading-none tracking-tight text-black md:text-6xl lg:text-7xl">
             {title}
           </h1>
           {/* <p className="mt-2 text-lg text-black">{description}</p> */}
@@ -115,7 +114,7 @@ const DynamicBlog = () => {
             <div className="text-md leading-snug">
               <div className="mb-4 mr-4 inline-block h-[24rem] w-full">
                 <img
-                  src={coverImage}
+                  src={image_url}
                   alt={title}
                   className="h-full w-full object-cover p-3"
                 />
