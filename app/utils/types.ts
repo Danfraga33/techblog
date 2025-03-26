@@ -70,20 +70,3 @@ export interface FrontmatterTypes {
   date: string;
   toc?: { title: string; id: string }[];
 }
-
-// export type BlogPost = {
-//   slug: string;
-//   _id: string;
-//   title: string;
-//   type: "blog";
-//   description: string;
-//   date: string;
-//   estimatedReadingTime: number;
-//   tags: string[];
-//   content: string;
-//   frontmatter: {
-//     coverImage: string;
-//     image_url: string;
-//     subject: string | null;
-//   };
-// };
