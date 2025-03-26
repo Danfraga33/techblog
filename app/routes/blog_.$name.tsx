@@ -76,7 +76,6 @@ const DynamicBlog = () => {
     frontmatter;
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
-  console.log("coverImage: ", coverImage);
 
   return (
     <>
