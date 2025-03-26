@@ -66,7 +66,7 @@ export default function PodcastPlayer({
         </div>
 
         <div className="text-center">
-          <h2 className="mb-8 px-8 text-xl font-bold md:text-xl">
+          <h2 className="mb-8 cursor-default px-8 text-xl font-bold md:text-xl">
             {frontmatter.description}
           </h2>
 
@@ -84,7 +84,7 @@ export default function PodcastPlayer({
             <FadedDivider />
           </div>
 
-          <div className="mb-4 text-sm text-gray-400">
+          <div className="mb-4 cursor-default text-sm text-gray-400">
             {formatTime(currentTime)}/
             {formatTime(audioRef.current?.duration || 0)}
           </div>

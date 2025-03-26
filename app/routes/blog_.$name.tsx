@@ -86,30 +86,29 @@ const DynamicBlog = () => {
             <p className="text-xs font-medium uppercase">by {author.name}</p>
           </div>
         </div>
-        <div className="px-4 pb-4 pt-2">
+        <div className="px-4 pb-2 pt-2">
           <h1 className="border-b border-black pb-2 text-5xl font-bold leading-none tracking-tight text-black md:text-6xl lg:text-7xl">
             {title}
           </h1>
-          {/* <p className="mt-2 text-lg text-black">{description}</p> */}
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-4 flex items-center justify-between">
             <div className="flex gap-4 text-black md:gap-8">
-              <div className="md:text-md text-xs">
+              <div className="md:text-md cursor-default text-xs">
                 <span className="text-sm font-medium">Date</span>
                 <p>{formatDate(date)}</p>
               </div>
-              <div className="md:text-md text-xs">
+              <div className="md:text-md cursor-default text-xs">
                 <span className="font-medium">Read</span>
                 <p>{estimatedReadingTime} min</p>
               </div>
             </div>
             {subject && (
-              <div className="rounded-full border border-black px-4 py-2 text-sm text-black md:text-lg">
+              <div className="cursor-default rounded-full border border-black px-4 py-2 text-sm text-black md:text-lg">
                 {subject}
               </div>
             )}
           </div>
         </div>
-        <div className="grid h-full gap-6 p-3">
+        <div className="grid h-full gap-6 p-2">
           <div className="text-black">
             <div className="text-md leading-snug">
               <div className="mb-4 mr-4 inline-block h-[24rem] w-full">

@@ -8,20 +8,21 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         {/* Newsletter Section */}
         <div className="mb-20 flex flex-col items-start justify-between md:flex-row">
-          <div className="mb-8 md:mb-0">
+          <div className="mb-8 cursor-default md:mb-0">
             <h2 className="mb-2 text-5xl font-bold uppercase">
               EMERGING TECH NEWS
             </h2>
             <h2 className="text-5xl font-bold uppercase">TO YOUR INBOX</h2>
           </div>
 
-          <div className="flex w-full md:w-auto">
+          <div className="flex w-full flex-col md:w-auto">
+            <h2 className="mb-2 text-2xl font-bold uppercase">Subscribe now</h2>
             <SmallSignup />
           </div>
         </div>
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-xl font-bold uppercase">
+            <h3 className="mb-4 cursor-default text-xl font-bold uppercase">
               Next Frontier Hub
             </h3>
             <a
