@@ -20,7 +20,9 @@ export default function PodcastsPage() {
     <main>
       <section className="container mx-auto px-4 py-16">
         <div className="mb-16 text-black">
-          <h1 className="mb-4 text-7xl font-bold">PODCAST</h1>
+          <h1 className="mb-4 font-heading text-7xl font-bold">
+            PODCAST<span className="text-primary">.</span>
+          </h1>
           <p className="max-w-3xl text-xl">
             Deep dives into emerging art and culture, covering contemporary
             movements, artistic expression, cultural phenomena, and trends
