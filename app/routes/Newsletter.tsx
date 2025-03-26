@@ -1,5 +1,4 @@
 import { json, useLoaderData } from "@remix-run/react";
-import { useState } from "react";
 import { getAllNewsletters } from "~/.server/newsletters";
 import NewsletterGrid from "~/components/NewsletterGrid";
 import { ScrollArea } from "~/components/ui/scroll-area";
