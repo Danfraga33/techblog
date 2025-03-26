@@ -24,14 +24,14 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
     <main className="mb-2 min-h-screen bg-white">
       <div className="container mx-auto px-4 pt-20">
         <div className="mb-12 flex flex-col items-end justify-end gap-6 text-end">
-          <ul className="flex text-black">
+          <ul className="flex font-heading font-[500] text-black">
             <Link to="/">
               <UnderlineAnimation className="text-xl">
                 {businessData.title}
               </UnderlineAnimation>
             </Link>
             <li className="mx-2">
-              <span className="text-xl text-primary">/</span>
+              <span className="cursor-default text-xl text-primary">/</span>
             </li>
             <li className="cursor-pointer">
               <UnderlineAnimation
@@ -44,7 +44,7 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
               </UnderlineAnimation>
             </li>
             <li className="mx-2">
-              <span className="text-xl text-primary">/</span>
+              <span className="cursor-default text-xl text-primary">/</span>
             </li>
             <li className="cursor-pointer">
               <UnderlineAnimation
@@ -61,10 +61,10 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
               </UnderlineAnimation>
             </li>
             <li className="mx-2">
-              <span className="text-xl text-primary">/</span>
+              <span className="cursor-default text-xl text-primary">/</span>
             </li>
             <li className="cursor-pointer">
-              <UnderlineAnimation className="text-xl">
+              <UnderlineAnimation className="text-xl font-normal">
                 <span onClick={() => setTopic("")}>Clear</span>
               </UnderlineAnimation>
             </li>
@@ -123,13 +123,13 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
             <h2 className="mb-6 text-lg font-medium">TOP STORIES</h2>
             <div className="space-y-6">
               {(filteredTop.length > 0 ? filteredTop : topNewsletters).map(
-                (story, i) => (
-                  <div key={story._id}>
+                (newsletter, i) => (
+                  <div key={newsletter._id}>
                     <Dialog>
                       <DialogTrigger asChild>
                         <div
                           className="group flex cursor-pointer gap-4"
-                          onClick={() => setSelectedNewsletter(story)}
+                          onClick={() => setSelectedNewsletter(newsletter)}
                         >
                           <div className="flex items-start">
                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-black p-3 text-xs font-bold">
@@ -139,22 +139,26 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
                           <div className="flex-1">
                             <h3
                               className="text-xl font-bold text-black hover:underline hover:decoration-primary"
-                              onClick={() => setSelectedNewsletter(story)}
+                              onClick={() => setSelectedNewsletter(newsletter)}
                             >
-                              {story.title}
+                              {newsletter.title}
                             </h3>
                             <div className="mt-1 flex items-center text-xs text-gray-600">
                               <span className="font-bold text-primary">
-                                {story.topic}
+                                {newsletter.topic}
                               </span>
                               <span className="mx-2">|</span>
-                              <span>{formatDate(story.uploadDate)}</span>
+                              <span>{formatDate(newsletter.uploadDate)}</span>
                             </div>
                           </div>
                           <div className="h-20 w-20 flex-shrink-0">
                             <img
-                              src="/7103.jpg"
-                              alt={story.title}
+                              src={
+                                newsletter.topic === "AI"
+                                  ? "/ArtificialIntelligenceNewsletterCover.jpg"
+                                  : "/SemiconductorNewsletterCover.jpg"
+                              }
+                              alt={newsletter.title}
                               width={80}
                               height={80}
                               className="h-full w-full object-cover"
@@ -183,7 +187,7 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
 
         {/* More Newsletters */}
         <div className="my-16 border-t border-black pt-8">
-          <h2 className="mb-8 cursor-default text-3xl font-bold text-black underline decoration-primary">
+          <h2 className="mb-8 cursor-default font-heading text-3xl font-bold text-black underline decoration-primary">
             More Newsletters
           </h2>
 
@@ -196,7 +200,11 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
                     onClick={() => setSelectedNewsletter(newsletter)}
                   >
                     <img
-                      src="/cover2.jpg"
+                      src={
+                        newsletter.topic === "AI"
+                          ? "/ArtificialIntelligenceNewsletterCover.jpg"
+                          : "/SemiconductorNewsletterCover.jpg"
+                      }
                       alt={newsletter.title}
                       width={400}
                       height={300}
