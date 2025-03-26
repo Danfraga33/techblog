@@ -40,7 +40,7 @@ export default function BlogSection({
                 </div>
                 <div className="md:col-span-3">
                   <UnderlineAnimation className="mb-4 pb-1 text-xl font-bold lg:text-3xl">
-                    <span> {post.frontmatter.title}</span>
+                    <span>{post.frontmatter.title}</span>
                   </UnderlineAnimation>
                   <p className="mb-4 text-black">
                     {post.frontmatter.description}
@@ -128,14 +128,21 @@ export default function BlogSection({
             </h3>
 
             <div className="space-y-6">
-              {resources.map((post, index) => (
+              {resources.map((resource, index) => (
                 <div key={index} className="text-md flex gap-4">
                   <div className="font-bold text-black">
-                    {post.id.toString().padStart(2, "0")}
+                    {resource.id.toString().padStart(2, "0")}
+                    <span className="text-primary">.</span>
                   </div>
-                  <Link to={post.link}>
+                  <Link className="flex items-center gap-2" to={resource.link}>
+                    <img
+                      src={resource.avatarImg}
+                      height={20}
+                      width={20}
+                      alt={`${resource.name}logo`}
+                    />
                     <UnderlineAnimation className="font-semibold">
-                      {post.name}
+                      {resource.name}
                     </UnderlineAnimation>
                   </Link>
                 </div>
