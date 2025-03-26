@@ -13,7 +13,7 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
   const [topic, setTopic] = useState("");
   const featuredNewsletter = newsletters[0];
   const topNewsletters = newsletters.slice(1, 4);
-  const remainingNewsletters = newsletters.slice(4);
+  const remainingNewsletters = newsletters.slice(5);
   const filteredNewsletters = topic
     ? newsletters.filter((newsletter) => newsletter.topic === topic)
     : newsletters;
