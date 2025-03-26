@@ -9,10 +9,12 @@ export default function NewsletterViewer({
 }) {
   return (
     <div className="p-4">
-      <div className="mb-6 text-black">
+      <div className="mb-6 cursor-default text-black">
         <h2 className="mb-2 text-3xl font-bold">{selectedNewsletter.title}</h2>
         <div className="mb-4 flex items-center text-sm text-gray-600">
-          <span className="font-bold">{selectedNewsletter.topic}</span>
+          <span className="font-bold text-primary">
+            {selectedNewsletter.topic}
+          </span>
           <span className="mx-2">|</span>
           <span>{formatDate(selectedNewsletter.uploadDate)}</span>
         </div>
