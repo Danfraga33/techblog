@@ -14,13 +14,13 @@ export default function BlogSection({
   newsletters: Newsletter[];
 }) {
   const monthlyReport = newsletters[0];
+  const indexBlogs = blogPosts.slice(0, 5);
 
   return (
     <section className="container mx-auto px-4 py-16">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {/* Left Column: Blog Posts */}
         <div className="md:col-span-2">
-          {blogPosts.map((post, index) => (
+          {indexBlogs.map((post, index) => (
             <Link
               to={`blog/${post.slug}`}
               key={index}
