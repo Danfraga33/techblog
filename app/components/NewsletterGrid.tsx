@@ -23,8 +23,8 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
   return (
     <main className="mb-2 min-h-screen bg-white">
       <div className="container mx-auto px-4 pt-20">
-        <div className="mb-12 flex flex-col items-end justify-end gap-6 text-end">
-          <ul className="flex font-heading font-[500] text-black">
+        <div className="mb-8 flex flex-col items-end justify-end gap-6 text-end">
+          <ul className="flex font-heading font-medium text-black">
             <Link to="/">
               <UnderlineAnimation className="text-xl">
                 {businessData.title}
@@ -118,9 +118,10 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
             </Dialog>
           </div>
 
-          {/* Top Stories */}
           <div className="md:w-1/3">
-            <h2 className="mb-6 text-lg font-medium">TOP STORIES</h2>
+            <h2 className="mb-6 font-heading text-lg text-primary">
+              TOP STORIES
+            </h2>
             <div className="space-y-6">
               {(filteredTop.length > 0 ? filteredTop : topNewsletters).map(
                 (newsletter, i) => (
@@ -161,7 +162,7 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
                               alt={newsletter.title}
                               width={80}
                               height={80}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full"
                             />
                           </div>
                         </div>
@@ -185,7 +186,6 @@ const NewsletterGrid = ({ newsletters }: NewsletterGridProps) => {
           </div>
         </div>
 
-        {/* More Newsletters */}
         <div className="my-16 border-t border-black pt-8">
           <h2 className="mb-8 cursor-default font-heading text-3xl font-bold text-black underline decoration-primary">
             More Newsletters
