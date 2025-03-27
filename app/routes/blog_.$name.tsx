@@ -92,11 +92,11 @@ const DynamicBlog = () => {
           <div className="mb-4 flex items-center justify-between">
             <div className="flex gap-4 text-black md:gap-8">
               <div className="md:text-md cursor-default text-xs">
-                <span className="text-sm font-medium">Date</span>
+                <span className="font-medium text-primary">Date</span>
                 <p>{formatDate(date)}</p>
               </div>
               <div className="md:text-md cursor-default text-xs">
-                <span className="font-medium">Read</span>
+                <span className="font-medium text-primary">Read</span>
                 <p>{estimatedReadingTime} min</p>
               </div>
             </div>
