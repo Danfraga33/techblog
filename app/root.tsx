@@ -120,7 +120,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <Header />
-        {children}
+        <Outlet />
         <Footer />
         <Scripts />
       </body>
