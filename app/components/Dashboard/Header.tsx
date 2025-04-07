@@ -3,6 +3,7 @@ import { TwitterIcon } from "lucide-react";
 import UnderlineAnimation from "./UnderlineAnimation";
 import { menuItems } from "~/data/constant/header";
 import { Button } from "../ui/button";
+import { Fragment } from "react";
 
 export default function Header() {
   return (
@@ -19,12 +20,14 @@ export default function Header() {
           <nav className="text-md hidden gap-8 font-semibold uppercase tracking-tighter md:flex md:items-center">
             {menuItems.map((item, i) =>
               item.title == "Member" ? (
-                <Button
-                  className="bg-amber-300 text-black hover:bg-amber-100 hover:transition-all"
-                  asChild
-                >
-                  <Link to={item.link}>{item.title}</Link>
-                </Button>
+                <Fragment key={i}>
+                  <Button
+                    className="bg-amber-300 text-black hover:bg-amber-100 hover:transition-all"
+                    asChild
+                  >
+                    <Link to={item.link}>{item.title}</Link>
+                  </Button>
+                </Fragment>
               ) : (
                 <UnderlineAnimation key={i}>
                   <Link to={item.link}>{item.title}</Link>
