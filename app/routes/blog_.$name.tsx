@@ -74,6 +74,7 @@ const DynamicBlog = () => {
 
   const { title, description, tags, image_url, coverImage, date, subject } =
     frontmatter;
+  console.log("image_url: ", frontmatter);
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
@@ -112,7 +113,7 @@ const DynamicBlog = () => {
             <div className="text-md leading-snug">
               <div className="mb-4 mr-4 inline-block h-[24rem] w-full">
                 <img
-                  src={image_url}
+                  src={coverImage}
                   alt={title}
                   className="h-full w-full object-cover p-3"
                 />
