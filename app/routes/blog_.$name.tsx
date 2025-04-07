@@ -113,7 +113,7 @@ const DynamicBlog = () => {
             <div className="text-md leading-snug">
               <div className="mb-4 mr-4 inline-block h-[24rem] w-full">
                 <img
-                  src={coverImage}
+                  src={image_url}
                   alt={title}
                   className="h-full w-full object-cover p-3"
                 />

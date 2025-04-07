@@ -46,7 +46,7 @@ const Blog = () => {
                   <div className="md:col-span-1">
                     <Link to={`/blog/${post.slug}`}>
                       <img
-                        src={post.frontmatter.coverImage || "/chip.jpg"}
+                        src={post.frontmatter.image_url || "/chip.jpg"}
                         alt={post.frontmatter.title}
                         width={300}
                         height={300}
