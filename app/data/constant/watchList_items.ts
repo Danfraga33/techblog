@@ -1,0 +1,38 @@
+export const watchlistItems = [
+  {
+    id: 1,
+    name: "NVIDIA Corporation",
+    ticker: "NVDA",
+    tags: ["AI", "Semiconductors"],
+    signalStrength: 92,
+    headline: "Announces new AI chip with 2x performance",
+    change: "+3.2%",
+  },
+  {
+    id: 2,
+    name: "Tesla, Inc.",
+    ticker: "TSLA",
+    tags: ["EV", "Energy"],
+    signalStrength: 78,
+    headline: "Cybertruck production ramp exceeds expectations",
+    change: "+1.8%",
+  },
+  {
+    id: 3,
+    name: "Microsoft Corporation",
+    ticker: "MSFT",
+    tags: ["Cloud", "AI"],
+    signalStrength: 85,
+    headline: "Azure AI services revenue grows 45% YoY",
+    change: "+0.9%",
+  },
+  {
+    id: 4,
+    name: "Palantir Technologies",
+    ticker: "PLTR",
+    tags: ["Data", "AI"],
+    signalStrength: 81,
+    headline: "New government contracts for AI platform",
+    change: "+4.5%",
+  },
+];
