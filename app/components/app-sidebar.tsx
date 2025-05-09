@@ -26,14 +26,12 @@ import {
 import { NavMain } from "./nav-main";
 import { NavDocuments } from "./nav-documents";
 import { NavSecondary } from "./nav-secondary";
-import { Link } from "@remix-run/react";
+import { Link, redirect, useNavigate } from "@remix-run/react";
 import { NavUser } from "./nav-user";
+import { UserButton, useUser } from "@clerk/remix";
+import { useEffect } from "react";
+
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   NavOptions: [
     {
       title: "Dashboard",
@@ -42,7 +40,7 @@ const data = {
     },
     {
       title: "Reports",
-      url: "#",
+      url: "/member/reports",
       icon: NotebookText,
     },
   ],
@@ -104,7 +102,16 @@ const data = {
     },
   ],
 };
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type UserObj = {
+  name: string;
+  email: string;
+  avatar: string;
+};
+
+export function AppSidebar({
+  userObj,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { userObj: UserObj }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -129,7 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userObj} />
       </SidebarFooter>
     </Sidebar>
   );
