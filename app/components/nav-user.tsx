@@ -1,3 +1,4 @@
+import { SignOutButton } from "@clerk/remix";
 import { getAuth } from "@clerk/remix/ssr.server";
 import {
   BadgeCheck,
@@ -96,7 +97,9 @@ export function NavUser({ user }: { user: userTypes }) {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+              <SignOutButton>
+                <button>Log out</button>
+              </SignOutButton>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
