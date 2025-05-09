@@ -1,12 +1,21 @@
 import { useUser } from "@clerk/remix";
 import { getAuth } from "@clerk/remix/ssr.server";
-import { Outlet, useNavigate } from "@remix-run/react";
+import { LoaderFunction } from "@remix-run/node";
+import { Outlet, redirect, useNavigate } from "@remix-run/react";
 import { useEffect } from "react";
 import { AppSidebar } from "~/components/app-sidebar";
 
 import { SiteHeader } from "~/components/site-header";
 
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
+
+export const loader: LoaderFunction = async (args) => {
+  const { userId } = await getAuth(args);
+  if (!userId) {
+    return redirect("/sign-in");
+  }
+  return {};
+};
 
 const MembersLayout = () => {
   const { isLoaded, isSignedIn, user } = useUser();

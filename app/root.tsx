@@ -7,61 +7,23 @@ import {
   redirect,
   useLocation,
 } from "@remix-run/react";
-import type {
-  ActionFunctionArgs,
-  LinksFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+
+import type { ActionFunctionArgs, LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 
-import { ReactNode } from "react";
-import stylesheet from "./tailwind.css?url";
-import Header from "./components/Dashboard/Header";
-import Footer from "./components/Dashboard/Footer";
 import { sendWelcomeEmail } from "./utils/email.server";
-import { subscriptionSchema } from "~/schemas/subscriptionSchema"; // Adjust path if necessary
-import { z } from "zod";
+import { subscriptionSchema } from "~/schemas/subscriptionSchema";
+import stylesheet from "./tailwind.css?url";
 
+import { z } from "zod";
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import { ClerkApp } from "@clerk/remix";
+import { ReactNode } from "react";
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
-  // { rel: "stylesheet", href: "./app/tailwind.css" },
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preload", href: "/font/karlo.tff", type: "font/tff" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-  {
-    rel: "apple-touch-icon",
-    sizes: "180x180",
-    href: "/favicon/apple-touch-icon.png",
-  },
-  {
-    rel: "icon",
-    type: "image/png",
-    sizes: "32x32",
-    href: "/favicon/favicon-32x32.png",
-  },
-  {
-    rel: "icon",
-    type: "image/png",
-    sizes: "16x16",
-    href: "/favicon/favicon-16x16.png",
-  },
-  {
-    rel: "icon",
-    type: "image/x-icon",
-    href: "/favicon/favicon.ico",
-  },
-  { rel: "manifest", href: "/favicon/site.webmanifest" },
 ];
-
 export const meta: MetaFunction = () => {
   const location = useLocation();
 
@@ -109,6 +71,8 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 }
 
+export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+
 export function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -119,15 +83,15 @@ export function Layout({ children }: { children: ReactNode }) {
         <Links />
       </head>
       <body>
-        <Header />
-        <Outlet />
-        <Footer />
+        {children}
         <Scripts />
       </body>
     </html>
   );
 }
 
-export default function App() {
+function App() {
   return <Outlet />;
 }
+
+export default ClerkApp(App);
