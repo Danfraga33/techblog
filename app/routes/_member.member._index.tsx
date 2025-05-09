@@ -4,7 +4,7 @@ import { DashboardContent } from "~/components/Members/dashboard-content";
 
 const Member = () => {
   return (
-    <div className="p-3 text-black">
+    <div>
       {/* <DataTable data={data} /> */}
       <DashboardContent />
     </div>

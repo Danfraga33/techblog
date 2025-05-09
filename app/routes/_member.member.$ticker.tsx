@@ -36,7 +36,7 @@ export default function CompanyPage({
   };
 
   return (
-    <div className="p-3 text-black">
+    <div>
       <CompanyHeader company={companyData} />
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         <div className="md:col-span-2">

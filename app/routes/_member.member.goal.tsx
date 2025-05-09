@@ -2,7 +2,7 @@ import React from "react";
 
 const MemberGoals = () => {
   return (
-    <div className="p-6 text-gray-900">
+    <div className="text-gray-900">
       <h1 className="mb-4 text-3xl font-bold">
         🧱 MVP Build Plan – Company → SEC Filings
       </h1>
@@ -77,10 +77,16 @@ const MemberGoals = () => {
             Implement on-demand company SEC downloading and LlamaIndex
             processing:
             <ul className="list-disc pl-6">
+              <li>If user isLoading, then put a spinner on members page</li>
               <li>Create API endpoint for ad-hoc company searches</li>
               <li>Set up queue system for processing requests</li>
               <li>Cache results to avoid duplicate processing</li>
               <li>Integrate LlamaIndex for document analysis</li>
+            </ul>
+            Improvements:
+            <ul className="list-disc pl-6">
+              <li>Improve Auth</li>
+              <li>Add Dark/Light</li>
             </ul>
           </li>
         </ul>
