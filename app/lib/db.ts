@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { PrismaClient } from "@prisma/client";
 
 const uri = process.env.MONGODB_CONNECTION_STRING as string;
 export const client = new MongoClient(uri);
@@ -15,3 +16,7 @@ export async function connectToDatabase() {
   cachedDb = db;
   return db;
 }
+
+//////////
+
+export const db = new PrismaClient();

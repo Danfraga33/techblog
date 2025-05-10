@@ -17,7 +17,10 @@ export default defineConfig({
     remix(),
     tsconfigPaths(),
   ],
+  optimizeDeps: {
+    exclude: ["@prisma/client"],
+  },
   build: {
-    target: "es2022", // Update the target environment
+    target: "es2022",
   },
 });
