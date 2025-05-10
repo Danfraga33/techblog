@@ -49,9 +49,7 @@ export function RevenueChart() {
   };
 
   return (
-    <div className="00 h-[350px] w-full">
-      {" "}
-      {/* Debug container */}
+    <div className="h-[350px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={data}
@@ -60,8 +58,8 @@ export function RevenueChart() {
           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
           <XAxis
             dataKey="year"
-            tick={{ fill: "#71717a" }} // zinc-500
-            axisLine={{ stroke: "#e5e7eb" }} // gray-200
+            tick={{ fill: "#71717a" }}
+            axisLine={{ stroke: "#e5e7eb" }}
           />
           <YAxis
             tickFormatter={(value) => `$${value}B`}
@@ -78,7 +76,7 @@ export function RevenueChart() {
           <Line
             type="linear"
             dataKey="revenue"
-            stroke="#3b82f6" // blue-500
+            stroke="#3b82f6"
             strokeWidth={3}
             connectNulls={true}
             dot={{
