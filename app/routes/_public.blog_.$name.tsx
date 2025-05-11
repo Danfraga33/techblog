@@ -74,7 +74,6 @@ const DynamicBlog = () => {
 
   const { title, description, tags, image_url, coverImage, date, subject } =
     frontmatter;
-  console.log("image_url: ", frontmatter);
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
 

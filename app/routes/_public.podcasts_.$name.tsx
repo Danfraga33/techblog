@@ -13,7 +13,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw new Response("Post not found", { status: 404 });
   }
   const fileContent = fs.readFileSync(filePath, "utf8");
-  // const { content } = matter(fileContent);
   const { code, frontmatter } = await bundleMDX({
     source: fileContent,
     mdxOptions(options) {

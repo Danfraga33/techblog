@@ -5,7 +5,6 @@ import PodcastCard from "~/components/PodcastCard";
 export async function loader() {
   return await getPodcasts();
 }
-// Helper function to capitalize words
 function capitalizeWords(str: string) {
   return str
     .split(" ")
@@ -15,6 +14,7 @@ function capitalizeWords(str: string) {
 
 export default function PodcastsPage() {
   const podcasts = useLoaderData<typeof loader>();
+  console.log("podcasts: ", podcasts);
 
   return (
     <main>
@@ -52,7 +52,6 @@ export default function PodcastsPage() {
             />
           </div>
 
-          {/* Podcasts Table */}
           <div className="border border-black text-black">
             <table className="w-full">
               <thead>

@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { TwitterIcon } from "lucide-react";
 import UnderlineAnimation from "./UnderlineAnimation";
-import { menuItems } from "~/data/constant/header";
+import { menuItems } from "~/data/constant/headerItems";
 import { Button } from "../ui/button";
 import { Fragment } from "react";
 
