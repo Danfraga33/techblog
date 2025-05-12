@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import { formatDate } from "~/lib/utils";
 import { Podcast } from "~/utils/types";
+import { Badge } from "../ui/badge";
 
 export default function PodcastSection({ podcasts }: { podcasts: Podcast[] }) {
   return (
@@ -35,14 +36,20 @@ export default function PodcastSection({ podcasts }: { podcasts: Podcast[] }) {
                 className="h-auto w-full mix-blend-multiply"
               />
             </div>
-
-            <h3 className="font-heading mb-8 text-xl font-bold text-black">
-              {podcast.frontmatter.title}
-            </h3>
+            <div className="flex flex-col gap-2">
+              <Badge className="inline bg-gray-300 font-heading text-black">
+                {podcast.frontmatter.subject}
+              </Badge>
+              <span className="mb-8 font-heading text-xl font-bold text-black">
+                {podcast.frontmatter.title}
+              </span>
+            </div>
 
             <div className="flex gap-8">
               <div>
-                <span className="text-sm font-medium text-black">Date</span>
+                <span className="text-sm font-semibold text-black text-primary">
+                  Date
+                </span>
                 <p className="text-black">
                   {formatDate(podcast.frontmatter.date)}
                 </p>
